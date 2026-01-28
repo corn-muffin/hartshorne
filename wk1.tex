@@ -27,7 +27,7 @@
 
 \begin{document}
 
-{Hartshorne} \hfill {1-25-2025}
+{Hartshorne} \hfill {1-27-2025}
 
 \bigskip\bigskip
 
@@ -45,13 +45,13 @@
 
 \bigskip
 
-\begin{enumerate}
-	\item[1.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
+% \begin{enumerate}
+% 	\item[1.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
 
 \begin{enumerate}
 	\item[2.] {
@@ -105,15 +105,15 @@
   \] 
 \end{proof}
 
-\begin{enumerate}
-	\item[5.] {
-      Show that a sheaf morphism $\vphi:\F\to\G$ is an isomorphism iff it is injective and surjective.
-    }
-\end{enumerate}
-
-\begin{proof}
-  $\vphi$ is an isomorphism iff each $\vphi_p:\F_p\to \G_p$ is an isomorphism. This occurs iff each $\vphi_p$ is injective and surjective, which occurs iff $\vphi$ is injective and surjective by the 2b.
-\end{proof}
+% \begin{enumerate}
+% 	\item[5.] {
+%       Show that a sheaf morphism $\vphi:\F\to\G$ is an isomorphism iff it is injective and surjective.
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+%   $\vphi$ is an isomorphism iff each $\vphi_p:\F_p\to \G_p$ is an isomorphism. This occurs iff each $\vphi_p$ is injective and surjective, which occurs iff $\vphi$ is injective and surjective by the 2b.
+% \end{proof}
 
 \begin{enumerate}
 	\item[8.] {
@@ -125,71 +125,85 @@
   Suppose $0\to \F'\xrightarrow{\vphi}\F\xrightarrow{\psi}\F''\to 0$ is exact.
   Then $\ker(\vphi(U)) = (\ker\vphi)(U)=0$ gives us that $\vphi(U)$ is injective. 
   It suffices to show that $\im(\vphi(U))=\ker(\psi(U))$.
+  Since $\ker\psi =\im\vphi = (\wtilde{\im}\vphi)^+$, it suffices to show that $\wtilde{\im}\vphi$ is a sheaf.
 
+  Let $\{V_i\}$ cover $V\subset X$ open, and $s_i\in \im(\vphi(V_i))$ be sections with $s_i|_{V_{ij}}=s_j|_{V_{ij}}$ for all $i,j$.
+  $\vphi(V_i)$ injective gives unique $t_i\in \F'(V_i)$ such that $s_i=\vphi(V_i)(t_i)$, and
+  \[
+    \vphi(V_{ij})(t_i|_{V_{ij}}) = s_i|_{V_{ij}}=s_j|_{V_{ij}} = \vphi(V_{ij})(t_j|_{V_{ij}})
+  \] 
+  implies that the restrictions of our $t_i,t_j$ agree as well.
+  Then $\F'$ a sheaf gives us a unique $t\in \F'(V)$ with $t|_{V_i}=t_i$.
+  Let $s=\vphi(V)(t)\in(\wtilde{\im}\vphi)(V)$ be its image, so that $s|_{V_i} = \vphi(V_i)(t|_{V_i}) = s_i$ for each $i$.
+  This shows existence.
+
+  Suppose we have another $s'=\vphi(V)(t')$ with $s'|_{V_i}=s_i$ for each $i$. 
+  Then injectivity and $\vphi(V_i)(t'|_{V_i})= \vphi(V_i)(t|_{V_i})$ implies $t'|_{V_i}=t|_{V_i}$ for all $i$, whence $t'=t$, and $s'=s$.
+  We conclude that $s$ is unique, so that $\wtilde{\im}\vphi$ is a sheaf.
 \end{proof}
 
-\begin{enumerate}
-	\item[5.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[15.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[16.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[17.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[18.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[19.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[20.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[21.] {
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
+% \begin{enumerate}
+% 	\item[5.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[15.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[16.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[17.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[18.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[19.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[20.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[21.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
 
 \end{document}

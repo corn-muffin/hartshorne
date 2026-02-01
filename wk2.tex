@@ -1,0 +1,258 @@
+\documentclass[12pt]{amsart} 
+\usepackage{amsfonts}
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{pgf,tikz,tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{lipsum}
+\usepackage{dsfont}
+\usepackage{stmaryrd}
+
+%\graphicspath{ {./diagrams/} }
+
+\input{./latex-preamble/cm-preamble.tex}
+
+\newtheorem*{lemma}{Lemma}
+\newcommand{\G}{\mathscr{G}}
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\B}{\mathscr{B}}
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\PSh}{PSh}
+\newcommand{\Ab}{\fr{Ab}}
+\newcommand{\Sch}{\fr{Sch}}
+\newcommand{\Ring}{\fr{Ring}}
+\DeclareMathOperator{\red}{red}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\fR}{\fr{R}}
+
+
+\begin{document}
+
+{Hartshorne} \hfill {2-1-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter II.2, Week 2}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip
+
+\begin{enumerate}
+	\item[2.1.] {
+      Let $A$ be a ring, $X=\Spec A$ its spectrum.
+      Fix an element $f\in A$, $D(f)=V(f)^c\subset X$ the associated distinguished open set.
+      Show that $(D(f),\O_X|_{D(f)})\cong \Spec A_f$ as locally ringed spaces.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $Y=\Spec A_f$, $S=\{f^n\}_{n\geqs 1}$, and $\phi:A\rightarrow S^{-1}A=A_f$ be the natural map $a\mapsto a/1$.
+  Note that $f^n\in \p$ prime for some $n\geqs 1$ iff $f\in \p$---that is, $S\cap \p=\0$ iff $\p\notin D(f)$.
+  Thus, AM 3.11.iv gives us a bijection
+  \begin{align*}
+    D(f)~&\longleftrightarrow Y \\
+    \p ~&\longrightarrow S^{-1}\p, \\
+    \phi^*(\q)~&\longleftarrow \q.
+  \end{align*}
+  Clearly the map $\q\mapsto \phi^*(\q)$ is continuous, so it suffices to show that $\p\mapsto S^{-1}\p$ is continuous.
+
+  Let $V(\b)\subset A_f$ be closed, and denote $\psi:\p\mapsto S^{-1}\p$. 
+  AM 3.11.i gives us that $\b=S^{-1}\a$ is extended.
+  Then $\p\supset \a$ implies $S^{-1}\p\supset S^{-1}\a=\b$ whenever $f\notin \a,\p$, so that $V(\a)\cap D(f)\subset \psi^{-1}(\b)$.
+  Suppose that $S^{-1}\p\supset S^{-1}\a$.
+  That is, for all $a\in \a$, there is some $x\in \p$ and $n\geqs 1$ such that $f^n(a-x)=0$.
+  Hence, $f^na\in \p$, so that $\p$ prime and $f\notin \p$ gives us $a\in \p$.%\footnote{As a sanity check, $f\notin \p$ also implies $f\notin \a$, so that $V(\a)\neq 0$!}
+  We conclude that $\psi^{-1}(V(\b))=V(\a)\cap D(f)\subset D(f)$ is closed, so that $\psi=(\psi^*)^{-1}$ is continuous.
+
+  Note that $(\O_X|_{D(f)})_\p\cong A_\p\cong (A_\p)_f\cong (A_f)_{\psi(\p)}\cong (\O_Y)_{\psi(\p)}$ for each $\p\not\ni f$.
+  Call this isomorphism $\alpha_\p:(\O_X|_{D(f)})_\p\to (\O_Y)_{\psi(\p)}$, and let 
+  \[
+    \alpha:\sqcup_{\p\in D(f)}(\O_X|_{D(f)})_\p
+    \to \sqcup_{\q\in Y}(\O_Y)_\q
+  \]
+  be defined by $\alpha|_{(\O_X|_{D(f)})_\p}=\alpha_\p$.
+  Then we have a map
+  \begin{align*}
+    \phi^\sharp(U):\O_X|_{D(f)}(U)~&\to (\phi^*)_*\O_{Y}(U) \\
+                        s~&\mapsto \alpha\circ s\circ\phi^*.
+  \end{align*}
+  We have that 
+  \[
+    \alpha\circ s|_V\circ \phi^*=\alpha\circ s\circ \phi^*|_{(\phi^*)^{-1}(V)}
+  \]
+  as functions on $(\phi^*)^{-1}(V)$ whenever $V\subset U\subset D(f)$ are open and $s\in \O_X(U)$, so $\phi^\sharp(U)$ gives a sheaf homomorphism $\phi^\sharp:\O_X|_{D(f)}\to \O_Y$.
+  We have that $\phi^\sharp_\p=\alpha_\p$ is an isomorphism of rings for all $\p\in D(f)$, so $\phi^\sharp$ is itself a sheaf isomorphism.
+  Then $(f,f^\sharp)$ is an isomorphism of locally ringed spaces, since ring isomorphisms preserve maximality.
+  
+  % Let $D_f(g)\subset \Spec A_f$ denote a distinguished open in $\Spec A_f$, and take $\{U_i=D_f(g_i)\}$ to be a basic open cover of $\Spec A_f$.
+  % Without loss of generality, we may assume $g_i\in \phi(A)$.
+  % Then
+\end{proof}
+
+\begin{enumerate}
+	\item[2.2.] {
+      Let $(X,\O_X)$ be a scheme, and let $U\subset X$ be any open subset.
+      Show that $(U,\O_X|_U)$ is a scheme.
+      We call this the \emph{induced scheme structure} on the open set $U$, and we refer to $(U,\O_X|_U)$ as the open subscheme of $U$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Choose a basic cover $\{D(f_i)\}$ of $U$. 
+  Then each 
+  \[
+    (D(f_i),(\O_X|_U)_{D(f_i)})= (D(f_i),\O_X|_{D(f_i)})\cong\Spec A_{f_i}
+  \]
+  by 2.1. 
+  We conclude that $\{D(f_i)\}$ is an affine open cover of $(U,\O_X|_U)$, so that the latter locally ringed space is a sheaf.
+\end{proof}
+
+
+\begin{enumerate}
+	\item[2.3.] {
+      $(*)$ A scheme $(X,\O_X)$ is \emph{reduced} if for every open set $U\subset X$, the ring $\O_X(U)$ has no nilpotent elements.
+      \begin{enumerate}
+        \item Show that $(X,\O_X)$ is reduced if and only if for every $p\in X$, the local ring $\O_{X,p}$ as no nilpotent elements.
+        \item Let $(X,\O_X)$ be a scheme.
+          Let $(\O_X)_{\red}$ be the sheaf associated to the presheaf $U\mapsto \O_X(U)_{\red}$, where for any ring $A$, we denote by $A_{\red}$ the quotient of $A$ by its nilradical $\fR(A)$. 
+          Show that $(X,(\O_X)_{\red})$ is a scheme.
+          We call it the \emph{reduced scheme} associated to $X$, and denote it by $X_{\red}$.
+          Show that there is a morphism of schemes $X_{\red}\to X$, which is a homeomorphism on the underlying topological spaces.
+        \item Let $f:X\to Y$ be a morphism of schemes, and assume that $X$ is reduced.
+          Show that there is a unique morphism $g:X\to Y_{\red}$ such that $f$ is obtained by composing $g$ with the natural map $Y_{\red}\to Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+	\item[2.4.] {
+      Let $A$ be a ring, and let $(X,\O_X)$ be a scheme.
+      Given a morphism $f:X\to\Spec A$, we have an associated map $f^\sharp:\O_{\Spec A}\to f_*\O_X$ on sheaves.
+      Taking Global sections, we obtain a homomorphism $A\to\Gamma(X,\O_X)$.
+      Thus, there is a natural map
+      \begin{align*}
+        \alpha:\Hom_{\Sch}(X,\Spec A)\to \Hom_{\Ring}(A,\Gamma(X,\O_X)).
+      \end{align*}
+      Show that $\alpha$ is bijective.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Suppose $f,g:X\to \Spec A$ are two morphisms of schemes with $\alpha(f)=\alpha(g)$.
+  That is, $f^\sharp(\Spec A)\equiv g^\sharp(\Spec A)$.
+  Fix an affine cover $\{U_i\cong \Spec B_i\}$ of $X$
+\end{proof}
+
+\begin{enumerate}
+	\item[2.5.] {
+      Describe $\Spec \ZZ$, and show that it is a final object for the category of schemes, i.e., each scheme $X$ admits a unique morphism to $\Spec\ZZ$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  The only primes of $\ZZ$ are $(p)$ for $p$ prime, and $(0)$.
+  The former are all maximal, while the latter is a generic point for $\Spec \ZZ$, since $V(\a)\ni (0)$ implies $(0)\supset \a$, i.e. $\a = (0)\subset \p$ for all $\p$ prime.
+
+  We have a bijection
+  \begin{align*}
+    \Hom_{\Sch}(X,\Spec \ZZ)\to \Hom_{\Ring}(\ZZ,\Gamma(X,\O_X)),
+  \end{align*}
+  so that the former is singleton for all $X$ by the fact that $\ZZ$ is initial in $\Ring$.
+\end{proof}
+
+\begin{enumerate}
+	\item[2.7.] {
+      Let $X$ be a scheme.
+      For any point $x\in X$, let $\O_x$ be the local ring at $x$, and $m_x$ its maximal ideal.
+      We define the \emph{residue field} of $x$ on $X$ to be the field $k(x)=\O_x/m_x$.
+      Now, let $K$ be any field.
+      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to give a point $x\in X$ and an inclusion map $k(x)\to K$.
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+	\item[2.8.] {
+      $(*)$ Let $X$ be a scheme.
+      For any point $x\in X$, we define the \emph{Zariski tangent space $T_x$} at $x\in X$ to be the dual of the $k(x)$-vector space $m_x/m_x^2$.
+      Now, assume that $X$ is a scheme over a field $k$, and let $k[\epsilon]/\epsilon^2$ be the \emph{ring of dual numbers} over $k$.
+      Show that to give a $k$-morphism of $\Spec k[\epsilon]/\epsilon^2$ to $X$ is equivalent to giving a point $x\in X$, \emph{rational over $k$} (i.e. such that $k(x)=k$), and an element of $T_x$.
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[2.9.] {
+      If $X$ is a topological space, and $Z$ an irreducible closed subset of $X$, a generic point for $Z$ is a point $\zeta$ such that $Z=\{\zeta\}^-$.
+      If $X$ is a scheme, show that every (nonempty) irreducible closed subset has a unique generic point.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $Z$ be an irreducible closed subset of a scheme $X$, and let $\{U_i\cong \Spec A_i\}$ be an affine open cover of $X$.
+  Then
+\end{proof}
+
+\begin{enumerate}
+  \item[2.10.] {
+      Describe $\Spec \R[x]$. How does its topological space compare to the set $\R$? To $\CC$?
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[2.13.] {
+      A topological space is \emph{quasi-compact} if every open cover has a finite sub-cover.
+      \begin{enumerate}
+        \item Show that a topological space $X$ is noetherian if and only if every open subset is quasi-compact.
+        \item If $A$ is a noetherian ring, show that $\sp(\Spec A)$ is a noetherian topological space.
+        \item Give an example to show that $\sp(\Spec A)$ can be noetherian even when $A$ is not.
+      \end{enumerate}
+    }
+\end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[19.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[20.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[21.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+
+\end{document}

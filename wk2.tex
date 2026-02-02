@@ -152,9 +152,71 @@
 \end{enumerate}
 
 \begin{proof}
-  Suppose $f,g:X\to \Spec A$ are two morphisms of schemes with $\alpha(f)=\alpha(g)$.
-  That is, $f^\sharp(\Spec A)\equiv g^\sharp(\Spec A)$.
-  Fix an affine cover $\{U_i\cong \Spec B_i\}$ of $X$
+  We begin by showing the result for $X=\Spec B$ affine.
+  In this case, $\alpha$ has an inverse map given by 
+  \begin{align*}
+    \beta:\Hom_{\Ring}(A,B)&~\longrightarrow \Hom_{\Sch}(\Spec B,\Spec A) \\
+    \vphi&~\longmapsto (f,f^\sharp),
+  \end{align*}
+  where 
+  \begin{align*}
+    f(\p)&=\vphi^{-1}(\p), \\
+    f^\sharp(s)(\p)&=\vphi_{f(\p)}(s(f(\p))).
+  \end{align*}
+  It suffices to show that $\beta=\alpha^{-1}$.
+  Fix $(f,f^\sharp)\in \Hom_{\Sch}(\Spec B,\Spec A)$, and denote 
+  \[
+    (\beta\circ\alpha)(f,f^\sharp) = (g,g^\sharp).
+  \]
+  Let $\phi_{f(\p)}:A\to A_{f(\p)}$ and $\phi_\p':B\to B_\p$ be the natural maps.
+  The commutative square
+  \[
+    \begin{tikzcd}[column sep = large]
+      A\ar[d,"\phi_{f(\p)}"']
+      \ar[r,"f^\sharp(\Spec A)"]&B\ar[d,"\phi'_\p"] \\
+      A_{f(\p)}\ar[r,"f^\sharp_{f(\p)}"']&B_\p
+    \end{tikzcd}
+  \] 
+  gives us that 
+  \begin{align*}
+    g(\p)&=(f^\sharp(\Spec A))^{-1}(\p) \\
+         &=(\phi'_\p\circ f^\sharp(X))^{-1}(m_\p) \\
+         &=(f_{f(\p)}^\sharp\circ \phi_{f(\p)})^{-1}(m_\p) \\
+         &= {\phi}_{f(\p)}^{-1}(m_{f(\p)}) \\
+         &= f(\p),
+  \end{align*}
+  since $f^\sharp$ is a local homomorphism.
+  Then
+  \begin{align*}
+    g^\sharp(s)(\p) &= f^\sharp(X)_{g(\p)}(s(g(\p))) \\
+                    &= f^\sharp_{f(\p)}(s(f(\p))) \\ 
+                    &=f^\sharp(s)(\p).
+  \end{align*}
+  implies $(g,g^\sharp)=(f,f^\sharp)$.
+
+  Fix $\vphi:A\to B$, and denote $\beta(\vphi)=(f,f^\sharp)$, $(\alpha\circ \beta)(\vphi)= \psi$.
+  Recall that $a\in A$ is identified with $\p\mapsto a_\p\in A_\p$, and similarly for $b\in B$.
+  Thus, $\psi(a)=\vphi(a)$ iff they're equal as maps $\Spec B\to \sqcup_{\p\in \Spec B}B_\p$.
+  The commutative square
+  \[
+    \begin{tikzcd}[column sep = large]
+      A\ar[d]
+      \ar[r,"\vphi"]&B\ar[d] \\
+      A_{f(\p)}\ar[r,"\vphi_{f(\p)}"']&B_\p
+    \end{tikzcd}
+  \] 
+  gives us
+  \[
+    \psi(a)(\p) = \vphi_{f(\p)}(a(f(\p))) = \vphi_{f(\p)}(a_{f(\p)}) = \vphi(a)(\p).
+  \]
+  Hence, $(\alpha\circ\beta)(\vphi)=\vphi$.
+  We conclude that $\beta=\alpha^{-1}$, so $\alpha$ is a bijection.
+
+  Now, we consider the general case. 
+  Fix an affine cover $\{U_i\cong \Spec B_i\}$ of $X$.
+  Suppose $f:X\to \Spec A$ is a morphism of schemes.
+  Then it restricts to a set of morphisms $f_i:\Spec B_i\to \Spec A$ of affine schemes.
+  If $f,g:X\to \Spec A$ are two morphisms of schemes with $\alpha(f)=\alpha(g)$, 
 \end{proof}
 
 \begin{enumerate}
@@ -180,11 +242,23 @@
       For any point $x\in X$, let $\O_x$ be the local ring at $x$, and $m_x$ its maximal ideal.
       We define the \emph{residue field} of $x$ on $X$ to be the field $k(x)=\O_x/m_x$.
       Now, let $K$ be any field.
-      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to give a point $x\in X$ and an inclusion map $k(x)\to K$.
+      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to giving a point $x\in X$ and an inclusion map $k(x)\to K$.
     }
 \end{enumerate}
 
 \begin{proof}
+  Note that $\Spec K=\{(0)\}$ is singleton, so a morphism $f:\Spec K\to X$ is a point $x=f((0))\in X$, as well as the information $f^\sharp(U): \O_X(U)\to K$ for every $x\in U\subset X$ open.
+  Restriction is the identity on $\O_{\Spec K}$, so this defines a map $f^\sharp_x:\O_x\to K$.
+  Since each element of $m_x$ is not invertible, this gives us a map $\ol{f^\sharp_x}:k(x)\to K$.
+  It is a morphism of fields, and thus an injection.
+
+  Conversely, suppose we have an inclusion $k(x)\hookrightarrow K$.
+  Then, for each $x\in U\subset X$, we have a map 
+  \[
+    f^\sharp(U):\O(U)\to \O_x\to k(x)\hookrightarrow K.
+  \]
+  These maps play well with restriction, thus giving us a morphism $f^\sharp:\O_X\to \O_{\Spec K}$ of sheaves.
+  Defining $f:\Spec K\to X:(0)\mapsto x$ gives us a morphism $(f,f^\sharp):\Spec K\to X$ of schemes, as desired.
 \end{proof}
 
 \begin{enumerate}
@@ -204,8 +278,8 @@
 \end{enumerate}
 
 \begin{proof}
-  Let $Z$ be an irreducible closed subset of a scheme $X$, and let $\{U_i\cong \Spec A_i\}$ be an affine open cover of $X$.
-  Then
+  Let $Z$ be an irreducible closed subset of a scheme $X$, and let $\{U_i\cong \Spec A_i\}_{i\in I}$ be an affine open cover of $X$.
+  Then $Z= \cup_{i\in I} U_i\cap Z$
 \end{proof}
 
 \begin{enumerate}

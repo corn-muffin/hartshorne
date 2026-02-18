@@ -102,8 +102,8 @@
   \[
     \nil' S \supset \nil S=\bigcap_{\p}\p \supset \bigcap_{\p}h(\p)=\nil' S,
   \] 
-  since each homogeneous prime ideal is prime in the usual sense.
-  This gives us $\nil'S\subset \nil S$.
+  %since each homogeneous prime ideal is prime in the usual sense.
+  which gives us $\nil'S\subset \nil S$.
   We conclude that $\nil S=\nil' S$.
   Now, $\Proj S=\0$ iff $S_+\subset \nil' S=\nil S$, which is exactly our result.
 
@@ -218,7 +218,12 @@
   It suffices to show that $f^\sharp$ is an isomorphism on open sets $D(g)$.
   Fix homogeneous $g\in S_+$.
   Since $D(g^n)=D(g)$ for all $n>0$, we may assume $g$ is of degree $\geqs d_0$.
-  Then the map $\vphi_g:S_{(g)}\to T_{(\vphi(g))}$ is clearly surjective, so it suffices to check injectivity.
+  We show the map $\vphi_g:S_{(g)}\to T_{(\vphi(g))}$ is surjective.
+  For any $b/\vphi(g)^n\in (B_A)_\p$, $b\vphi(g)=\vphi(a)$ with $a\in A$ gives us 
+  \[
+    \vphi_g(a/g^{n+1})=\vphi(ag)/\vphi(g^{n+1})=b/\vphi(g)^n\in \im\vphi_g.
+  \]
+  It suffices to check injectivity.
   If $\vphi(a/g)=0$, then we can find $n\geqs 1$ such that $\vphi(g)^n\vphi(a)=0$.
   Then $\vphi(g^na)=0$ implies $g^na=0$ by injectivity of $\vphi$, whence $a/g =0$ in $S_{(g)}$.
   The result follows.
@@ -352,7 +357,7 @@
 
   $\ol{\vphi}$ is injective, so (b) implies $\ol{f}^\sharp:\O_Z\to \O_Y$ is injective, and $\ol{f}(Y)=f(Y)$ is dense.
   $f(Y)=f(Y)^-$ is closed, so $\ol{f}:Y\to Z$ is surjective.
-  $f = g\circ \ol{f}$ with $f,g$ homemomorphisms onto their image implies $\ol{f}$ is a homeomorphism onto its image $\ol{f}(Y)=Z$.
+  $f = g\circ \ol{f}$ with $f,g$ homeomorphisms onto their image implies $\ol{f}$ is a homeomorphism onto its image $\ol{f}(Y)=Z$.
   Additionally, $f^\sharp = \ol{f}^\sharp g^\sharp$ surjective implies $\ol{f}^\sharp$ is surjective, so that $\ol{f}^\sharp:\O_Z\to \O_Y$ is an isomorphism of sheaves.
   Then 
   \[

@@ -1,45 +1,10 @@
 \documentclass[12pt]{amsart} 
-\usepackage{amsfonts}
-\usepackage{amscd}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{enumitem}
-\usepackage{pgf,tikz,tikz-cd}
-\usepackage{mathrsfs}
-\usepackage[margin=1in]{geometry}
-\usepackage{array}
-\usepackage{lipsum}
-\usepackage{dsfont}
-\usepackage{stmaryrd}
-
-%\graphicspath{ {./diagrams/} }
 
 \input{./latex-preamble/cm-preamble.tex}
 
+%\graphicspath{ {./diagrams/} }
+
 \newtheorem*{lemma}{Lemma}
-\newcommand{\G}{\mathscr{G}}
-\newcommand{\sA}{\mathscr{A}}
-\newcommand{\B}{\mathscr{B}}
-\DeclareMathOperator{\Sh}{Sh}
-\DeclareMathOperator{\PSh}{PSh}
-\newcommand{\Ab}{\fr{Ab}}
-\newcommand{\Sch}{\fr{Sch}}
-\newcommand{\Ring}{\fr{Ring}}
-\DeclareMathOperator{\red}{red}
-\newcommand{\sO}{\mathscr{O}}
-\newcommand{\fR}{\fr{R}}
-\DeclareMathOperator{\Proj}{Proj}
-\DeclareMathOperator{\nil}{nil}
-\DeclareMathOperator{\Ann}{Ann}
-\newcommand{\I}{{\mathscr{I}}}
-\newcommand{\cI}{{\mathcal{I}}}
-\newcommand{\cK}{{\mathcal{K}}}
-\newcommand{\sK}{{\mathscr{K}}}
-\newcommand{\ilim}{\varprojlim}
-\newcommand{\dlim}{\varinjlim}
-
-
 
 \begin{document}
 
@@ -366,56 +331,191 @@
   is the composition of a surjective map with an isomorphism, and is therefore surjective itself.
 \end{proof}
 
-% \begin{enumerate}
-% 	\item[3.1.] {
-%       Show that a morphism $f:X\to Y$ is locally of finite type if and only if \emph{every} affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ can be covered by open affine subsets $U_j=\Spec A_j$, where each $A_j$ is a finitely generated $B$-algebra.
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-% 	\item[3.2.] {
-%       A morphism $f:X\to Y$ of schemes is \emph{quasi-compact} if there is a cover of $V$ by open affines $V_i$ such that $f^{-1}(V_i)$ is quasi-compact for each $i$.
-%       Show that $f$ is quasi compact if and only if for \emph{every} open affine subset $V\subset Y$, $f^{-1}(V)$ is quasi-compact.
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-% 	\item[3.3.] {
-%       $(*)$
-%       \begin{enumerate}
-%         \item Show that a morphism $f:X\to Y$ is of finite type if and only if it is locally of finite type and quasi-compact.
-%         \item Conclude from this that $f$ is of finite type if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ can be covered by a finite number of open affines $U_j=\Spec A_j$, where each $A_j$ is a finitely generated $B$-algebra.
-%         \item Show also if $f$ is of finite type, then for \emph{every} open affine subset $U=\Spec A\subset f^{-1}(V)$, $A$ is a finitely generated $B$-algebra.
-%       \end{enumerate}
-%     }
-% \end{enumerate}
-% 
-% \begin{enumerate}
-%   \item[3.4.] {
-%       Show that a morphism $f:X\to Y$ is finite if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ is affine, equal to $\Spec A$, where $A$ is a finite $B$-module.
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-%   \item[3.6.] {
-%       Let $X$ be an integral scheme.
-%       Show that the local ring $\O_\xi$ of the generic point $\xi$ of $X$ is a field.
-%       It is called the \emph{function field} of $X$, and is denoted by $K(X)$.
-%       Show also if $U=\Spec A$ is any open affine subset of $X$, then $K(X)$ is isomorphic to the quotient field of $A$.
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
+\begin{enumerate}
+	\item[3.1.] {
+      Show that a morphism $f:X\to Y$ is locally of finite type if and only if \emph{every} affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ can be covered by open affine subsets $U_j=\Spec A_j$, where each $A_j$ is a finitely generated $B$-algebra.
+    }
+\end{enumerate}
+
+\begin{proof}
+  One direction is clear.
+  Suppose conversely that $f:X\to Y$ is locally of finite type, and fix $\Spec A\cong U\subset X$ and $\Spec B\cong V\subset Y$ affine, with $f(U)\subset V$.
+  To proceed, we must first prove the following lemma.
+
+  \begin{lemma}
+    Fix a sheaf morphism $f:X\to Y$ of finite type, $\Spec A\cong U\subset X$, $\Spec B\cong V\subset Y$, $f(U)\subset Y$ as above, and denote the map of rings associated to $f|_U:U\to V$ by $\vphi:B\to A$.
+    There exist $f_{11},\ldots, f_{rs}\in A$ and $g_1,\ldots, g_r\in B$ such that
+    \begin{align*}
+      \Spec A &= D(f_{11})\cup\cdots \cup D(f_{rs}), \\
+      \Spec B &= D(g_1)\cup \cdots \cup D(g_r),
+    \end{align*}
+    \[
+      f(D(f_{ij}))\subset D(g_i),
+    \] 
+    and the induced map
+    \begin{align*}
+      \vphi_{g_i}: B_{g_i}\to A_{f_{ij}}
+    \end{align*}
+    is of finite type.
+  \end{lemma}
+
+  \begin{proof}
+    We have an affine cover $\{V_i=\Spec B_i\}$ of $X$ such that each $f^{-1}(V_i)$ can be covered by open affines $U_{ij}=\Spec A_{ij}$, where $A_{ij}$ is a finitely generated $B_i$ algebra.
+    Fix some $i$ and write
+    \begin{align*}
+      V_i\cap V &= \bigcup_{D(g_\beta)\subset V_i\cap V}D(g_\beta),
+    \end{align*}
+    where $D(g_\beta)$ is affine in both $V_i$ and $V$.
+    Then $f^{-1}(D(g_\beta))=D(\vphi(g_\beta))$ and fixing some $j$ allows us to write
+    \begin{align*}
+      U_{ij}\cap U &= \bigcup_{D(f_\alpha)\subset U_{ij}\cap U}D(f_\alpha) \\
+             &= \bigcup_{\substack{D(f_\alpha) \subset U_{ij}\cap U \\ D(g_\beta)\subset V_i\cap V}} 
+             D(f_\alpha\vphi(g_\beta)),
+    \end{align*}
+    where each $D(f_\alpha)$ and $D(\vphi(g_\beta))$ is distinguisheed in both $U$ and $U_{ij}$.
+    We denote $f_{\alpha\beta}:= f_{\alpha} \vphi(g_\beta)$.
+    Then $f|_{D(f_{\alpha\beta})}:D(f_{\alpha\beta}) \to D(g_\beta)$ induces the map $\vphi_{g_\beta}: B_{g_\beta}\to A_{f_{\alpha\beta}}$.
+
+    For any $g_\beta\in B$, $f_\alpha\in A$, and $f_{\alpha\beta}\in A$ as above, we write $g'_\beta\in B_i$, $f'_\alpha\in A_{ij}$, and $f'_{\alpha\beta}\in A_{ij}$ for the corresponding elements which determine the same distinguished subset.
+    Then
+    \begin{align*}
+      (B_i)_{g'_\beta} 
+      = \O_{V_i}(D(g'_\beta)) 
+      = \O_V(D(g_\beta))
+      = B_{g_\beta},
+    \end{align*}
+    \begin{align*}
+      (A_{ij})_{f'_\alpha} 
+      = \O_{U_{ij}}(D(f'_\alpha))  
+      = \O_U(D(f_\alpha)) 
+      = A_{f_\alpha},
+    \end{align*}
+    and
+    \begin{align*}
+      (A_{ij})_{f'_{\alpha\beta}}
+      = A_{f_{\alpha\beta}}
+      = A_{f_\alpha}\otimes_B B_{g_{\beta}}.
+    \end{align*}
+    Then $A_{ij}$ a finitely generated $B_i$-algebra and $A_{f_\alpha}$ a cyclic $A_{ij}$-algebra gives that $A_{f_\alpha}$ is a finitely generated $B_i$-algebra.
+    That is, there exists a surjective map
+    \begin{align*}
+      B_i[x_1,\ldots, x_{n_\alpha}]~&\rightarrow A_{f_\alpha}.
+    \end{align*}
+    Right exactness of $-\otimes_B B_{g_\beta}$ gives us a surjective map
+    \begin{align*}
+      B_{g_\beta}[x_1,\ldots, x_{n_\alpha}]~&\rightarrow A_{f_{\alpha\beta}},
+    \end{align*}
+    whence $A_{f_{\alpha\beta}}$ is a finitely generated $B_{g_\beta}$-algebra.
+
+    Combining these covers of the $V_i\cap V$ and $U_{ij}\cap U$ gives us a cover $\{D(g_\beta)\}_\beta$ of $\Spec B$, and covers $\{D(f_{\alpha\beta}) \}_\alpha$ of each $f^{-1}(D(g_\beta))=D(\vphi(g_\beta))$, where $\vphi_{g_\beta}:B_{g_\beta}\to A_{f_{\alpha\beta}}$ is of finite type.
+    Since $\Spec B$ and $D(\vphi(g_\beta))$ are affine, we may assume each of these covers is finite, completing our result.
+  \end{proof}
+
+  Thus, it suffices to show the following lemma.
+
+  \begin{lemma}
+    Let $\vphi:B\to A$ be a morphism of rings such that $\vphi_i:B\to A_{f_i}$ is of finite type for each $1\leqs i\leqs r$, where $(f_1,\ldots, f_r)=(1)$.
+    Then $\vphi$ is of finite type.
+  \end{lemma}
+
+  \begin{proof}
+    Take $\{a_{ij}=a'_{i j}/f_i^{e_{ij}}\}_{j=1}^{r_i}$ to be a set of generators for $A_{f_i}$ as a $B$-algebra. %, so that $\{a_{ij}'\}_{j=1}^{s_i}\cup\{f_i^{-1}\}$ is another set of generators for
+    Without loss of generality, $r_i=r$ for all $1\leqs i\leqs r$.
+    Define
+    \[
+      A' := \vphi(B)[a'_{ij}~:~1\leqslant i,j\leqs r],
+    \] 
+    noting that
+    \begin{align*}
+      A'_{f_i} &= \vphi(B)[f_i^{-1},a'_{ij}~:~\leqslant i,j\leqs r]= A_{f_i}.
+    \end{align*}
+    Now, consider the quotient $A/A'$.
+    It suffices to show that $A/A'=0$.
+    For any prime ideal $\p\in \Spec A$, we can choose $i$ such that $f_i\notin \p$.
+    Then
+    \begin{align*}
+      (A/A')_\p &= \frac{A_\p}{A'_\p} \\
+                &= \frac{(A_{f_i})_\p} {(A'_{f_i})_\p} \\
+                &= \left(\frac{A_{f_i}}{A_{f_i}}\right)_\p \\
+                &= 0_\p \\
+                &= 0
+    \end{align*}
+    gives us that in fact $A/A'=0$, since being zero is a local condition.
+    We conclude that $A$ is a finitely generated $B$-algebra, as desired.
+  \end{proof}
+\end{proof}
+ 
+ \begin{enumerate}
+ 	\item[3.2.] {
+       A morphism $f:X\to Y$ of schemes is \emph{quasi-compact} if there is a cover of $Y$ by open affines $V_i$ such that $f^{-1}(V_i)$ is quasi-compact for each $i$.
+       Show that $f$ is quasi compact if and only if for \emph{every} open affine subset $V\subset Y$, $f^{-1}(V)$ is quasi-compact.
+     }
+ \end{enumerate}
+ 
+ \begin{proof}
+   One implication is clear.
+   Conversely, suppose there exists a cover $\{V_i=\Spec B_i\}$ of $Y$ by open affines such that $f^{-1}(V_i)$ is quasi-compact for each $i$, and take an open affine $V=\Spec B\subset Y$.
+   Fix $i$ and write 
+   \begin{align*}
+     V\cap V_i&= \bigcup_j D(g_{ij}),
+   \end{align*}
+   where we range over $D(g_{ij})\subset V\cap V_i$ which are affine in both $V$ and $V_i$.
+   Then
+   \begin{align*}
+     V&= \bigcup_{i,j}D(g_{ij}) = \bigcup_{1\leqs i,j\leqs n}D(g_{ij})
+   \end{align*}
+   by quasi-compactness of $V_i$.
+   A finite union of compact sets is compact, so it suffices to show the following lemma.%that $f^{-1}(D(g))$ is compact for each $g\in B_i$.
+
+   \begin{lemma}
+     Let $f:X\to Y$ be a map of schemes, and $\Spec A\cong U\subset Y$ an affine open such that $f^{-1}(U)$ is quasi-compact.
+     For any $h\in A$, $f^{-1}(D(h))$ is also quasi-compact.
+   \end{lemma}
+
+   \begin{proof}
+     Take a cover $\{U_\alpha\}_\alpha$ of $f^{-1}(D(h))$, and note that
+     \begin{align*}
+       f
+     \end{align*}
+   \end{proof}
+ \end{proof}
+ 
+ \begin{enumerate}
+ 	\item[3.3.] {
+       $(*)$
+       \begin{enumerate}
+         \item Show that a morphism $f:X\to Y$ is of finite type if and only if it is locally of finite type and quasi-compact.
+         \item Conclude from this that $f$ is of finite type if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ can be covered by a finite number of open affines $U_j=\Spec A_j$, where each $A_j$ is a finitely generated $B$-algebra.
+         \item Show also if $f$ is of finite type, then for \emph{every} open affine subset $U=\Spec A\subset f^{-1}(V)$, $A$ is a finitely generated $B$-algebra.
+       \end{enumerate}
+     }
+ \end{enumerate}
+ 
+ \begin{enumerate}
+   \item[3.4.] {
+       Show that a morphism $f:X\to Y$ is finite if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ is affine, equal to $\Spec A$, where $A$ is a finite $B$-module.
+     }
+ \end{enumerate}
+ 
+ \begin{proof}
+   Fix an open affine cover $\{V_i\cong \Spec B_i\}$ of $Y$ such that $f^{-1}(V_i)\cong \Spec A_i$ is affine, and each $A_i$ is a finite $B_i$-module.
+ \end{proof}
+ 
+ \begin{enumerate}
+   \item[3.6.] {
+       Let $X$ be an integral scheme.
+       Show that the local ring $\O_\xi$ of the generic point $\xi$ of $X$ is a field.
+       It is called the \emph{function field} of $X$, and is denoted by $K(X)$.
+       Show also if $U=\Spec A$ is any open affine subset of $X$, then $K(X)$ is isomorphic to the quotient field of $A$.
+     }
+ \end{enumerate}
+ 
+ \begin{proof}
+   Fix $U=\Spec A\subset X$ open affine.
+   Then $\Cl_U(\{\xi\})=\{\xi\}^-\cap U=U$ implies that $\xi$ is the minimal prime ideal of $U$.
+   That is, $\xi=(0)\in \Spec A$.
+   Then $K(X)= A_{(0)}$ is the quotient field of $A$.
+ \end{proof}
 
 % \begin{enumerate}
 %   \item[2.13.] {

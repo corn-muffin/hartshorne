@@ -1,0 +1,292 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\DeclareMathOperator{\pr}{pr}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {2-14-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter II.4, Week 5}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip
+Assume all schemes are noetherian, as otherwise everything breaks.
+\bigskip
+
+
+\begin{enumerate}
+  \item[4.1.] {
+      Show that a finite morphism is proper.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $f:X\to Y$ be a finite morphism.
+  Take an open affine cover $\{V_i=\Spec B_i\}$ of $Y$ with each $f^{-1}(B_i)=\Spec A_i$ a finitely generated $B_i$-module.
+  It suffices to consider the case $f|_{\Spec A_i}:\Spec A_i\to \Spec B_i$, so we may assume $f^*:\Spec B\to \Spec A$ is a morphism of affine schemes corresponding to a ring morphism $f:A\to B$.
+  
+  $f^*:\Spec B\to \Spec A$ is finite, so in particular finite type.
+  Now fix a valuation ring $R$ with $R\hookrightarrow K$ its fraction field, and morphisms $u:B\to K$, $v:A\to R$.
+  We are in the affine case, so (4.7) gives us that $f^*$ is proper iff there is a unique morphism $h:B\to R$ such that the following diagram commutes.
+  \[
+    \begin{tikzcd}
+      K & B\ar[l,"u"']\ar[dl,dotted,"h"'] \\
+      R\ar[u,hook,"i"] & A\ar[l,"v"]\ar[u,"f"']
+    \end{tikzcd}
+  \] 
+  %For each $\vphi(b)\in A$, we define $h(\vphi(b)) =v(b)$.
+  %If $\vphi(b-b')=0$, then $iv(b-b')=u\vphi(b-b')=0$ implies $v(b-b')=0$ by injectivity of $i$, whence $h$ is well defined on $\vphi(B)$.
+  $B$ is a finite $A$-module, so in particular it is integral over $A$.
+  Consider the inclusion $v(A)\hookrightarrow u(B)$, and let $u(b)\in u(B)$.
+  Take $a_1,\ldots, a_n$ such that
+  \begin{align*}
+    b^n + f(a_1)b^{n-1}+\cdots +f(a_n) &= 0 \\
+    \implies u(b)^n +uf(a_1)u(b)^{n-1}+\cdots+uf(a_n)&= 0 \\
+    \implies~\;~\;~ u(b)^n + v(a_1)u(b)^{n-1}+\cdots + v(a_n)&=0,
+  \end{align*}
+  whence our $u(b)$, and thus all of $u(B)$, is integral over $v(A)$.
+  Valuation rings are integrally closed, so it follows that $u(B)=v(A)\subset R$.
+  Then $h=u:B\to R$ is the unique map satisfying the diagram, whence $f^*$ is proper.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.2.] {
+      Let $S$ be a scheme.
+      Let $f$ and $g$ be two $S$-morphisms from a reduced $S$-scheme $X$ to a seperated $S$-scheme $Y$ which agree on an open dense subset of $X$.
+      Show that $f=g$.
+      Give examples to show that this result fails if either (a) $X$ is nonreduced, or (b) $Y$ is nonseperated. 
+      [\emph{Hint}: Consider the map $h:X\to Y\times_S Y$ obtained from $f$ and $g$.]
+    }
+\end{enumerate}
+
+\begin{proof}
+  % Let $U\subset X$ be the open dense subset on which $f$ and $g$ agree, $i:U\hookrightarrow X$ the inclusion.
+  % The universal property of $Y\times_S Y$ defines a map $h$ such that the following diagram commutes.
+  % \[
+  %   \begin{tikzcd}
+  %     &&Y \ar[dr] \\
+  %     %U\ar[r,"i"]
+  %     X\ar[r,"h"]\ar[urr, bend left=25,"f"]
+  %     \ar[drr,bend right=25,"\text{$g$}"']
+  %     &Y\times_SY\ar[ur]\ar[dr]&&S\\
+  %     &&Y \ar[ur]
+  %   \end{tikzcd}
+  % \] 
+  % Then $f\circ i=g\circ i$ gives us that the following diagram commutes for either of $h$ or $\Delta\circ f$, whence $h\circ i=\Delta\circ f\circ i$.
+  % \[
+  %   \begin{tikzcd}
+  %     &&&Y \ar[dr] \\
+  %     U\ar[r,"i"]\ar[urrr, bend left=25,"f\circ i"]
+  %     \ar[drrr,bend right=25,"f\circ i"']
+  %     &X\ar[r,shift left=0.75ex,"h"]
+  %     \ar[r,shift right=0.75ex,"\Delta\circ f"']
+  %     &Y\times_SY\ar[ur]\ar[dr]&&S\\
+  %     &&&Y \ar[ur]
+  %   \end{tikzcd}
+  % \] 
+  Let $U\subset X$ be an open dense subset on which $f$ and $g$ agree, $i:U\hookrightarrow X$ the inclusion.
+  Denote $\Delta:Y\to Y\times_S Y$, and $h:X\to Y\times_S Y$ the map given by $f,g:X\to Y$ and the universal property of $Y\times_S Y$.
+  %Consider the pullback $Y\leftarrow Z \to X$ of the following diagram.
+  View $X$ and $Y$ as $Y\times_S Y$-schemes using the aforementioned maps and take the fibred product $Z:= X\times_{Y\times_SY} Y$.
+  \[
+    \begin{tikzcd}[column sep=0.75cm]
+      Z \ar[d,"v"']\ar[r] & X\ar[d,"h"] \\
+      Y\ar[r,"\Delta"']& Y\times_S Y
+    \end{tikzcd}
+  \] 
+  $(U,f,i)$ completes the pullback square as well, so we have the following diagram.
+  \[
+    \begin{tikzcd}[column sep=0.75cm]
+      U\ar[d]\ar[r]%\ar[dd,bend right=35,"f\circ i"']
+      &U\ar[d,"i"]\\
+      Z \ar[d,"v"']\ar[r] & X\ar[d,"h"] \\
+      Y\ar[r,"\Delta"']& Y\times_S Y
+    \end{tikzcd}
+  \] 
+  $Y$ seperated means $\Delta$ is a closed immersion, and closed immersions are preserved under base extension by 3.11a, so $Z\to X$ is a closed immersion.
+  Without loss of generality, we assume $Z$ is in fact a closed subscheme of $X$.
+
+  $U$ inherits its structure sheaf from $X$, and is thus reduced, whence the scheme theoretic image of $i:U\to X$ is simply $X$.
+  The diagram gives us that $i:U\to X$ factors as $U\to Z\to X$, so the identity $\id:X\to X$ factors through $Z\to X$.
+  That is, we have a composition $\id:X\to Z\to X$, whence $Z=X$.
+  Then $h=\Delta\circ v$, and the following diagram tells us that $v=f$.
+  \[
+    \begin{tikzcd}
+      &&&Y\\ % \ar[dr] \\
+      %U\ar[r,"i"]
+      X\ar[rr,bend right=15,"h"']\ar[urrr, bend left=25,"f"]\ar[r,"v"]
+      &Y\ar[r,"\Delta"]\ar[urr,bend left=15,"\id"']
+      &Y\times_SY\ar[ur, bend right=15]%\ar[dr]%&&S\\
+      %&&&Y \ar[ur]
+    \end{tikzcd}
+  \] 
+  We conclude that $f=g$ as morphisms on $X$.
+\end{proof}
+
+% \begin{enumerate}
+%   \item[4.3.] {
+%       $(*)$ Let $X$ be a seperated scheme over an affine scheme $S$.
+%       Let $U$ and $V$ be open affine subsets of $X$.
+%       Then $U\cap V$ is also affine.
+%       Give an example to show that this fails if $X$ is not seperated.
+%     }
+% \end{enumerate}
+
+\begin{enumerate}
+  \item[4.5.] {
+      Let $X$ be an integral scheme of finite type over a field $k$, having function field $K$.
+      We say that a valuation of $K/k$ has \emph{center} $x$ on $X$ if its valuation ring $R$ dominates the local ring $\O_{x,X}$.
+      \begin{enumerate}
+        \item If $X$ is seperated over $k$, then the center of any valuation of $K/k$ on $X$ (if it exists) is unique.
+        \item If $X$ is proper over $k$, then every valuation of $K/k$ has a unique center on $X$.
+        \item $(*)$ Prove the converses of (a) and (b).
+        \item If $X$ is proper over $k$, and if $k$ is algebraically closed, show that $\Gamma(X,\O_X)=k$.
+          [\emph{Hint}: Let $a\in \Gamma(X,\O_X)$ with $a\notin k$.
+          Show that there is a valuation ring $R$ of $K/k$ with $a^{-1}\in \m_R$.
+          Then use (b) to get a contradiction.]
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Take a valuation of $K/k$ with valuation ring $R$.
+  Let $\xi\in X$ be the generic point of $X$, so that $\{\xi\}^-=X$ with the reduced induced structure.
+  We have $R\supset k$ by definition of a valuation of $K/k$.
+  With notation as in (4.3) and (4.7), fixing the map $U\to X$ with image $\xi$ gives us the following commutative square.
+  \[
+    \begin{tikzcd}
+      U\ar[d] \ar[r] &X\ar[d] \\
+      T\ar[r]&\Spec k
+    \end{tikzcd}
+  \] 
+  $k(\xi)=K$, so, by Lemma 4.4, diagonal maps $h:T\to X$ so that the diagram commutes are in correspondance with points $x\in \{\xi\}^-=X$ such that $R$ dominates $\O_{x,X}$.
+  This is exactly the condition that $x$ is a center of the valuation, so $X\to \Spec k$ seperated implies centers are unique when they exist.
+  
+  (b) By (a), centers of a valuation of $K/k$ are in correspondance with diagonals of the above diagram. 
+  $X\to \Spec k$ implies there exists a unique such diagonal, whence a unique center.
+
+   % (c) Take a valuation ring $R$ with quotient field $L$, and maps $U=\Spec L\to X$, $T=\Spec R\to\Spec k$.
+   % Then we have an inclusion $k\subset R$, and by Lemma 4.4 an inclusion $k(x_1)\subset L$ for some $x_1\in X$.
+   % If $\xi\in X$ is the generic point of $X$ supplied by $X$ integral, then $x_1\in X=\{\xi\}^-$ implies $\{x_1\in U\subset X\text{ open}\}\subset \{\xi\in U\subset X\text{ open}\}$.
+
+  (d) The map $X\to \Spec k$ gives us an inclusion of rings $k\subset \Gamma(X,\O_X)=:A$ by Exercise 2.4.
+  Suppose that $A\supsetneq k$, and take $a\in A\setminus k$.
+  Consider the ring $B:=k[a^{-1}]\subset A$.
+  $k$ algebraically closed implies $a^{-1}\notin B^\times$, so we can find a prime ideal $a^{-1}\in\p\lideal B$.
+  Then we have a local ring 
+  \[
+    B_\p\subset B_{(0)}\subset A_{(0)}= K
+  \]
+  with maximal ideal $\m_\p:=\p B_\p$.
+  Take some local ring $R\subset K$ which dominates $B_\p$ and is maximal with respect to domination, so that $R$ is a valuation ring with $a^{-1}\in \m_\p\subset\m_R$.
+  Additionally, $k\subset B\subset R$, so $R$ is indeed a valuation of $K/k$.
+
+  Now, suppose that $X\to\Spec k$ is proper.
+  We receive a unique $x\in X$ such that $R$ dominates $\O_{x,X}$.
+  Then $a\in \O_X\subset \O_{x,X}\subset R$ implies $a\notin \m_R$, contradicting our construction of $R$.
+  Hence, no such center exists, i.e. $X$ is not proper over $k$ by (b).
+  Note that $X$ may still be seperated over $k$, as we have only contradicted existence, rather than uniqueness.
+\end{proof}
+
+% \begin{enumerate}
+%   \item[4.6.] {
+%       $(*)$ Let $f:X\to Y$ be a proper morphism of affine varieties over $k$.
+%       Then $f$ is a finite morphism. [\emph{Hint}: Use (4.11A).]
+%     }
+% \end{enumerate}
+
+% \begin{enumerate}
+%   \item[4.7.] {
+%     }
+% \end{enumerate}
+
+\begin{enumerate}
+  \item[4.8.] {
+      Let $\P$ be a property of morphisms of schemes such that:
+      \begin{enumerate}[label=(\roman*)]
+        \item a closed immersion has $\P$;
+        \item a composition of two morphisms having $\P$ has $\P$;
+        \item $\P$ is stable under base extension.
+      \end{enumerate}
+      Then show that:
+      \begin{enumerate}
+        \item a product of morphisms having $\P$ has $\P$;
+        \item if $f:X\to Y$ and $g:Y\to Z$ are two morphisms, and if $g\circ f$ has $\P$ and $g$ is seperated, then $f$ has $\P$;
+        \item If $f:X\to Y$ has $\P$, then $f_{\red}:X_\red\to Y_\red$ has $\P$.
+      \end{enumerate}
+
+      [\emph{Hint}: For (b), consider the graph morphism $\Gamma_f:X\to X\times_Z Y$, and note that it is obtained from the diagonal morphism $\Delta:Y\to Y\times_ZY$.]
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Let $f:X\to Y$ and $g:X'\to Y'$ be morphisms having $\P$.
+  Transitivity of base extensions gives us that 
+  \begin{align*}
+    X\times_Y(Y\times_S X')&\cong X\times_SX' \\
+    (Y\times_S Y')\times_{Y'}X'&\cong Y\times_SX',
+  \end{align*}
+  so we can construct the following diagram.
+  \[
+    \begin{tikzcd}
+      X'\ar[r,"\id_{X'}"] & X'\ar[r,"g"] &Y' \\
+      X\times_S X'\ar[r,"f'"]\ar[d]\ar[u]
+      %& Y\times_SX'\ar[d]
+      & Y\times_SX'\ar[r,"g'"]\ar[d]\ar[u]
+      & Y\times_S Y'\ar[d]\ar[u]\\
+      X\ar[r,"f"'] &Y \ar[r,"\id_Y"] & Y
+    \end{tikzcd}
+  \] 
+  Both of $f',g'$ have property $\P$, since it is stable under base extension.
+  Additionally, their composition $f'\circ g'$ has property $\P$ by closure under composition.
+  However, we see that $f'\circ g'$ is exactly the product of $f, g$ by the above diagram, which gives us our result.
+  
+  (b) The following isomorphism holds on open affines, hence globally.
+  \[
+    (X\times_SY)\times_{S'}Z\cong X\times_S(Y\times_{S'}Z)
+  \]
+  Then, in our particular case, we have
+  \begin{align*}
+    (X\times_Z Y)\times_{Y\times_Z Y} Y\cong X\times_Z(Y\times_{Y\times})
+  \end{align*}
+  Next, take $g_1:Y\times_Z Y\xrightarrow{\pi_1} Y\xrightarrow{g} Z$, 
+  \[
+    \begin{tikzcd}
+      X\ar[d,"f"']\ar[r,"\Gamma_f"']
+      & X\times_Z Y\ar[d,"\mbox{$(f,\id)$}"]\ar[r] 
+      & X\ar[d, "f\circ g"] \\
+      Y\ar[r,"\Delta"'] & Y\times_Z Y\ar[r,"g_1"'] & Z
+    \end{tikzcd}
+  \] 
+\end{proof}
+
+% \begin{enumerate}
+%   \item[4.9.] {
+%       Show that a composition of projective morphisms is projective. Conclude that projective morphisms have properties (a)-(f) of (Ex. 4.8) above.
+%     }
+% \end{enumerate}
+
+% \begin{enumerate}
+%   \item[4.10.] {
+% 
+%     }
+% \end{enumerate}
+
+\end{document}

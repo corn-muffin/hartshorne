@@ -228,7 +228,7 @@ Assume all schemes are noetherian, as otherwise everything breaks.
       Then show that:
       \begin{enumerate}
         \item a product of morphisms having $\P$ has $\P$;
-        \item if $f:X\to Y$ and $g:Y\to Z$ are two morphisms, and if $g\circ f$ has $\P$ and $g$ is seperated, then $f$ has $\P$;
+        \item if $f:X\to Y$ and $g:Y\to Z$ are two morphisms, and if $g\circ f$ has $\P$ and $g$ is separated, then $f$ has $\P$;
         \item If $f:X\to Y$ has $\P$, then $f_{\red}:X_\red\to Y_\red$ has $\P$.
       \end{enumerate}
 
@@ -264,17 +264,26 @@ Assume all schemes are noetherian, as otherwise everything breaks.
   \]
   Then, in our particular case, we have
   \begin{align*}
-    (X\times_Z Y)\times_{Y\times_Z Y} Y\cong X\times_Z(Y\times_{Y\times})
+    (X\times_Z Y)\times_{Y\times_Z Y} Y\cong X\times_Z(Y\times_{Y\times}).
   \end{align*}
-  Next, take $g_1:Y\times_Z Y\xrightarrow{\pi_1} Y\xrightarrow{g} Z$, 
+  This allows us to create the following diagram of pullback squares.
   \[
     \begin{tikzcd}
-      X\ar[d,"f"']\ar[r,"\Gamma_f"']
-      & X\times_Z Y\ar[d,"\mbox{$(f,\id)$}"]\ar[r] 
-      & X\ar[d, "f\circ g"] \\
-      Y\ar[r,"\Delta"'] & Y\times_Z Y\ar[r,"g_1"'] & Z
+      & X\ar[r, "g\circ f"] & Z \\
+      X\ar[d,"f"']\ar[r,"\Gamma_f"]
+      & X\times_Z Y\ar[d,"\mbox{$(f,\id)$}"] \ar[r, "\pr_2"'] \ar[u] 
+      & Y\ar[u,"g"'] \\
+      Y\ar[r,"\Delta"'] & Y\times_Z Y
     \end{tikzcd}
   \] 
+  Seperability of $g$ implies $\Delta$ is a closed immersion, and thus has $\P$. 
+  Then stability under base extension gives us that $\Gamma_f$ and $\pr_2$ have $\P$, pulling back along the squares.
+  However, we have that $\pr_2\circ \Gamma_f=f$, so that $f$ has $\P$ by stability under composition.
+
+  (c) We have that $f:X\to Y$ induces a map $g:X\to Y_{\red}$ with $f:X\xrightarrow{g} Y_{\red}\xrightarrow{h} Y$, where $h$ is the natural map.
+  Note that $h$ is a closed immersion, as $A\to A_{\red}$ is surjective for any ring $A$.
+  Then $h$ is seperated and $f$ has $\P$, so $g$ has $\P$ by (b).
+  Finally, $f_{\red}:X_{\red}\to X\xrightarrow{g}Y_{\red}$ has property $\P$ since $X_\red\to X$ is a closed immersion, and $\P$ is stable under composition.
 \end{proof}
 
 % \begin{enumerate}

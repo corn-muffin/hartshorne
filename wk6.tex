@@ -6,6 +6,9 @@
 
 \DeclareMathOperator{\pr}{pr}
 \newcommand{\SPEC}{\text{\bf{Spec}}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\E}{\mathscr{E}}
+\renewcommand{\sHom}{{\mathscr{H}om}}
 
 \newtheorem{lemma}{Lemma}
 
@@ -26,14 +29,6 @@
   {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
     
 \end{center}
-
-\bigskip\bigskip
-
-I couldn't keep doing problems that require 2.17 without proving it, or at least the meat of it in 2.16, for myself.
-Also, I didn't quite have time to finish my write up of 5.17, and 2.16 seemed much more interesting than 5.3, for example.
-I might try to go back and write up a couple more of these problems and some of the problems from 2 and 3 that I missed over the break.
-These next couple of weeks will be very very rough, so I might have to just write up easy problems for next week.
-We shall see\ldots
 
 \bigskip\bigskip
 
@@ -96,20 +91,29 @@ We shall see\ldots
   We conclude that $\phi$ is an isomorphism of rings.
 \end{proof}
 
-% \begin{enumerate}
-%   \item[2.17.] {
-%       \emph{A Criterion for Affineness}
-%       \begin{enumerate}
-%         \item Let $f:X\to Y$ be a morphism of schemes, and suppose that $Y$ can be covered by open subsets $U_i$ such that for each $i$, the induced map $f^{-1}(U_i)\to U_i$ is an isomorphism.
-%           Then $f$ is an isomorphism.
-%         \item A schem $X$ is affine if and only if there is a finite set of elements $f_1,\ldots, f_r\in A=\Gamma(X,\O_X)$ such that the open subsets $X_{f_i}$ are affine, and $f_1,\ldots, f_r$ generate the unit ideal in $A$.
-%       \end{enumerate}
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-%   (b) If $X$ is affine, then we have
-% \end{proof}
+\begin{enumerate}
+  \item[2.17.] {
+      \emph{A Criterion for Affineness}
+      \begin{enumerate}
+        \item Let $f:X\to Y$ be a morphism of schemes, and suppose that $Y$ can be covered by open subsets $U_i$ such that for each $i$, the induced map $f^{-1}(U_i)\to U_i$ is an isomorphism.
+          Then $f$ is an isomorphism.
+        \item A scheme $X$ is affine if and only if there is a finite set of elements $f_1,\ldots, f_r\in A=\Gamma(X,\O_X)$ such that the open subsets $X_{f_i}$ are affine, and $f_1,\ldots, f_r$ generate the unit ideal in $A$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) We have that
+
+  (b) If $X$ is affine, then we can take $(f_1,\ldots, f_r)=(1)$ to be a finite set of generators of the unit ideal, so that $X_{f_i}=D(f_i)$ are distinguished affines covering $X$.
+  
+  Conversely, take a scheme $X$ with such elements $f_1,\ldots, f_r\in A$.
+  Each $X_{f_i}$ is affine and thus quasi-compact, so a finite cover of $X$ by quasi-compact open sets implies $X$ is quasi-compact.
+  Each intersection $X_{f_i}\cap X_{f_j}=D_{X_{f_i}}(f_j)$ is affine and thus quasi-compact, so that 2.16(d) gives us $\Gamma(X_{f_i},\O_{X_{f_i}})\cong A_{f_i}$.
+
+  Exc. 2.4 supplies us with an isomorphism $\phi_i:X_{f_i}\iso\Spec A_{f_i}$.
+  so that we have a cover of $\Spec A$ by $D(f_i)\cong \Spec A_{f_i}$ where $\phi$
+\end{proof}
 
 \begin{enumerate}
   \item[4.9.] {
@@ -209,108 +213,158 @@ We shall see\ldots
   Namely, a product of projective morphisms is projective, $g\circ f$ projective with $g$ seperated implies $f$ projective, and the reduction $f_\red$ of a projective map $f$ is projective.
 \end{proof}
 
-% \begin{enumerate}
-%   \item[5.1.] {
-%       f
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
+\begin{enumerate}
+  \item[5.1.] {
+      Let $(X,\O_X)$ be a ringed space, and let $\E$ be a locally free $\O_X$-module of finite rank.
+      We define the \emph{dual} of $\E$ to be the sheaf $\E^\vee:=\sHom_{\O_X}(\E,\O_X)$.
+      \begin{enumerate}
+        \item Show that $(\E^\vee)^\vee\cong \E$.
+        \item For any $\O_X$-module $\F$, $\sHom_{\O_X}(\E,\F)\cong \E^\vee\otimes_{\O_X}\F$.
+        \item For any $\O_X$-modules $\F,\G$,
+          \[
+            \sHom_{\O_X}(\E\otimes \F,\G)\cong \sHom_{\O_X}(\F,\sHom_{\O_X}(\E,\G)).
+          \] 
+        \item (\emph{Projection Formula}).
+          If $f:(X\O_X)\to (Y,\O_Y)$ is a morphism of ringed spaces, $\F$ is an $\O_X$-module, and $\E$ is a locally free $\O_Y$-module of finite rank, then there is a natural isomorphism 
+          \[
+            f_*(\F\otimes_{\O_X}f^*\E)\cong f_*(\F)\otimes_{\O_Y}\E.
+          \]
+      \end{enumerate}
+    }
+\end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.3.] {
-%       Let $X=\Spec A$ be an affine scheme.
-%       Show that the functors $\wtilde{\cdot}$ and $\Gamma$ are adjoint.
-%       That is, for any $A$-module $M$, and for any sheaf of $\O_X$-modules $\F$, there is a natural isomorphism
-%       \[
-%         \Hom_A(M,\Gamma(X,\F))\cong \Hom_{\O_X}(\wtilde{M},\F)
-%       \] 
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
+\begin{proof}
+\end{proof}
 
-% \begin{enumerate}
-%   \item[5.5.] {
-%     }
-% \end{enumerate}
+\begin{enumerate}
+  \item[5.3.] {
+      Let $X=\Spec A$ be an affine scheme.
+      Show that the functors $\wtilde{\cdot}$ and $\Gamma$ are adjoint.
+      That is, for any $A$-module $M$, and for any sheaf of $\O_X$-modules $\F$, there is a natural isomorphism
+      \[
+        \Hom_A(M,\Gamma(X,\F))\cong \Hom_{\O_X}(\wtilde{M},\F)
+      \] 
+    }
+\end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.6.] {
-%     }
-% \end{enumerate}
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[5.5.] {
+      Let $f:X\to Y$ be a morphism of schemes.
+      \begin{enumerate}
+        \item Show by example that if $\F$ is coherent on $X$, then $f_*\F$ need not be coherent on $Y$, even if $X$ and $Y$ are varieties over a field $k$.
+        \item Show that a closed immersion is a finite morphism.
+        \item If $f$ is a finite morphism of noetherian schemes, and if $\F$ is coherent on $X$, then $f_*\F$ is coherent on $Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[5.6.] {
+      \emph{Support}.
+      Recall the notions of support of a section of sheaf, support of a sheaf, and subsheaf with supports from (Ex. 1.14) and (Ex. 1.20).
+      \begin{enumerate}
+        \item Let $A$ be a ring.
+          Let $M$ be an $A$-module, let $X=\Spec A$, and let $\F=\wtilde{M}$.
+          For any $m\in M=\Gamma(X,\F)$, show that $\Supp m=V(\Ann m)$, where $\Ann m=\{a\in A\mid am =0\}$ is the \emph{annihilator} of $m$
+        \item Now suppose that $A$ is noetherian, and $M$ is finitely generated.
+          Show that $\Supp \F=V(\Ann M)$.
+        \item The support of a coherent sheaf on a noetherian scheme is closed.
+        \item For any ideal $\a\subset A$, we define a submodule $\Gamma_\a(M)$ of $M$ by 
+          \[
+            \Gamma_\a(M)=\{m\in M\mid \exists n>0(\a^nm = 0)\}.
+          \]
+          Assume that $A$ is noetherian, and $M$ is any $A$-module.
+          Show that $\wtilde{\Gamma_\a(M)}\cong \H_Z^0(\F)$, where $Z=V(\a)$ and $\F=\wtilde{M}$.
+        \item Let $X$ be a noetherian scheme, and let $Z$ be a closed subset.
+          If $\F$ is a quasi-coherent (resp., coherent) $\O_X$-module, then $\H_Z^0(\F)$ is also quasi-coherent (resp., coherent).
+      \end{enumerate}
+    }
+\end{enumerate}
 
 % \begin{enumerate}
 %   \item[5.7.] {
 %     }
 % \end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.8.] {
-%     }
-% \end{enumerate}
+\begin{enumerate}
+  \item[5.8.] {
+      Again let $X$ be a noetherian scheme, and $\F$ a coherent sheaf on $X$.
+      We will consider the function
+      \[
+        \vphi(x)=\dim_{k(x)}\F_x\otimes_{\O_X}k(x),
+      \] 
+      where $k(x)=\O_x/m_x$ is the residue field at the poitn $x\in X$.
+      Use Nakayama's lemma to prove the following results.
+      \begin{enumerate}
+        \item The function $\vphi$ is \emph{upper semi-continuous}, i.e., for any $n\in \ZZ$, the set $\{x\in X\mid \vphi(x)\geqs n\}$ is closed.
+        \item If $\F$ is locally free and $X$ is connected, then $\vphi$ is a constant function.
+        \item Conversely, if $X$ is reduced and $\vphi$ is constant, then $\F$ is locally free.
+      \end{enumerate}
+    }
+\end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.16.] {
-%       For $(X,\O_X)$ a ringed space and $\F$ a sehaf of $\O_X$-modules, we define the \emph{tensor algebra}, \emph{symmetric algebra}, and \emph{exterior algebra} of $\F$ by taking the sheaves associated to the associated presheaf.
-%       \begin{enumerate}
-%         \item Suppose that $\F$ is locally free of rank $n$.
-%            Then $T^r(\F)$, $S^r(\F)$ and $\wedge^r(\F)$ are locally free, of ranks $rn$, $\binom{n+r-1}{n-1}$, and $\binom nr$ respectively.
-%          \item Again, let $\F$ be locally free of rank $n$.
-%            Then the multiplication map 
-%       \end{enumerate}
-%     }
-% \end{enumerate}
+\begin{enumerate}
+  \item[5.16.] {
+      For $(X,\O_X)$ a ringed space and $\F$ a sehaf of $\O_X$-modules, we define the \emph{tensor algebra}, \emph{symmetric algebra}, and \emph{exterior algebra} of $\F$ by taking the sheaves associated to the associated presheaf.
+      \begin{enumerate}
+        \item Suppose that $\F$ is locally free of rank $n$.
+           Then $T^r(\F)$, $S^r(\F)$ and $\wedge^r(\F)$ are locally free, of ranks $rn$, $\binom{n+r-1}{n-1}$, and $\binom nr$ respectively.
+         \item Again, let $\F$ be locally free of rank $n$.
+           Then the multiplication map 
+      \end{enumerate}
+    }
+\end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.17.] {
-%       \emph{Affine morphisms.} A morphism $f:X\to Y$ is \emph{affine} if there is an affine open cover $\{V_i\}$ of $Y$ such that $f^{-1}(V_i)$ is affine for each $i$.
-%       \begin{enumerate}
-%         \item Show that $f$ is an affine morphism if and only if for each every open affine $V\subset Y$, $f^{-1}(V)$ is affine.
-%         \item An affine morphism is quasi compact and seperated.
-%           Any finite morphism is affine.
-%         \item Let $Y$ be a scheme, and let $\sA$ be a quasi-coherent sheaf of $\O_Y$-algebras.
-%           Show that there is a unique scheme $X$, and a morphism $f:X\to Y$, such that for every open affine $V\subset Y$, $f^{-1}(V)\cong \Spec\sA(V)$, and for every inclusion $U\hookrightarrow V$ of open affines of $Y$, the morphism $f^{-1}(U)\hookrightarrow f^{-1}(V)$ corresponds to the restriction homomorphism $\sA(V)\to \sA(U)$.
-%           The scheme $X$ is called $\SPEC \sA$.
-%         \item If $\sA$ is a quasi-coherent $\O_Y$-algebra, then $f:X=\SPEC\sA\to Y$ is an affine morphism and $\sA\cong f_*\O_X$.
-%           Conversely, if $f:X\to Y$ is an affine morphism, then $\sA=f_*\O_X$ is a quasi-coherent sheaf of $\O_Y$-modules, and $X\cong \SPEC\sA$.
-%         \item Let $f:X\to Y$ be an affine morphism, and let $\sA=f_*\O_X$.
-%           Show that $f_*$ induces an equivalence of categories from the category of quasi-coherent $\O_X$-modules to the category of quasi-coherent $\sA$-modules (i.e., quasi-coherent $\O_Y$-mdoules having the structure of an $\sA$-module.)
-%           [\emph{Hint}: For any quasi-coherent $\sA$-module $\sM$, construct a quasi-coherent $\O_X$-module $\wtilde{\sM}$, and show that the funtors $f_*$ and $\wtilde{\cdot}$ are inverse to eachother.]
-%       \end{enumerate}
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-%   (a) It suffices to show that an affine morphism has this property.
-%   Take $f:X\to Y$ affine with open affine cover $\{V_i\}$ such that each $f^{-1}(V_i)$ is affine, and let $V\subset Y$ be open affine.
-%   Affine communication lemma gives us a cover of $V$ by $D(g)$, $g\in \O_Y(V_i)$ which are distinguished open in both $V$ and $V_i$ for some $i$.
-%   Note that each $f^{-1}(D(g_\alpha))= D(f^\sharp(V_i)(g))$ is open affine.
-%   Then we may assume $V=Y$ is affine, and that each $V_i$ is a distinguished open set of $Y$.
-% 
-%   We have a cover of $X$ by open affines $U_i=f^{-1}$
-% 
-%   (b) Let $f:X\to Y$ be affine. 
-%   Then, for any $V\subset Y$ affine open, $f^{-1}(V)$ is affine by (a), and thus quasi-compact.
-%   It follows from 3.2 that $f$ is quasi compact.
-% 
-%   Taking an affine cover $V_i$ of $Y$, we have an affine cover $U_i:=f^{-1}(V_i)$ of $X$.
-%   Then $f|_{U_i}:U_i\to V_i$ is a morphism of affine schemes, hence seperated, so that $\Delta|_{U_i}:U_i\to U_i\times_{V_i}U_i$ is a closed immersion.
-%   It follows that $\Delta:X\to X\times_YX$ is in fact a closed immersion, i.e. $f$ is seperated.
-%   
-%   If $f$ is finite, then there is an affine cover $V_i\cong \Spec B_i$ of $Y$ such that $f^{-1}(V_i)\cong \Spec A_i$ such that $A_i$ is a finitely generated $B_i$ module.
-%   In particular, $f^{-1}(V_i)$ is affine.
-% 
-%   (c)
-% \end{proof}
+\begin{enumerate}
+  \item[5.17.] {
+      \emph{Affine morphisms.} A morphism $f:X\to Y$ is \emph{affine} if there is an affine open cover $\{V_i\}$ of $Y$ such that $f^{-1}(V_i)$ is affine for each $i$.
+      \begin{enumerate}
+        \item Show that $f$ is an affine morphism if and only if for each every open affine $V\subset Y$, $f^{-1}(V)$ is affine.
+        \item An affine morphism is quasi compact and seperated.
+          Any finite morphism is affine.
+        \item Let $Y$ be a scheme, and let $\sA$ be a quasi-coherent sheaf of $\O_Y$-algebras.
+          Show that there is a unique scheme $X$, and a morphism $f:X\to Y$, such that for every open affine $V\subset Y$, $f^{-1}(V)\cong \Spec\sA(V)$, and for every inclusion $U\hookrightarrow V$ of open affines of $Y$, the morphism $f^{-1}(U)\hookrightarrow f^{-1}(V)$ corresponds to the restriction homomorphism $\sA(V)\to \sA(U)$.
+          The scheme $X$ is called $\SPEC \sA$.
+        \item If $\sA$ is a quasi-coherent $\O_Y$-algebra, then $f:X=\SPEC\sA\to Y$ is an affine morphism and $\sA\cong f_*\O_X$.
+          Conversely, if $f:X\to Y$ is an affine morphism, then $\sA=f_*\O_X$ is a quasi-coherent sheaf of $\O_Y$-modules, and $X\cong \SPEC\sA$.
+        \item Let $f:X\to Y$ be an affine morphism, and let $\sA=f_*\O_X$.
+          Show that $f_*$ induces an equivalence of categories from the category of quasi-coherent $\O_X$-modules to the category of quasi-coherent $\sA$-modules (i.e., quasi-coherent $\O_Y$-mdoules having the structure of an $\sA$-module.)
+          [\emph{Hint}: For any quasi-coherent $\sA$-module $\sM$, construct a quasi-coherent $\O_X$-module $\wtilde{\sM}$, and show that the funtors $f_*$ and $\wtilde{\cdot}$ are inverse to eachother.]
+      \end{enumerate}
+    }
+\end{enumerate}
 
-% \begin{enumerate}
-%   \item[5.18.] {
-%       \emph{Vector Bundles}. Let $Y$ be a scheme.
-%       A \emph{(geometric) vector bundle} of rank $n$ over $Y$ is a scheme $X$ and a morphism $f:X\to Y$, together with additional data consisting of an open covering $\{U_i\}$ of $Y$, and isomorphisms $\psi_i:f^{-1}(U_i)\to \AA_{U_i}^n$, such that for any $i,j$, and for any open affine subset $V=\Spec A\subset U_{i}\cap U_j$, the automorphism $\psi=\psi_j\circ \psi_i^{-1}$ of $\AA_V^n=\Spec A[x_1,\ldots,x_n]$ is given by a 
-%     }
-% \end{enumerate}
+\begin{proof}
+  (a) It suffices to show that an affine morphism has this property.
+  Take $f:X\to Y$ affine with open affine cover $\{V_i\}$ such that each $f^{-1}(V_i)$ is affine, and let $V\subset Y$ be open affine.
+  Affine communication lemma gives us a cover of $V$ by $D(g)$, $g\in \O_Y(V_i)$ which are distinguished open in both $V$ and $V_i$ for some $i$.
+  Note that each $f^{-1}(D(g_\alpha))= D(f^\sharp(V_i)(g))$ is open affine.
+  Then we may assume $V=Y$ is affine, and that each $V_i$ is a distinguished open set of $Y$.
+
+  We have a cover of $X$ by open affines $U_i=f^{-1}$
+
+  (b) Let $f:X\to Y$ be affine. 
+  Then, for any $V\subset Y$ affine open, $f^{-1}(V)$ is affine by (a), and thus quasi-compact.
+  It follows from 3.2 that $f$ is quasi compact.
+
+  Taking an affine cover $V_i$ of $Y$, we have an affine cover $U_i:=f^{-1}(V_i)$ of $X$.
+  Then $f|_{U_i}:U_i\to V_i$ is a morphism of affine schemes, hence seperated, so that $\Delta|_{U_i}:U_i\to U_i\times_{V_i}U_i$ is a closed immersion.
+  It follows that $\Delta:X\to X\times_YX$ is in fact a closed immersion, i.e. $f$ is seperated.
+  
+  If $f$ is finite, then there is an affine cover $V_i\cong \Spec B_i$ of $Y$ such that $f^{-1}(V_i)\cong \Spec A_i$ such that $A_i$ is a finitely generated $B_i$ module.
+  In particular, $f^{-1}(V_i)$ is affine.
+
+  (c)
+\end{proof}
+
+\begin{enumerate}
+  \item[5.18.] {
+      \emph{Vector Bundles}. Let $Y$ be a scheme.
+      A \emph{(geometric) vector bundle} of rank $n$ over $Y$ is a scheme $X$ and a morphism $f:X\to Y$, together with additional data consisting of an open covering $\{U_i\}$ of $Y$, and isomorphisms $\psi_i:f^{-1}(U_i)\to \AA_{U_i}^n$, such that for any $i,j$, and for any open affine subset $V=\Spec A\subset U_{i}\cap U_j$, the automorphism $\psi=\psi_j\circ \psi_i^{-1}$ of $\AA_V^n=\Spec A[x_1,\ldots,x_n]$ is given by a 
+    }
+\end{enumerate}
 
 \end{document}

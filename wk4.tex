@@ -5,21 +5,6 @@
 
 %\graphicspath{ {./diagrams/} }
 
-\stackMath
-\def\trianglelefteqslant{\ThisStyle{\mathrel{%
-  \stackinset{r}{.75pt+.15\LMpt}{t}{.1\LMpt}{\rule{.3pt}{1.1\LMex+.2ex}}{\SavedStyle\leqslant}%
-}}}
-
-\stackMath
-\def\trianglerighteqslant{\ThisStyle{\mathrel{%
-  \stackinset{r}{.75pt+.15\LMpt}{t}{.1\LMpt}{\rule{.3pt}{1.1\LMex+.2ex}}{\SavedStyle\geqslant}%
-}}}
-
-\newcommand{\trd}{\mbox{tr.d. }}
-\DeclareMathOperator{\ssp}{sp}
-\newcommand{\lideal}{\trianglelefteqslant}
-\newcommand{\rideal}{\trianglerighteqslant}
-
 \newtheorem{lemma}{Lemma}
 
 \begin{document}
@@ -42,39 +27,39 @@
 
 \bigskip
 
-\begin{enumerate}
-	\item[3.9.] {
-      \emph{The Topological Space of a Product.}
-      Recall that in the category of varieties, the Zariski topology on the product of two varieties is not equal to the product topology.
-      Now, we see that in the category of schemes, the underlying point set of a product of schemes is not even the product set.
-      \begin{enumerate}
-        \item Let $k$ be a field, and let $\A^1_k=\Spec k[x]$ be the affine line over $k$.
-          Show that $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$, and show that the underlying point set of the product is not the product of the underlying point set of the factors (even if $k$ is algebraically closed).
-        \item Let $k$ be a field with $s$ and $t$ indeterminates over $k$.
-          Then $\Spec k(s)$, $\Spec k(t)$, and $\Spec k$ are all one point spaces.
-          Describe the product scheme $\Spec k(s)\times_{\Spec k}\Spec k(t)$.
-      \end{enumerate}
-    }
-\end{enumerate}
-
-\begin{proof}
-  (a) We have that $k[x]\otimes_k k[x]\cong k[x,y]$ as $k$-algebras, so $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$ as schemes over $k$.
-  Fix $k=\CC$, and consider the generic points of $\A_k^2$.
-  %If there were a bijection between $\A_k^2$ and the set theoretic product, then this would give us a bijection of generic points, and thus a bijection of irreducible components.
-  %There is an injection of point sets $f:\A_k^1\times\A_k^1\to \A_k^2$ given by $(\p,\q)\mapsto \p^e + \q^e$.
-  A bijection of sets would give us a bijection of generic points, and thus a bijection of irreducible polynomials.
-  This is clearly false, so that $\A_k^2\neq \A_k^1\times \A_k^1$ as sets.
-
-  (b) Fix $A=k(s)\otimes_k k(t)$, so that the product scheme is given by $X=\Spec A$.
-  Consider the ideal $\p=(s\otimes 1 +1\otimes t)\subset A$.
-  Clearly $\p\neq (0)$.
-  If $\p=(1)$, then we have
-  \begin{align*}
-    1\otimes 1 &= (s\otimes 1 + 1\otimes t)\left(\sum_{i=1}^n \frac{f_i(s)}{p_i(s)}\otimes \frac{g_i(t)}{q_i(t)}\right) \\
-      &= \sum_{i=1}^n\frac{sf_i(s)}{p_i(s)}\otimes \frac{g_i(t)}{q_i(t)} +
-      \frac{f_i(s)}{p_i(s)}\otimes \frac{tg_i(t)}{q_i(t)}.
-  \end{align*}
-\end{proof}
+% \begin{enumerate}
+% 	\item[3.9.] {
+%       \emph{The Topological Space of a Product.}
+%       Recall that in the category of varieties, the Zariski topology on the product of two varieties is not equal to the product topology.
+%       Now, we see that in the category of schemes, the underlying point set of a product of schemes is not even the product set.
+%       \begin{enumerate}
+%         \item Let $k$ be a field, and let $\A^1_k=\Spec k[x]$ be the affine line over $k$.
+%           Show that $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$, and show that the underlying point set of the product is not the product of the underlying point set of the factors (even if $k$ is algebraically closed).
+%         \item Let $k$ be a field with $s$ and $t$ indeterminates over $k$.
+%           Then $\Spec k(s)$, $\Spec k(t)$, and $\Spec k$ are all one point spaces.
+%           Describe the product scheme $\Spec k(s)\times_{\Spec k}\Spec k(t)$.
+%       \end{enumerate}
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+%   (a) We have that $k[x]\otimes_k k[x]\cong k[x,y]$ as $k$-algebras, so $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$ as schemes over $k$.
+%   Fix $k=\CC$, and consider the generic points of $\A_k^2$.
+%   %If there were a bijection between $\A_k^2$ and the set theoretic product, then this would give us a bijection of generic points, and thus a bijection of irreducible components.
+%   %There is an injection of point sets $f:\A_k^1\times\A_k^1\to \A_k^2$ given by $(\p,\q)\mapsto \p^e + \q^e$.
+%   A bijection of sets would give us a bijection of generic points, and thus a bijection of irreducible polynomials.
+%   This is clearly false, so that $\A_k^2\neq \A_k^1\times \A_k^1$ as sets.
+% 
+%   (b) Fix $A=k(s)\otimes_k k(t)$, so that the product scheme is given by $X=\Spec A$.
+%   Consider the ideal $\p=(s\otimes 1 +1\otimes t)\subset A$.
+%   Clearly $\p\neq (0)$.
+%   If $\p=(1)$, then we have
+%   \begin{align*}
+%     1\otimes 1 &= (s\otimes 1 + 1\otimes t)\left(\sum_{i=1}^n \frac{f_i(s)}{p_i(s)}\otimes \frac{g_i(t)}{q_i(t)}\right) \\
+%       &= \sum_{i=1}^n\frac{sf_i(s)}{p_i(s)}\otimes \frac{g_i(t)}{q_i(t)} +
+%       \frac{f_i(s)}{p_i(s)}\otimes \frac{tg_i(t)}{q_i(t)}.
+%   \end{align*}
+% \end{proof}
 
 \begin{enumerate}
 	\item[3.10.] {
@@ -210,7 +195,7 @@
        &\cong f_\p^{-1}(\m_\p) \\
        &\cong f^{-1}(\p).
   \end{align*}
-  follow from minimality of the extension of an ideal, maximality of $\m_\p\lideal A_\p$, and the second lemma respectively.
+  follow from minimality of the extension of an ideal, maximality of $\m_\p\lideal A_\p$, and the second lemma respectively.\footnote{I originally wrote this out a while ago, so I hadn't written it up again, let alone in simplied form, when we had our meeting. For some reason I thought (b) was the interesting part lol.}
 
   %(a) The affine case is Ex. 3.20 in Atiyah-MacDonald. %\footnote{I did it on paper, and it's a tad boring to write out. Just a series of commutative diagrams, and a repeat argument from Ex 2.1 of Hartshorne.} 
   Fix affine open covers $\{U_i=\Spec A_i\}$ of $X$ and $\{V_j=\Spec B_j\}$ of $Y$.
@@ -365,6 +350,8 @@
     f(D_{i}(g_{ij})) &= \{f^\sharp(V)^{-1}(\p)\in \Spec B:\p\lideal A_i, ~\p\not\ni g_{ij}\} \\
                        &= \{\}
   \end{align*}
+
+  (d) Let $f:X\to Y$ be a scheme of finite type, and $Y\to Y'$ a map of schemes.
 \end{proof}
 
 % \begin{enumerate}

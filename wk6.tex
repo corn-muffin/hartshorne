@@ -103,16 +103,17 @@
 \end{enumerate}
 
 \begin{proof}
-  (a) We have that
+  (a) Let 
 
   (b) If $X$ is affine, then we can take $(f_1,\ldots, f_r)=(1)$ to be a finite set of generators of the unit ideal, so that $X_{f_i}=D(f_i)$ are distinguished affines covering $X$.
   
   Conversely, take a scheme $X$ with such elements $f_1,\ldots, f_r\in A$.
   Each $X_{f_i}$ is affine and thus quasi-compact, so a finite cover of $X$ by quasi-compact open sets implies $X$ is quasi-compact.
-  Each intersection $X_{f_i}\cap X_{f_j}=D_{X_{f_i}}(f_j)$ is affine and thus quasi-compact, so that 2.16(d) gives us $\Gamma(X_{f_i},\O_{X_{f_i}})\cong A_{f_i}$.
+  Each intersection $X_{f_i}\cap X_{f_j}=D_{X_{f_i}}(f_j)\cong \Spec (A_{f_i})_{f_j}\cong \Spec A_{f_if_j}$ is affine with and thus quasi-compact, so that 2.16(d) gives us $\Gamma(X_{f_i},\O_{X_{f_i}})\cong A_{f_i}$.
 
-  Exc. 2.4 supplies us with an isomorphism $\phi_i:X_{f_i}\iso\Spec A_{f_i}$.
-  so that we have a cover of $\Spec A$ by $D(f_i)\cong \Spec A_{f_i}$ where $\phi$
+  Ex. 2.4 supplies us with an isomorphism $\phi_i:X_{f_i}\iso\Spec A_{f_i}$, so that we have a cover of $\Spec A$ by $X_{f_i}\cong \Spec A_{f_i}$ where $\phi_i|_{D_{X_{f_i}(f_j)}}=\phi_j|_{D_{X_{f_j}}(f_i)}$.
+  Then we can glue together the maps $\phi_i$ to a map $\phi:X\to \Spec A$, which is an isomorphism by (a).
+  Hence, $X\cong \Spec A$ is affine.
 \end{proof}
 
 \begin{enumerate}

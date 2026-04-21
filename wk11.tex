@@ -1,0 +1,309 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\DeclareMathOperator{\CaCl}{CaCl}
+\DeclareMathOperator{\Pic}{Pic}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\sR}{{\mathscr R}}
+\newcommand{\N}{{\mathcal N}}
+\renewcommand{\U}{{\mathcal U}}
+
+\DeclareFontFamily{U}{mathx}{}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathAccent{\widehat}{0}{mathx}{"70}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\newcommand{\wcheck}{\widecheck}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {4-08-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.3-4, Week 11}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[3.1.] {
+      Let $X$ be a noetherian scheme.
+      Show that $X$ is affine if and only if $X_{\red}$ is affine.
+      [Hint: Use (3.7), and for any coherent sheaf $\F$ on $X$, consider the filtration $\F\supset \N\cdot \F\supset \N^2\cdot\F\supset\cdots$, where $\N$ is the sheaf of nilpotent elements on $X$.]
+    }
+\end{enumerate}
+
+\begin{proof}
+  If $X=\Spec A$ is affine, then $X_\red=\Spec (A/\nil A)$ is affine.
+  Conversely, suppose that $X_\red$ is affine.
+  For any quasi-coherent sheaf $\F$ on $X$, consider the filtration $\F\supset \N\F\supset \N^2\F\supset\cdots$, where $\N$ is the sheaf of nilpotent elements on $X$.
+
+  Noetherianity of $X$ gives us a finite affine open cover $\{U_i\}$, where each $\N(U_i)$ is a finitely generated $\O_X(U_i)$-module since $\O_X(U_i)$ is noetherian.
+  Thus, we can take $n\geqs 0$ such that $\N^n(U_i)=0$ for each $i$, whence $\N^n=0$.
+  This gives us a finite filtration
+  \begin{align*}
+    0=\N^n\F\subset\cdots \subset \N\F\subset \F,
+  \end{align*}
+  and thus the short exact sequences
+  \begin{equation}
+    0\to \N^{k+1}\F\to\N^k\F\to \frac{\N^k\F}{\N^{k+1}\F}\to 0
+  \end{equation}
+  for all $0\leqs k<n$.
+
+  Clearly 
+  \[
+    \N\subset \Ann \left(\frac{\N^k\F}{\N^{k+1}\F}\right),
+  \] 
+  so there is a quasi-coherent scheme $\G$ on $X_\red$ such that
+  \[
+    \frac{\N^k\F}{\N^{k+1}\F}\cong i_*\G
+  \] 
+  with $i:X_\red\to X$ the inclusion.
+  It follows from (2.10) that
+  \begin{align*}
+    H^\bullet(X,\frac{\N^k\F}{\N^{k+1}\F})\cong H^\bullet(X_\red, \G).
+  \end{align*}
+  (3.7) implies $H^i(X_\red,\G) =0$ for $i>0$, so the long exact sequence of homology for (1) gives us exactness of
+  \begin{align*}
+    H^i(X,\N^{k+1}\F)\to H^i(X,\N^k\F)\to H^i(X_\red,\G)=0
+  \end{align*}
+  for all $i>0$.
+  $H^\bullet(X,\N^n\F)=0$, so induction gives us $H^i(X,\N^k\F)=0$ for all $i>0$ and $0\leqs k\leqs n$.
+  In particular, $H^i(X,\F)=0$ for all $i>0$.
+  $\F$ is an arbitrary quasi-coherent sheaf on $X$, so that $X$ is affine by (3.7).
+\end{proof}
+
+\begin{enumerate}
+  \item[3.2.] {
+      Let $X$ be a reduced noetherian scheme.
+      Show that $X$ is affine if and only if each irreducible component is affine.
+    }
+\end{enumerate}
+
+\begin{proof}
+  One implication is clear.
+  Suppose, then, that each irreducible component of $X$ is affine.
+  $X$ is noetherian, so we can write a finite irreducible decomposition $X=Y_1\cup\cdots\cup Y_r$, with each $Y_1,\ldots, Y_r$ affine.
+  %By (Ex. 3.1), we may assume $X$ is reduced.
+  Now, fix a quasi-coherent sheaf $\F$ on $X$.
+  We have a filtration
+  \[
+    \F\supset \I_{Y_1}\F\supset \I_{Y_1\cup Y_2}\F\supset \cdots \supset \I_{Y_1\cup\cdots \cup Y_r}\F= 0.
+  \] 
+  This gives us exact sequences
+  \[
+    0\to \I_{Y_1\cup\cdots\cup Y_{k+1}}\F\to \I_{Y_1\cup\cdots \cup Y_k}\F\to \frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F} \to 0
+  \] 
+  for all $0\leqs k<r$, where
+  \[
+    \I_{Y_{k+1}}\subset \Ann \left(\frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F}\right).
+  \] 
+  Then by (2.10) we have quasi-coherent sheaves $\G_i$ on $Y_i$ such that
+  \[
+    H^\bullet(X,\frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F})\cong H^\bullet(Y_i,\G_i).
+  \] 
+  each $Y_i$ is affine, so $H^p(Y_i,\G_i)=0$ for all $p>0$.
+  Hence, the maps $H^p(X,\I_{Y_1\cup\cdots \cup Y_{k+1}}\F)\to H^p(X,\I_{Y_1\cup\cdots\cup Y_k}\F)$ are surjective for all $0\leqs k<r$ and $p>0$ as in (Ex. 3.1).
+  It follows that $H^p(X,\F)=0$ for all $p>0$ by induction on $r-k$, so that $X$ is affine by (3.7).
+\end{proof}
+
+\begin{enumerate}
+  \item[3.3.] {
+      Let $A$ be a noetherian ring, and let $\a$ be an ideal of $X$.
+      \begin{enumerate}
+        \item Show that $\Gamma_\a(\cdot)$ (II, Ex. 5.6) is a left-exact functor from the category of $A$-modules to itself.
+          We denote its right derived functors, calculated in $\Mod(A)$, by $H_\a^i(\cdot)$.
+        \item Now let $X=\Spec A$, $Y=V(\a)$.
+          Show that for any $A$-module $M$,
+          \[
+            H_\a^i(M)= H_Y^i(X,\wtilde M).
+          \] 
+        \item For any $i$, show that $\Gamma_\a(H_\a^i(M))=H_\a^i(M)$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Let $0\to M'\xrightarrow{\phi} M\xrightarrow{\psi} M''$ be a left exact sequence in $\Mod_A$, and consider the following diagram.
+  \[
+    \begin{tikzcd}
+      0\ar[r] &M'\ar[r,"\phi"] &M\ar[r,"\psi"] &M'' \\
+      0\ar[r] &\Gamma_\a(M')\ar[r,"\phi_\a"]\ar[u,hook] &\Gamma_\a(M)\ar[u, hook]\ar[r,"\psi_\a"] & \Gamma_\a(M'')\ar[u,hook]
+    \end{tikzcd}
+  \] 
+  We clearly have $\phi_\a$ injective and $\im\phi_\a\subset\ker\psi_\a$.
+  It suffices to show $\ker\psi_\a\subset \im\phi_\a$.
+
+  Take $m\in \ker\psi_\a\subset\ker\psi$, and $m'\in M'$ such that $\phi(m')=m$.
+  We have $n>0$ such that $0=\a^n\phi(m')=\phi(\a^nm')$, whence $\a^nm'=0$ by injectivity of $\phi$.
+  We conclude that $m'\in \Gamma_\a(M')$, so that $m=\phi_\a(m')\in \im\phi_\a$ gives us exactness.
+
+  (b) Let $0\to M\to I^\bullet$ be an injective resolution of $M$ in $\Mod_A$.
+  Then $\wtilde I^\bullet$ is a flasque resolution of $\wtilde M$ by (3.4).
+  Thus, it suffices to show that $\Gamma_\a(I^\bullet)\cong \Gamma_Y(\wtilde I^\bullet)$.
+  This follows from the more general fact that $\Gamma_\a(N)\cong \Gamma_Y(\wtilde N)$, which is a corollary of (II, Ex. 5.6c).
+
+  % If $m\in\Gamma_\a(M)$ and $\p\notin V(\a)$, then there is some $a\in \a\setminus \p$ so that $m_\p=\frac{a^n m}{a^n}\in M_\p$ for all $n\geqs 0$ implies $m_\p=0$.
+  % Conversely, take $m\in \Gamma_Y(M)$.
+
+  (c) Let $0\to M\to I^\bullet$ be an injective resolution of $M$, so that $H_\a^\bullet(M)= h^\bullet(\Gamma_\a(I^\bullet))$.
+  Then, with boundary maps $d^p:\Gamma_\a(I^p)\to \Gamma_\a(I^{p+1})$,
+  \begin{align*}
+    \Gamma_\a(h^p(\Gamma_\a(I^\bullet)))
+    &= \Gamma_\a\left(\frac{\ker d^p}{\im d^{p-1}}\right) \\
+    &\supset\frac{\Gamma_\a(\ker d^p)}{\im d^{p-1}} \\
+    &=h^p(\Gamma_\a(I^\bullet)),
+  \end{align*}
+  since $\ker d^p\subset \Gamma_\a (I^p)$.
+  That is,
+  \[
+    \Gamma_\a(H_\a^\bullet(M))=H_\a^\bullet(M),
+  \] 
+  as desired.
+\end{proof}
+
+\begin{enumerate}
+  \item[3.7] {
+      Let $A$ be a noetherian ring, let $X=\Spec A$, let $\a\lideal A$ be an ideal, and let $U\subset X$ be the open set $X-V(\a)$.
+      \begin{enumerate}
+        \item For any $A$-module $M$, establish the following formula of Deligne:
+          \[
+            \Gamma(U,\wtilde M)\cong \dlim_n\Hom_A(\a^n,M).
+          \] 
+        \item Apply this in the case of an injective $A$-module $I$ to give another proof of (3.4).
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (b) Fix an injective $A$-module $I$, let $V\subset U$ be another open set, and let $\b\lideal A$ an ideal such that $V=X-V(\b)$.
+  Then $V(\a)\subset V(\b)$, so $\sqrt{\a}\supset \sqrt{\b}$.
+  $A$ noetherian implies $\a,\b$ finitely generated, so we can find $m>0$ such that $\a= \sqrt{\a}^m$ and $\b=\sqrt{\b}^m$.
+  Then $\a\supset \b$, so $I$ injective implies the restriction map
+  \begin{align*}
+    \Hom_A(\a^n,I)\to \Hom_A(\b^n,I)
+  \end{align*}
+  is surjective for any $n$.
+  A direct limit of epimorphisms is itself an epimorphism, so
+  \[
+    \Gamma(U,\wtilde I)\to \Gamma(V,\wtilde I)
+  \] 
+  is surjective by (a).
+\end{proof}
+
+\begin{enumerate}
+  \item[4.1.] {
+      Let $f:X\to Y$ be an affine morphism of noetherian separated schemes (II, Ex. 5.17).
+      Show that for any quasi-coherent sheaf $\F$ on $X$, there are natural isomorphisms for all $i\geqs 0$
+      \[
+        H^i(X,\F)\cong H^i(Y,f_*\F).
+      \] 
+      [\emph{Hint}: Use (II, 5.8).]
+    }
+\end{enumerate}
+
+\begin{proof}
+  (II, 5.8) gives us that $f_*\F$ is quasi-compact, since $X$ is noetherian.
+  Thus, it suffices by (4.4) and $X$, $Y$ noetherian separated to give an isomorphism
+  \[
+    \wcheck H^\bullet(\U,\F)\cong \wcheck H^\bullet(\V,f_*\F)
+  \] 
+  for some open affine covers $\U$ of $X$ and $\V$ of $Y$.
+
+  Take $\V=\{V_i\}$ to be some open affine cover of $Y$.
+  $f$ affine gives us that each $f^{-1}(V_i)$ is affine, so we have an open affine cover $\U=\{f^{-1}(V_i)\}$ of $X$.
+  Noting that
+  \begin{align*}
+    C^p(\V,f_*\F) 
+    &= \prod_{i_0<\cdots<i_p}f_*\F(V_{i_0,\ldots, i_p}) \\
+    &= \prod_{i_0<\cdots<i_p}\F(f^{-1}(V_{i_0,\ldots, i_p})) \\
+    &= \prod_{i_0<\cdots<i_p}\F(U_{i_0,\ldots, i_p}) \\
+    &= C^p(\U,\F)
+  \end{align*}
+  gives us a natural isomorphism of chain complexes $C^\bullet(\U,\F)\cong C^\bullet(\V,f_*\F)$, so it particular an isomorphism $\wcheck H^\bullet(\U,F)\cong \wcheck H^\bullet(\V,f_*\F)$ of homology.
+  This completes the proof.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.3.] {
+      Let $X=\AA_k^2=\Spec k[x,y]$, and let $U=X-\{(0,0)\}$.
+      Using a suitable cover of $U$ by open affine subsets, show that $H^1(U,\O_U)$ is isomorphic to the $k$-vector space spanned by $\{x^iy^j~:~i,j<0\}$.
+      In particular, it is infinite dimensional.
+      (Using (3.5), this provides another proof that $U$ is not affine.)
+    }
+\end{enumerate}
+
+\begin{proof}
+  Consider the cover $\V= \{V_x,V_y\}$ of $U$, where $V_x = D(x)$ and $V_y=D(y)$.
+  Open immersions are separated, so $X$ separated implies $U$ separated.
+  Noetherianity of $X$ gives us that $U$ is locally noetherian.
+  $U=V_x\cup V_y$ is a union of finitely many affine--in particular quasi-compact--open subschemes.
+  Thus, $U$ is itself quasi-compact, and hence noetherian.
+  (4.4) gives us
+  \begin{align*}
+    H^\bullet(U,\O_U)\cong \wcheck H^\bullet(\V,\O_U).
+  \end{align*}
+
+  We write
+  \begin{align*}
+    C^\bullet(\V,\O_U)
+    &= [0\to \O_U(V_x)\oplus \O_U(V_y)\xrightarrow{d} \O_U(V_x\cap V_y)\to 0] \\
+    &= [0\to k[x^{\pm 1},y]\oplus k[x,y^{\pm1}]\xrightarrow{d}k[x^{\pm1},y^{\pm1}]\to 0],
+  \end{align*}
+  where $d(f(x,y),g(x,y)) = f(x,y)-g(x,y)$.
+  As a vector space, then, $\im d$ is spanned by $\{x^iy^j:i\geqs 0\}\cup \{x^iy^j:j\geqs 0\}$.
+  Then
+  \begin{align*}
+    H^1(U,\O_U) 
+    &=\cok d \\
+    &= \frac{k[x^{\pm1},y^{\pm1}]}{\im d} \\
+    &\cong k\la x^iy^j :i,j<0\ra,
+  \end{align*}
+  where $k\la X\ra$ denotes the $k$-span of $X$.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.7.] {
+      Let $X$ be a subscheme of $\PP_k^2$ defined by a single homogeneous equation $f(x_0,x_1,x_2)=0$ of degree $d$.
+      (Do not assume $f$ is irreducible.)
+      Assume that $(1,0,0)\notin X$.
+      Then show that $X$ can be covered by the two open affine subsets $U=X\cap \{x_1\neq 0\}$ and $V=X\cap \{x_2\neq 0\}$.
+      Now, calculate the \v{C}ech complex explicitly, and thus show that
+      \begin{align*}
+        &\dim H^0(X,\O_X)=1, \\
+        &\dim H^1(X,\O_X)=\frac12(d-1)(d-2).
+      \end{align*}
+    }
+\end{enumerate}
+
+\begin{proof}
+  Since $(1,0,0)\notin X$, we have $X=U\cup V$.
+  Further, 
+  \begin{align*}
+    U &= \Spec\left(\frac{k[\frac{x_0}{x_1},\frac{x_2}{x_1}]}{(f(\frac{x_0}{x_1},1,\frac{x_2}{x_1}))}\right), \\
+    V &= \Spec\left(\frac{k[\frac{x_0}{x_2},\frac{x_1}{x_2}]}{(f(\frac{x_0}{x_2},\frac{x_1}{x_2},1))}\right)
+  \end{align*}
+  are affine.
+  We compute
+  \begin{align*}
+    C^\bullet &= [0\to \frac{k[\frac{x_0}{x_1},\frac{x_2}{x_1}]}{(f(\frac{x_0}{x_1},1,\frac{x_2}{x_1}))}\oplus \frac{k[\frac{x_0}{x_2},\frac{x_1}{x_2}]}{(f(\frac{x_0}{x_2},\frac{x_1}{x_2},1))}\xrightarrow{d} \frac{k[y_1,y_2^{\pm1}]}{f} ]
+  \end{align*}
+\end{proof}
+
+\end{document}

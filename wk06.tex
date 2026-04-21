@@ -1,0 +1,371 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\DeclareMathOperator{\pr}{pr}
+\newcommand{\SPEC}{\text{\bf{Spec}}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\E}{\mathscr{E}}
+\renewcommand{\sHom}{{\mathscr{H}om}}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {3-02-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter II.4-5, Week 6}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[2.16.] {
+      Let $X$ be a scheme, let $f\in \Gamma(X,\O_X)$, and define 
+      \[
+        X_f:=\{x\in X: f_x\notin \m_x\subset \O_{X,x}\}.
+      \]
+      \begin{enumerate}
+        \item If $U=\Spec B$ is an open affine subscheme of $X$, and if $\ol{f}\in B=\Gamma(U,\O_X|_U)$ is the restriction of $f$, show that $U\cap X_f=D(\ol{f})$.
+          Conclude that $X_f$ is an open subset of $X$.
+        \item Assume that $X$ is quasi-compact. Let $A=\Gamma(X,\O_X)$, and let $a\in A$ be an element whose restriction to $X_f$ is $0$.
+          Show that, for some $n>0$, $f^na=0$.
+        \item Now assume that $X$ has a finite cover by open affines $U_i$ such that each intersection $U_i\cap U_j$ is quasi-compact. 
+          (This hypothesis is satisfied, for example, if $\ssp(X)$ is noetherian.)
+          Let $b\in \Gamma(X_f,\O_{X_f})$.
+          Show that, for some $n>0$, $f^nb$ is the restriction of an element of $A$.
+        \item With the hypothesis of (c), conclude that $\Gamma(X_f,\O_{X_f})\cong A_f$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) $\p\in U\cap X_f$ iff $\ol{f}_\p\notin \m_\p=\p\O_{U,\p}$, i.e. $\ol{f}\notin \p$.
+  It follows that $U\cap X_f= D(\ol{f})$ is open, so that $X_f$ is a union of open sets, hence open itself.
+
+  (b) Let $a\in A$ with $a|_{X_f}=0$.
+  Then, for any open affine $U$ intersection $X_f$, we define denote the restriction $\ol{a}:=a|_U$.
+  Then $\ol{a}|_{D(\overline{f})}=a|_{U\cap X_f}=0$, whence there exists $n >0$ such that $\ol{f^na}=\ol{f}^n \ol{a} =0$.
+  Quasi-compactness of $X$ gives us a finite affine open cover $\{U_i\}$, so that we can take some fixed $n>0$ with $(f^na)|_{U_i}=0$ for all $U_i$.
+  The sheaf axiom gives us that in fact $f^na=0$, so we are done.
+
+  (c) Consider $f_i:=f|_{U_i}$ and $b_i:=b|_{D(f_i)}$.
+  Then, for each $i$, (a) gives us some $m>0$ such that 
+  \[
+    (f_i^mb_i)|_{D(f_i)}=c_i|_{D(f_i)},
+  \]
+  with $c_i\in \Gamma(U_i,\O_{U_i})$.
+  Denote $U_{ij}=U_i\cap U_j$.
+  $(c_i-c_j)|_{U_{ij}\cap X_f} = 0$, so (c) gives us $l>0$ such that $f^l(c_i-c_j)|_{U_ij} = 0$, i.e. $(f^lc_i)|_{U_{ij}}=(f^lc_j)|_{U_{ij}}$.
+  There are only finitely many $U_{ij}$, so we can take $l$ such that the above holds for each $i,j$. 
+  Then we have $n= m+l>0$ such that 
+  \begin{align*}
+    (f_i^nb_i)|_{D(f_i)} &= c_i|_{D(f_i)}, \\ 
+    c_i|_{U_ij} & = c_j|_{U_{ij}}
+  \end{align*}
+  for all $i,j$.
+  Then the $c_i$ glue to an element $c\in A$ such that $c|_{X_f}$ is the gluing of the $f_i^nb_i|_{D(f_i)}$; namely, $f^nb$.
+  
+  (d) By (c), we have a map $\phi:\Gamma(X_f,\O_{X_f})\to A_f:b\mapsto f^nb/f^n$, which is well defined regardless of our choice of $n>0$.\footnote{We are often somewhat sloppy in writing $f^nb$ for the element of $A$ which restricts to it, but we attempt to distinguish when necessary.}
+  Suppose that $\phi(b)=0$, so that there exists $m>0$ with $f^{n+m}b =f^m(f^nb\cdot 1 - f^n\cdot 0) = 0$.
+  Then, with notation as in (c), $f_i^{n+m}b_i=0$ means $b_i=0$ for each $i$, whence $b=0$, showing injectivity.
+
+  Finally, we show surjectivity.
+  Fix $a/f^m\in A_f$.
+  It suffices to find $b\in \Gamma(X_f,\O_{X_f})$ such that $f^{n+m}b-f^na=0$ for $f^nb\in A$.\footnote{It is in fact equivalent, as if $f^{n+m+l}b-f^{n+l}a=0$ for $l>0$, then we can replace $n>0$ by $n+l>0$.}
+  Fortunately, we need only glue together the maps $b_i = a|_{D(f_i)}/f_i^m$ to a map $b\in \Gamma(X_f,\O_{X_f})$, where compatibility is simple.
+  Then $f^mb=a$, so that $\phi(b)=f^mb/f^m=a/f^n$, as desired.
+  We conclude that $\phi$ is an isomorphism of rings.
+\end{proof}
+
+\begin{enumerate}
+  \item[2.17.] {
+      \emph{A Criterion for Affineness}
+      \begin{enumerate}
+        \item Let $f:X\to Y$ be a morphism of schemes, and suppose that $Y$ can be covered by open subsets $U_i$ such that for each $i$, the induced map $f^{-1}(U_i)\to U_i$ is an isomorphism.
+          Then $f$ is an isomorphism.
+        \item A scheme $X$ is affine if and only if there is a finite set of elements $f_1,\ldots, f_r\in A=\Gamma(X,\O_X)$ such that the open subsets $X_{f_i}$ are affine, and $f_1,\ldots, f_r$ generate the unit ideal in $A$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Let 
+
+  (b) If $X$ is affine, then we can take $(f_1,\ldots, f_r)=(1)$ to be a finite set of generators of the unit ideal, so that $X_{f_i}=D(f_i)$ are distinguished affines covering $X$.
+  
+  Conversely, take a scheme $X$ with such elements $f_1,\ldots, f_r\in A$.
+  Each $X_{f_i}$ is affine and thus quasi-compact, so a finite cover of $X$ by quasi-compact open sets implies $X$ is quasi-compact.
+  Each intersection $X_{f_i}\cap X_{f_j}=D_{X_{f_i}}(f_j)\cong \Spec (A_{f_i})_{f_j}\cong \Spec A_{f_if_j}$ is affine with and thus quasi-compact, so that 2.16(d) gives us $\Gamma(X_{f_i},\O_{X_{f_i}})\cong A_{f_i}$.
+
+  Ex. 2.4 supplies us with an isomorphism $\phi_i:X_{f_i}\iso\Spec A_{f_i}$, so that we have a cover of $\Spec A$ by $X_{f_i}\cong \Spec A_{f_i}$ where $\phi_i|_{D_{X_{f_i}(f_j)}}=\phi_j|_{D_{X_{f_j}}(f_i)}$.
+  Then we can glue together the maps $\phi_i$ to a map $\phi:X\to \Spec A$, which is an isomorphism by (a).
+  Hence, $X\cong \Spec A$ is affine.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.9.] {
+      Show that a composition of projective morphisms is projective.
+      Conclude that projective morphisms have all properties listed in Ex. 4.8.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We begin by showing that the Segre embedding $f: \PP_\ZZ^n\times_\ZZ\PP_\ZZ^m\to \PP_\ZZ^{N}$, with $N=(n+1)(m+1)-1$, is a closed embedding.\footnote{Please tell me there is a much more elegant way of doing this.}
+  Recall that $\PP_\ZZ^n=\Proj (\ZZ[x_1,\ldots, x_n])$, has an affine cover\footnote{We do not omit the trivial term $x_i/x_i$, as it simply adjoins $1$.}
+  \[
+    U_i=D(x_i)\cong \Spec (\PP_\ZZ^n)_{(x_i)}\cong \Spec \ZZ[\frac{x_0}{x_i},\ldots, \frac{x_n}{x_i}],
+  \]
+  as we expect from the study of varieties.
+  Then we have an open affine cover of $\PP_\ZZ^n\times_\ZZ\PP_\ZZ^m$ by
+  \begin{align*}
+    U_i\times_\ZZ V_j 
+    &\cong \Spec (\ZZ[\frac{x_0}{x_i},\ldots, \frac{x_n}{x_i}]
+    \otimes_\ZZ \ZZ[\frac{y_0}{y_j},\ldots, \frac{y_m}{y_j}]) \\
+    &\cong \Spec \ZZ[\frac{x_ky_l}{x_iy_j}: 0\leqs k\leqs n, ~ 0\leqs l\leqs m].
+  \end{align*}
+  Then choose some bijection $\sigma:\{0,\ldots, N\}\to \{(k,l)\}$, so we have surjective ring maps 
+  \begin{align*}
+    \vphi_p: \ZZ[\frac{x_0}{x_p},\ldots, \frac{x_N}{x_p}] &\longrightarrow
+    \ZZ[\frac{x_ky_l}{x_iy_j}: k,l] \\
+    \frac{x_q}{x_p}&\longmapsto \frac{x_{\sigma_1(q)}y_{\sigma_2(q)}}{x_{\sigma_1(p)}y_{\sigma_2(p)}}
+  \end{align*}
+  for each $0\leqs p\leqs N$.
+
+  Surjectivity gives us corresponding closed immersions $f_{p}:U_{\sigma_1(p)}\cap V_{\sigma_2(p)}\to W_p$ by Ex. 2.18.
+  It is not difficult to show these maps are compatible by considering the ring morphisms, so they glue together to our desired map $f: \PP_\ZZ^n \times_\ZZ \PP_\ZZ^m \to \PP_\ZZ^N$.
+  It suffices to show that being a closed immersion is an affine local condition.
+
+  There is a cover of $\PP_\ZZ^N$ by affine open sets upon which $f^\sharp$ is surjective, so $f^\sharp$ must be surjective.
+  It suffices to show that it is a homeomorphism onto its image.
+  Its image is the union of the finitely many closed sets $\im f_p\subset \PP_\ZZ^N$, and is thus closed.
+  $f$ is locally a homeomorphism onto its image, and it is probably injective.\footnote{How do you actually show injectivity? I feel like it should be obvious.} %so we need only show that it is injective.
+  Thus, $f$ is a closed embedding of schemes.
+  As a result, any base extension $f'$ of $f$ is a closed embedding.
+
+  Now, if $g:X\to Y$ and $h:Y\to Z$ are projective maps, then we have factorizations 
+  \begin{align*}
+    &g:X\xrightarrow{\wtilde{g}} Y\times_\ZZ \PP_\ZZ^m\to Y \\
+    &h:Y\xrightarrow{\wtilde{h}} Z\times_\ZZ \PP_\ZZ^n\to Z
+  \end{align*}
+  for some $m,n>0$, where $\wtilde{g},\wtilde{h}$ are closed immersions.
+  The pullback of a closed immersion is a closed immersion, so we consider the following pullback square.
+  \[
+    \begin{tikzcd}
+      Y\times_\ZZ \PP_\ZZ^m\ar[r,"\wtilde{h}'"]\ar[d] &Z\times_\ZZ \PP_\ZZ^n \times_\ZZ\PP_\ZZ^m\ar[d]\\
+      Y\ar[r,"\wtilde{h}"'] &Z\times_\ZZ\PP_\ZZ^n
+    \end{tikzcd}
+  \] 
+  Combining this with our closed immersion $f':Z\times_\ZZ\PP_\ZZ^n\times_\ZZ\PP_\ZZ^m\to Z\times_\ZZ\PP_\ZZ^N$ from earlier, we get the following diagram.
+  \[
+    \begin{tikzcd}
+      X\ar[dr,"g"]\ar[r] & Y\times_\ZZ \PP_\ZZ^n\ar[d]\ar[r,"\wtilde{h}'"]
+                         & Z\times_\ZZ\PP_\ZZ^n\times_\ZZ\PP_\ZZ^m \ar[r,"f'"]\ar[d] 
+                         & Z\times_\ZZ\PP_\ZZ^N\ar[ddl]\\
+                         & Y\ar[dr,"h"]\ar[r,"\wtilde{h}"] 
+                         & Z\times_\ZZ\PP_\ZZ^n\ar[d] \\
+                         &&Z
+    \end{tikzcd}
+  \] 
+  The top line is a composition of closed immersions, and thus is a closed immersion which composes with the projection onto $Z$ to give $h\circ g$.
+  Thus, we have a factorization $h\circ g:X\to Z\times_\ZZ\PP_\ZZ^N\to Z$, showing $h\circ g$ is projective.
+
+  By Exc. 4.8, it suffices to show that closed immersions and base extensions of projective maps are projective.
+  First, take $g:X\to Y$ be a closed immersion.
+  We have the following diagram.
+  \[
+    \begin{tikzcd}
+      X\ar[r]\ar[dr] & X\times_\ZZ\PP_\ZZ^n \ar[r,"g'"] \ar[d]
+                     & Y\times_\ZZ\PP_\ZZ^n\ar[d] \\
+                     & X\ar[r,"g"'] & Y
+    \end{tikzcd}
+  \] 
+  $g'$ is a closed immersion, so it suffices to show that $X\to X\times_\ZZ\PP_\ZZ^n$ is a closed immersion.
+  Being a closed immersion is an affine local condition, so it suffices to show that $\Spec A\to \Spec A\times_\ZZ U_i$ is a closed immersion.
+  $U_i\cong\Spec \ZZ[x_0/x_i,\ldots,x_n/x_i]$, so this amounts to showing
+  \[
+    A[x_1,\ldots, x_n]\cong A\otimes_\ZZ\ZZ[\frac{x_0}{x_i},\ldots,\frac{x_n}{x_i}]\longrightarrow A
+  \] 
+  is surjective, which is clear.
+
+  Now, suppose $g:X\to Y$ is projective, and $Z\to Y$ is a base extension.
+  Then we have the following diagram.
+  \[
+    \begin{tikzcd}
+      X'\ar[r]\ar[d]\ar[rr,bend left, "g'"] &Z\times_\ZZ\PP_\ZZ^n\ar[d] \ar[r] & Z\ar[d] \\
+      X\ar[r]\ar[rr,bend right, "g"'] & Y\times_\ZZ\PP_\ZZ^n\ar[r] & Y \\
+    \end{tikzcd}
+  \] 
+  Then $X'\to Z\times_\ZZ\PP_\ZZ^n$ is a closed immersion, so that $g':X'\to Z$ factors as desired.
+  We conclude that base extensions of projective maps are projective, whence Exc. 2.8 gives us the other three properties.
+  Namely, a product of projective morphisms is projective, $g\circ f$ projective with $g$ seperated implies $f$ projective, and the reduction $f_\red$ of a projective map $f$ is projective.
+\end{proof}
+
+\begin{enumerate}
+  \item[5.1.] {
+      Let $(X,\O_X)$ be a ringed space, and let $\E$ be a locally free $\O_X$-module of finite rank.
+      We define the \emph{dual} of $\E$ to be the sheaf $\E^\vee:=\sHom_{\O_X}(\E,\O_X)$.
+      \begin{enumerate}
+        \item Show that $(\E^\vee)^\vee\cong \E$.
+        \item For any $\O_X$-module $\F$, $\sHom_{\O_X}(\E,\F)\cong \E^\vee\otimes_{\O_X}\F$.
+        \item For any $\O_X$-modules $\F,\G$,
+          \[
+            \sHom_{\O_X}(\E\otimes \F,\G)\cong \sHom_{\O_X}(\F,\sHom_{\O_X}(\E,\G)).
+          \] 
+        \item (\emph{Projection Formula}).
+          If $f:(X\O_X)\to (Y,\O_Y)$ is a morphism of ringed spaces, $\F$ is an $\O_X$-module, and $\E$ is a locally free $\O_Y$-module of finite rank, then there is a natural isomorphism 
+          \[
+            f_*(\F\otimes_{\O_X}f^*\E)\cong f_*(\F)\otimes_{\O_Y}\E.
+          \]
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[5.3.] {
+      Let $X=\Spec A$ be an affine scheme.
+      Show that the functors $\wtilde{\cdot}$ and $\Gamma$ are adjoint.
+      That is, for any $A$-module $M$, and for any sheaf of $\O_X$-modules $\F$, there is a natural isomorphism
+      \[
+        \Hom_A(M,\Gamma(X,\F))\cong \Hom_{\O_X}(\wtilde{M},\F)
+      \] 
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[5.5.] {
+      Let $f:X\to Y$ be a morphism of schemes.
+      \begin{enumerate}
+        \item Show by example that if $\F$ is coherent on $X$, then $f_*\F$ need not be coherent on $Y$, even if $X$ and $Y$ are varieties over a field $k$.
+        \item Show that a closed immersion is a finite morphism.
+        \item If $f$ is a finite morphism of noetherian schemes, and if $\F$ is coherent on $X$, then $f_*\F$ is coherent on $Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[5.6.] {
+      \emph{Support}.
+      Recall the notions of support of a section of sheaf, support of a sheaf, and subsheaf with supports from (Ex. 1.14) and (Ex. 1.20).
+      \begin{enumerate}
+        \item Let $A$ be a ring.
+          Let $M$ be an $A$-module, let $X=\Spec A$, and let $\F=\wtilde{M}$.
+          For any $m\in M=\Gamma(X,\F)$, show that $\Supp m=V(\Ann m)$, where $\Ann m=\{a\in A\mid am =0\}$ is the \emph{annihilator} of $m$
+        \item Now suppose that $A$ is noetherian, and $M$ is finitely generated.
+          Show that $\Supp \F=V(\Ann M)$.
+        \item The support of a coherent sheaf on a noetherian scheme is closed.
+        \item For any ideal $\a\subset A$, we define a submodule $\Gamma_\a(M)$ of $M$ by 
+          \[
+            \Gamma_\a(M)=\{m\in M\mid \exists n>0(\a^nm = 0)\}.
+          \]
+          Assume that $A$ is noetherian, and $M$ is any $A$-module.
+          Show that $\wtilde{\Gamma_\a(M)}\cong \H_Z^0(\F)$, where $Z=V(\a)$ and $\F=\wtilde{M}$.
+        \item Let $X$ be a noetherian scheme, and let $Z$ be a closed subset.
+          If $\F$ is a quasi-coherent (resp., coherent) $\O_X$-module, then $\H_Z^0(\F)$ is also quasi-coherent (resp., coherent).
+      \end{enumerate}
+    }
+\end{enumerate}
+
+% \begin{enumerate}
+%   \item[5.7.] {
+%     }
+% \end{enumerate}
+
+\begin{enumerate}
+  \item[5.8.] {
+      Again let $X$ be a noetherian scheme, and $\F$ a coherent sheaf on $X$.
+      We will consider the function
+      \[
+        \vphi(x)=\dim_{k(x)}\F_x\otimes_{\O_X}k(x),
+      \] 
+      where $k(x)=\O_x/m_x$ is the residue field at the poitn $x\in X$.
+      Use Nakayama's lemma to prove the following results.
+      \begin{enumerate}
+        \item The function $\vphi$ is \emph{upper semi-continuous}, i.e., for any $n\in \ZZ$, the set $\{x\in X\mid \vphi(x)\geqs n\}$ is closed.
+        \item If $\F$ is locally free and $X$ is connected, then $\vphi$ is a constant function.
+        \item Conversely, if $X$ is reduced and $\vphi$ is constant, then $\F$ is locally free.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[5.16.] {
+      For $(X,\O_X)$ a ringed space and $\F$ a sehaf of $\O_X$-modules, we define the \emph{tensor algebra}, \emph{symmetric algebra}, and \emph{exterior algebra} of $\F$ by taking the sheaves associated to the associated presheaf.
+      \begin{enumerate}
+        \item Suppose that $\F$ is locally free of rank $n$.
+           Then $T^r(\F)$, $S^r(\F)$ and $\wedge^r(\F)$ are locally free, of ranks $rn$, $\binom{n+r-1}{n-1}$, and $\binom nr$ respectively.
+         \item Again, let $\F$ be locally free of rank $n$.
+           Then the multiplication map 
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[5.17.] {
+      \emph{Affine morphisms.} A morphism $f:X\to Y$ is \emph{affine} if there is an affine open cover $\{V_i\}$ of $Y$ such that $f^{-1}(V_i)$ is affine for each $i$.
+      \begin{enumerate}
+        \item Show that $f$ is an affine morphism if and only if for each every open affine $V\subset Y$, $f^{-1}(V)$ is affine.
+        \item An affine morphism is quasi compact and seperated.
+          Any finite morphism is affine.
+        \item Let $Y$ be a scheme, and let $\sA$ be a quasi-coherent sheaf of $\O_Y$-algebras.
+          Show that there is a unique scheme $X$, and a morphism $f:X\to Y$, such that for every open affine $V\subset Y$, $f^{-1}(V)\cong \Spec\sA(V)$, and for every inclusion $U\hookrightarrow V$ of open affines of $Y$, the morphism $f^{-1}(U)\hookrightarrow f^{-1}(V)$ corresponds to the restriction homomorphism $\sA(V)\to \sA(U)$.
+          The scheme $X$ is called $\SPEC \sA$.
+        \item If $\sA$ is a quasi-coherent $\O_Y$-algebra, then $f:X=\SPEC\sA\to Y$ is an affine morphism and $\sA\cong f_*\O_X$.
+          Conversely, if $f:X\to Y$ is an affine morphism, then $\sA=f_*\O_X$ is a quasi-coherent sheaf of $\O_Y$-modules, and $X\cong \SPEC\sA$.
+        \item Let $f:X\to Y$ be an affine morphism, and let $\sA=f_*\O_X$.
+          Show that $f_*$ induces an equivalence of categories from the category of quasi-coherent $\O_X$-modules to the category of quasi-coherent $\sA$-modules (i.e., quasi-coherent $\O_Y$-mdoules having the structure of an $\sA$-module.)
+          [\emph{Hint}: For any quasi-coherent $\sA$-module $\sM$, construct a quasi-coherent $\O_X$-module $\wtilde{\sM}$, and show that the funtors $f_*$ and $\wtilde{\cdot}$ are inverse to eachother.]
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) It suffices to show that an affine morphism has this property.
+  Take $f:X\to Y$ affine with open affine cover $\{V_i\}$ such that each $f^{-1}(V_i)$ is affine, and let $V\subset Y$ be open affine.
+  Affine communication lemma gives us a cover of $V$ by $D(g)$, $g\in \O_Y(V_i)$ which are distinguished open in both $V$ and $V_i$ for some $i$.
+  Note that each $f^{-1}(D(g_\alpha))= D(f^\sharp(V_i)(g))$ is open affine.
+  Then we may assume $V=Y$ is affine, and that each $V_i$ is a distinguished open set of $Y$.
+
+  We have a cover of $X$ by open affines $U_i=f^{-1}$
+
+  (b) Let $f:X\to Y$ be affine. 
+  Then, for any $V\subset Y$ affine open, $f^{-1}(V)$ is affine by (a), and thus quasi-compact.
+  It follows from 3.2 that $f$ is quasi compact.
+
+  Taking an affine cover $V_i$ of $Y$, we have an affine cover $U_i:=f^{-1}(V_i)$ of $X$.
+  Then $f|_{U_i}:U_i\to V_i$ is a morphism of affine schemes, hence seperated, so that $\Delta|_{U_i}:U_i\to U_i\times_{V_i}U_i$ is a closed immersion.
+  It follows that $\Delta:X\to X\times_YX$ is in fact a closed immersion, i.e. $f$ is seperated.
+  
+  If $f$ is finite, then there is an affine cover $V_i\cong \Spec B_i$ of $Y$ such that $f^{-1}(V_i)\cong \Spec A_i$ such that $A_i$ is a finitely generated $B_i$ module.
+  In particular, $f^{-1}(V_i)$ is affine.
+
+  (c)
+\end{proof}
+
+\begin{enumerate}
+  \item[5.18.] {
+      \emph{Vector Bundles}. Let $Y$ be a scheme.
+      A \emph{(geometric) vector bundle} of rank $n$ over $Y$ is a scheme $X$ and a morphism $f:X\to Y$, together with additional data consisting of an open covering $\{U_i\}$ of $Y$, and isomorphisms $\psi_i:f^{-1}(U_i)\to \AA_{U_i}^n$, such that for any $i,j$, and for any open affine subset $V=\Spec A\subset U_{i}\cap U_j$, the automorphism $\psi=\psi_j\circ \psi_i^{-1}$ of $\AA_V^n=\Spec A[x_1,\ldots,x_n]$ is given by a 
+    }
+\end{enumerate}
+
+\end{document}

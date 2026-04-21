@@ -1,0 +1,424 @@
+\documentclass[12pt]{amsart} 
+\usepackage{amsfonts}
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{pgf,tikz,tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{lipsum}
+\usepackage{dsfont}
+\usepackage{stmaryrd}
+
+%\graphicspath{ {./diagrams/} }
+
+\input{./latex-preamble/cm-preamble.tex}
+
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document}
+
+{Hartshorne} \hfill {2-1-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter II.2, Week 2}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip
+
+\begin{enumerate}
+	\item[2.1.] {
+      Let $A$ be a ring, $X=\Spec A$ its spectrum.
+      Fix an element $f\in A$, $D(f)=V(f)^c\subset X$ the associated distinguished open set.
+      Show that $(D(f),\O_X|_{D(f)})\cong \Spec A_f$ as locally ringed spaces.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $Y=\Spec A_f$, $S=\{f^n\}_{n\geqs 1}$, and $\phi:A\rightarrow S^{-1}A=A_f$ be the natural map $a\mapsto a/1$.
+  Note that $f^n\in \p$ prime for some $n\geqs 1$ iff $f\in \p$---that is, $S\cap \p=\0$ iff $\p\notin D(f)$.
+  Thus, AM 3.11.iv gives us a bijection
+  \begin{align*}
+    D(f)~&\longleftrightarrow Y \\
+    \p ~&\longrightarrow S^{-1}\p, \\
+    \phi^*(\q)~&\longleftarrow \q.
+  \end{align*}
+  Clearly the map $\q\mapsto \phi^*(\q)$ is continuous, so it suffices to show that $\p\mapsto S^{-1}\p$ is continuous.
+
+  Let $V(\b)\subset A_f$ be closed, and denote $\psi:\p\mapsto S^{-1}\p$. 
+  AM 3.11.i gives us that $\b=S^{-1}\a$ is extended.
+  Then $\p\supset \a$ implies $S^{-1}\p\supset S^{-1}\a=\b$ whenever $f\notin \a,\p$, so that $V(\a)\cap D(f)\subset \psi^{-1}(\b)$.
+  Similarly, $S^{-1}\p\supset S^{-1}\a$ implies $\phi^*(S^{-1}\p)\supset \phi^*(S^{-1}\a)\supset \a$.
+  % That is, for all $a\in \a$, there is some $x\in \p$ and $n\geqs 1$ such that $f^n(a-x)=0$.
+  % Hence, $f^na\in \p$, so that $\p$ prime and $f\notin \p$ gives us $a\in \p$.%\footnote{As a sanity check, $f\notin \p$ also implies $f\notin \a$, so that $V(\a)\neq 0$!}
+  We conclude that $\psi^{-1}(V(\b))=V(\a)\cap D(f)\subset D(f)$ is closed, so that $\psi=(\psi^*)^{-1}$ is continuous.
+
+  Note that $(\O_X|_{D(f)})_\p\cong A_\p\cong (A_\p)_f\cong (A_f)_{\psi(\p)}\cong (\O_Y)_{\psi(\p)}$ for each $\p\not\ni f$.
+  Call this isomorphism $\alpha_\p:(\O_X|_{D(f)})_\p\to (\O_Y)_{\psi(\p)}$, and let 
+  \[
+    \alpha:\sqcup_{\p\in D(f)}(\O_X|_{D(f)})_\p
+    \to \sqcup_{\q\in Y}(\O_Y)_\q
+  \]
+  be defined by $\alpha|_{(\O_X|_{D(f)})_\p}=\alpha_\p$.
+  Then we have a map
+  \begin{align*}
+    \phi^\sharp(U):\O_X|_{D(f)}(U)~&\to (\phi^*)_*\O_{Y}(U) \\
+                        s~&\mapsto \alpha\circ s\circ\phi^*.
+  \end{align*}
+  We have that 
+  \[
+    \alpha\circ s|_V\circ \phi^*=\alpha\circ s\circ \phi^*|_{(\phi^*)^{-1}(V)}
+  \]
+  as functions on $(\phi^*)^{-1}(V)$ whenever $V\subset U\subset D(f)$ are open and $s\in \O_X(U)$, so $\phi^\sharp(U)$ gives a sheaf homomorphism $\phi^\sharp:\O_X|_{D(f)}\to \O_Y$.
+  $\phi^\sharp_\p=\alpha_\p$ is an isomorphism of rings for all $\p\in D(f)$, so $\phi^\sharp$ is itself a sheaf isomorphism.
+  Then $(f,f^\sharp)$ is an isomorphism of locally ringed spaces, since ring isomorphisms preserve maximality.
+\end{proof}
+
+\begin{enumerate}
+	\item[2.2.] {
+      Let $(X,\O_X)$ be a scheme, and let $U\subset X$ be any open subset.
+      Show that $(U,\O_X|_U)$ is a scheme.
+      We call this the \emph{induced scheme structure} on the open set $U$, and we refer to $(U,\O_X|_U)$ as the open subscheme of $U$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Choose a basic cover $\{D(f_i)\}$ of $U$. 
+  Then each 
+  \[
+    (D(f_i),(\O_X|_U)_{D(f_i)})= (D(f_i),\O_X|_{D(f_i)})\cong\Spec A_{f_i}
+  \]
+  by 2.1. 
+  We conclude that $\{D(f_i)\}$ is an affine open cover of $(U,\O_X|_U)$, so that the latter locally ringed space is a sheaf.
+\end{proof}
+
+
+\begin{enumerate}
+	\item[2.3.] {
+      $(*)$ A scheme $(X,\O_X)$ is \emph{reduced} if for every open set $U\subset X$, the ring $\O_X(U)$ has no nilpotent elements.
+      \begin{enumerate}
+        \item Show that $(X,\O_X)$ is reduced if and only if for every $p\in X$, the local ring $\O_{X,p}$ as no nilpotent elements.
+        \item Let $(X,\O_X)$ be a scheme.
+          Let $(\O_X)_{\red}$ be the sheaf associated to the presheaf $U\mapsto \O_X(U)_{\red}$, where for any ring $A$, we denote by $A_{\red}$ the quotient of $A$ by its nilradical $\fR(A)$. 
+          Show that $(X,(\O_X)_{\red})$ is a scheme.
+          We call it the \emph{reduced scheme} associated to $X$, and denote it by $X_{\red}$.
+          Show that there is a morphism of schemes $X_{\red}\to X$, which is a homeomorphism on the underlying topological spaces.
+        \item Let $f:X\to Y$ be a morphism of schemes, and assume that $X$ is reduced.
+          Show that there is a unique morphism $g:X\to Y_{\red}$ such that $f$ is obtained by composing $g$ with the natural map $Y_{\red}\to Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+	\item[2.4.] {
+      Let $A$ be a ring, and let $(X,\O_X)$ be a scheme.
+      Given a morphism $f:X\to\Spec A$, we have an associated map $f^\sharp:\O_{\Spec A}\to f_*\O_X$ on sheaves.
+      Taking Global sections, we obtain a homomorphism $A\to\Gamma(X,\O_X)$.
+      Thus, there is a natural map
+      \begin{align*}
+        \alpha:\Hom_{\Sch}(X,\Spec A)\to \Hom_{\Ring}(A,\Gamma(X,\O_X)).
+      \end{align*}
+      Show that $\alpha$ is bijective.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We begin by showing the result for $X=\Spec B$ affine.
+  In this case, $\alpha$ has an inverse map given by 
+  \begin{align*}
+    \beta:\Hom_{\Ring}(A,B)&~\longrightarrow \Hom_{\Sch}(\Spec B,\Spec A) \\
+    \vphi&~\longmapsto (f,f^\sharp),
+  \end{align*}
+  where 
+  \begin{align*}
+    f(\p)&=\vphi^{-1}(\p), \\
+    f^\sharp(s)(\p)&=\vphi_{f(\p)}(s(f(\p))).
+  \end{align*}
+  It suffices to show that $\beta$ and $\alpha$ indeed compose to the identity.
+
+  Fix $(f,f^\sharp)\in \Hom_{\Sch}(\Spec B,\Spec A)$, and denote 
+  \[
+    (\beta\circ\alpha)(f,f^\sharp) = (g,g^\sharp).
+  \]
+  Let $\phi_{f(\p)}:A\to A_{f(\p)}$ and $\phi_\p':B\to B_\p$ be the natural maps.
+  The commutative square
+  \[
+    \begin{tikzcd}[column sep = large]
+      A\ar[d,"\phi_{f(\p)}"']
+      \ar[r,"f^\sharp(\Spec A)"]&B\ar[d,"\phi'_\p"] \\
+      A_{f(\p)}\ar[r,"f^\sharp_{f(\p)}"']&B_\p
+    \end{tikzcd}
+  \] 
+  gives us that 
+  \begin{align*}
+    g(\p)&=(f^\sharp(\Spec A))^{-1}(\p) \\
+         &=(\phi'_\p\circ f^\sharp(X))^{-1}(m_\p) \\
+         &=(f_{f(\p)}^\sharp\circ \phi_{f(\p)})^{-1}(m_\p) \\
+         &= {\phi}_{f(\p)}^{-1}(m_{f(\p)}) \\
+         &= f(\p),
+  \end{align*}
+  since $f^\sharp$ is a local homomorphism.
+  Then
+  \begin{align*}
+    g^\sharp(s)(\p) &= f^\sharp(X)_{g(\p)}(s(g(\p))) \\
+                    &= f^\sharp_{f(\p)}(s(f(\p))) \\ 
+                    &=f^\sharp(s)(\p).
+  \end{align*}
+  implies $(g,g^\sharp)=(f,f^\sharp)$.
+
+  Fix $\vphi:A\to B$, and denote $\beta(\vphi)=(f,f^\sharp)$, $(\alpha\circ \beta)(\vphi)= \psi$.
+  Recall that $a\in A$ is identified with $\p\mapsto a_\p\in A_\p$, and similarly for $b\in B$.
+  Thus, $\psi(a)=\vphi(a)$ iff they're equal as maps $\Spec B\to \sqcup_{\p\in \Spec B}B_\p$.
+  The commutative square
+  \[
+    \begin{tikzcd}[column sep = large]
+      A\ar[d]
+      \ar[r,"\vphi"]&B\ar[d] \\
+      A_{f(\p)}\ar[r,"\vphi_{f(\p)}"']&B_\p
+    \end{tikzcd}
+  \] 
+  gives us
+  \[
+    \psi(a)(\p) = \vphi_{f(\p)}(a(f(\p))) = \vphi_{f(\p)}(a_{f(\p)}) = \vphi(a)(\p).
+  \]
+  Hence, $(\alpha\circ\beta)(\vphi)=\vphi$.
+  We conclude that $\beta=\alpha^{-1}$, so $\alpha$ is a bijection.
+
+  Now, we consider the general case of $X$ a scheme. 
+  Define a map 
+  \begin{align*}
+    \beta:\Hom_{\Ring}(A,\Gamma(X,\O_X))&~\longrightarrow \Hom_{\Sch}(X,\Spec A) \\
+    \vphi&~\longmapsto (f,f^\sharp)
+  \end{align*}
+  as follows.
+  Fix an affine cover $\{U_i=\Spec B_i\}$ of $X$, and define $f:X\to \Spec A$ by $f(x)=\vphi^{-1}(\p_x)$, where $\p_x$ is the inverse image in $\Gamma(X,\O_X)$ of the unique maximal ideal $m_x\trianglelefteq(\O_X)_x$.
+  Naturality of the restriction maps gives us that $f|_{U_i}=f_i$, where $(f_i,f_i^\sharp)=\beta(\rho_{U_i}\circ \vphi)$ is defined in the affine case.
+  
+  Next, we define $f^\sharp$ as follows.
+  Fix $V\subset X$ open and $s\in \O_{\Spec A}(V)$.
+  Consider the sections $f^\sharp_i(V\cap U_i)(s)\in f_*\O_X(V\cap U_i)$, with $f^\sharp_i$ as above.
+  We have that 
+  \begin{align*}
+    f^\sharp_i(V\cap U_i\cap U_j)(s)(\p) 
+    = (\rho_{V\cap U_i\cap U_j}\circ \vphi)_{f(\p)} (s(f(\p)))
+    = f^\sharp_j(V\cap U_i\cap U_j)(s)(\p) 
+  \end{align*}
+  for all $\p\in f^{-1}(V\cap U_i\cap U_j)$, so the sections agree on their overlap.
+  Then they glue to a unique section $f^\sharp(V)(s)\in f_*\O_X(V)$.
+  
+  It suffices to verify that $\alpha$ and $\beta$ compose to the identity.
+  Fix $(f,f^\sharp)\in \Hom_{\Sch}(X,\Spec A)$, and denote $(\beta\circ \alpha)(f,f^\sharp)=(g,g^\sharp)$.
+  Then $g|_{U_i} = g_i$, where 
+  \[
+    (g_i,g_i^\sharp)= \beta(\rho_{U_i}\circ f^\sharp(\Spec A)) = \beta(f^\sharp(U_i)).
+  \]
+  This gives us $g_i=f|_{U_i}$ by the affine case, so that $g=f$. 
+
+  Fix $V\subset \Spec A$ open and $s\in \O_{\Spec A}(V)$. 
+  Note that the $g^\sharp(V)(s)$ is the gluing of the sections $g^\sharp(V\cap U_i)(s)$ defined by
+  \begin{align*}
+    g^\sharp(V\cap U_i)(s)(\p)
+    &=(\rho_{V\cap U_i}\circ f^\sharp(V))_{g(\p)} (s(g(\p))) \\
+    &= f^\sharp_{f(\p)}(s(f(\p))) \\
+    &= f^\sharp(V\cap U_i)(s)(\p)
+  \end{align*}
+  for all $\p\in f^{-1}(V\cap U_i)$.
+  Thus, $(f,f^\sharp)=(g,g^\sharp)$.
+
+  Finally, fix $\vphi:A\to \Gamma(X,\O_X)$ and let $(f,f^\sharp)= \beta(\vphi)$, $\psi=(\alpha)(f,f^\sharp)$.
+  Then 
+  \[
+    \rho_{U_i}\circ \psi = \rho_{U_i}\circ (\alpha(f,f^\sharp)) = f^\sharp(U_i)= \rho_{U_i}\circ \vphi
+  \]
+  by the affine case, so that $\psi = \vphi$ by uniqueness of gluing.
+  We conclude that $\alpha$ is a bijection.
+  % We have that the following diagram commutes.
+  % \[
+  %   \begin{tikzcd}[row sep = 0.25cm]
+  %     &&\Gamma(U_i,\O_X)\ar[dr]\\
+  %     A\ar[r,"\vphi"]& \Gamma(X,\O_X)\ar[dr]\ar[ur] &&\Gamma(U_i\cap U_j,\O_X)\\
+  %                    &&\Gamma(U_j,\O_X)\ar[ur]
+  %   \end{tikzcd}
+  % \] 
+  % Noting that $\p_x\in \Spec B_x$ is the inverse image of $\p_x
+  % Fix an affine cover $\{U_i\cong \Spec B_i\}$ of $X$.
+  % Suppose $f:X\to \Spec A$ is a morphism of schemes.
+  % Then it restricts to a set of morphisms $f_i:\Spec B_i\to \Spec A$ of affine schemes.
+  % If $f,g:X\to \Spec A$ are two morphisms of schemes with $\alpha(f)=\alpha(g)$, 
+\end{proof}
+
+\begin{enumerate}
+	\item[2.5.] {
+      Describe $\Spec \ZZ$, and show that it is a final object for the category of schemes, i.e., each scheme $X$ admits a unique morphism to $\Spec\ZZ$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  The only primes of $\ZZ$ are $(p)$ for $p$ prime, and $(0)$.
+  The former are all maximal, while the latter is a generic point for $\Spec \ZZ$, since $V(\a)\ni (0)$ implies $(0)\supset \a$, i.e. $\a = (0)\subset \p$ for all $\p$ prime.
+
+  We have a bijection
+  \begin{align*}
+    \Hom_{\Sch}(X,\Spec \ZZ)\to \Hom_{\Ring}(\ZZ,\Gamma(X,\O_X)),
+  \end{align*}
+  so that the former is singleton for all $X$ by the fact that $\ZZ$ is initial in $\Ring$.
+\end{proof}
+
+\begin{enumerate}
+	\item[2.7.] {
+      Let $X$ be a scheme.
+      For any point $x\in X$, let $\O_x$ be the local ring at $x$, and $m_x$ its maximal ideal.
+      We define the \emph{residue field} of $x$ on $X$ to be the field $k(x)=\O_x/m_x$.
+      Now, let $K$ be any field.
+      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to giving a point $x\in X$ and an inclusion map $k(x)\to K$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Note that $\Spec K=\{(0)\}$ is singleton, so a morphism $f:\Spec K\to X$ is a point $x=f((0))\in X$, as well as the information $f^\sharp(U): \O_X(U)\to K$ for every $x\in U\subset X$ open.
+  Restriction is the identity on $\O_{\Spec K}$, so this defines a map $f^\sharp_x:\O_x\to K$.
+  Since each element of $m_x$ is not invertible, this gives us a map $\ol{f^\sharp_x}:k(x)\to K$.
+  It is a morphism of fields, and thus an injection.
+
+  Conversely, suppose we have an inclusion $k(x)\hookrightarrow K$.
+  Then, for each $x\in U\subset X$, we have a map 
+  \[
+    f^\sharp(U):\O(U)\to \O_x\to k(x)\hookrightarrow K.
+  \]
+  These maps play well with restriction, thus giving us a morphism $f^\sharp:\O_X\to \O_{\Spec K}$ of sheaves.
+  Defining $f:\Spec K\to X:(0)\mapsto x$ gives us a morphism $(f,f^\sharp):\Spec K\to X$ of schemes, as desired.
+\end{proof}
+
+% \begin{enumerate}
+% 	\item[2.8.] {
+%       $(*)$ Let $X$ be a scheme.
+%       For any point $x\in X$, we define the \emph{Zariski tangent space $T_x$} at $x\in X$ to be the dual of the $k(x)$-vector space $m_x/m_x^2$.
+%       Now, assume that $X$ is a scheme over a field $k$, and let $k[\epsilon]/\epsilon^2$ be the \emph{ring of dual numbers} over $k$.
+%       Show that to give a $k$-morphism of $\Spec k[\epsilon]/\epsilon^2$ to $X$ is equivalent to giving a point $x\in X$, \emph{rational over $k$} (i.e. such that $k(x)=k$), and an element of $T_x$.
+%     }
+% \end{enumerate}
+
+\begin{enumerate}
+  \item[2.9.] {
+      If $X$ is a topological space, and $Z$ an irreducible closed subset of $X$, a generic point for $Z$ is a point $\zeta$ such that $Z=\{\zeta\}^-$.
+      If $X$ is a scheme, show that every (nonempty) irreducible closed subset has a unique generic point.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We begin by proving the case of $X=\Spec A$ affine.
+  Let $Z=V(\q)\subset X$ be irreducible and closed.
+  That is, $V(\q)=V(\a)\cup V(\b)=V(\a\b)$ implies $V(\a)=V(\q)$ or $V(\b)=V(\q)$.
+  Suppose now that $ab\in \q$.
+  Then $V((\q,a)(\q,b))= V(\q)$ gives us $(\q,a)\subset \sqrt{(\q,a)} =\q$ or $(\q,b)\subset \sqrt{(\q,b)}=\q$.
+  Hence, either $a\in \q$ or $b\in \q$, so that $\q$ is prime.
+
+  % Conversely, take $\q\trianglelefteq A$ prime, and suppose that $V(\q)=V(\a)\cup V(\b)$, so $\q=\sqrt{\a}\sqrt{\b}=\sqrt{\a},\sqrt{\b}$.
+  % Then $\q$ prime gives us $\q\supset \sqrt{\a}$ or $\q\supset \sqrt{\b}$, as otherwise there exists $ab\in \q$ with $a,b\notin \q$.
+  % Thus, $V(\q)$ is irreducible.
+
+  Suppose that $\zeta$ is a generic point associated to $Z=V(\q)$.
+  Then 
+  \begin{align*}
+    \{\zeta\}^- &= \bigcap_{V(\a)\ni \zeta}V(\a) 
+                = V(\cup_{\a\subset \zeta}\a) 
+                = V(\zeta)
+  \end{align*}
+  implies that $\zeta = \q$. 
+  This is clearly unique, and we showed that $\q$ is prime above, so this is always possible.
+
+  Let $Z$ be an irreducible closed subset of a scheme $X$, and let $\{U_i\cong \Spec A_i\}_{i\in I}$ be an affine open cover of $X$.
+  Replace $\{U_i\}$ by a subcover such that each $U_i\cap Z\neq \0$.
+  We claim that each $U_i\cap Z$ is irreducible in $U_i$.
+  Take $\0\neq U_i\cap V\subset U_i\cap Z$ nonempty open in $U_i$.
+  Then $\0\neq U_i\cap V\subset Z$ nonempty open gives us that 
+  \[
+    \Cl_{U_i}(U_i\cap V) = U_i\cap \Cl_X(U_i\cap V)= U_i\cap Z,
+  \]
+  whence $U_i\cap Z$ is irreducible in $U_i$.
+
+  Take $\zeta_i\in U_i$ to be the unique generic point of $U_i\cap Z$ given by the affine case, so $\{\zeta_i\}^-\supset \Cl_{U_i}(\zeta_i)=Z\cap U_i$.
+  Note that $Z\cap U_i\cap U_j\neq 0$ for all $i,j$, as otherwise 
+  \[
+    Z= Z\cap (U_i^c\cup U_j^c)= (Z\cap U_i^c)\cup(Z\cap U_j^c)
+  \]
+  gives us that $Z$ is disjoint from $U_i$ or $U_j$.
+  Then 
+  \[
+    \{\zeta_i\}^-\cap U_j \supset (Z\cap U_i)\cap U_j\neq \0
+  \] 
+  implies $\zeta_i\in U_j$, as otherwise $U_j^c\cap \{\zeta_i\}^-\supset \{\zeta_i\}^-$.
+  Then $\Cl_{U_j}(\zeta_i)=\{\zeta_i\}^-\cap U_j$ implies 
+  \[
+    \Cl_{U_j}(\zeta_i)\supset (Z\cap U_i\cap U_j)^-\cap U_j = Z\cap U_j.
+  \]
+  Hence, $\zeta_i$ is a generic point of $Z\cap U_j\subset U_j$ for each $j$.
+  Uniqueness in the affine case gives us $\zeta_i=\zeta_j=:\zeta$ for all $i,j$, so that
+  \[
+    \{\zeta\}^-\supset \bigcup_{i\in I} U_i\cap Z = Z.
+  \] 
+  Any generic point $\zeta'$ of $Z$ must also be a generic point of each of the $U_i\cap Z$, so uniqueness follows from the affine case.
+\end{proof}
+% 
+% \begin{enumerate}
+%   \item[2.10.] {
+%       Describe $\Spec \R[x]$. How does its topological space compare to the set $\R$? To $\CC$?
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[2.13.] {
+%       $(*)$ A topological space is \emph{quasi-compact} if every open cover has a finite sub-cover.
+%       \begin{enumerate}
+%         \item Show that a topological space $X$ is noetherian if and only if every open subset is quasi-compact.
+%         \item If $A$ is a noetherian ring, show that $\Sp(\Spec A)$ is a noetherian topological space.
+%         \item Give an example to show that $\Sp(\Spec A)$ can be noetherian even when $A$ is not.
+%       \end{enumerate}
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[19.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[20.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[21.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+
+\end{document}

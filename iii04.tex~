@@ -1,0 +1,130 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\newcommand{\longto}{\longrightarrow}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {4-21-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.4}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} %\footnote{Collaborated with Kalev Martinson and Frank :).}}
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[4.1.] {
+      Let $f:X\to Y$ be an affine morphism of noetherian separated schemes (II, Ex. 5.17).
+      Show that for any quasi-coherent sheaf $\F$ on $X$, there are natural isomorphisms for all $i\geqs 0$
+      \[
+        H^i(X,\F)\cong H^i(Y,f_*\F).
+      \] 
+      [\emph{Hint}: Use (II, 5.8).]
+    }
+\end{enumerate}
+
+\begin{proof}
+  (II, 5.8) gives us that $f_*\F$ is quasi-coherent, since $X$ is noetherian.
+  Thus, it suffices by (4.4) and $X$, $Y$ noetherian, separated to give an isomorphism
+  \[
+    \wcheck H^\bullet(\U,\F)\cong \wcheck H^\bullet(\V,f_*\F)
+  \] 
+  for some open affine covers $\U$ of $X$ and $\V$ of $Y$.
+
+  Take $\V=\{V_i\}$ to be some open affine cover of $Y$.
+  $f$ affine gives us that each $f^{-1}(V_i)$ is affine, so we have an open affine cover $\U=\{f^{-1}(V_i)\}$ of $X$.
+  Noting that
+  \begin{align*}
+    C^p(\V,f_*\F) 
+    &= \prod_{i_0<\cdots<i_p}f_*\F(V_{i_0,\ldots, i_p}) \\
+    &= \prod_{i_0<\cdots<i_p}\F(f^{-1}(V_{i_0,\ldots, i_p})) \\
+    &= \prod_{i_0<\cdots<i_p}\F(U_{i_0,\ldots, i_p}) \\
+    &= C^p(\U,\F)
+  \end{align*}
+  gives us a natural isomorphism of chain complexes $C^\bullet(\U,\F)\cong C^\bullet(\V,f_*\F)$, so it particular an isomorphism $\wcheck H^\bullet(\U,F)\cong \wcheck H^\bullet(\V,f_*\F)$ of homology.
+  This completes the proof.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.3.] {
+      Let $X=\AA_k^2=\Spec k[x,y]$, and let $U=X-\{(0,0)\}$.
+      Using a suitable cover of $U$ by open affine subsets, show that $H^1(U,\O_U)$ is isomorphic to the $k$-vector space spanned by $\{x^iy^j~:~i,j<0\}$.
+      In particular, it is infinite dimensional.
+      (Using (3.5), this provides another proof that $U$ is not affine.)
+    }
+\end{enumerate}
+
+\begin{proof}
+  Consider the cover $\V= \{V_x,V_y\}$ of $U$, where $V_x = D(x)$ and $V_y=D(y)$.
+  Open immersions are separated, so $X$ separated implies $U$ separated.
+  Noetherianity of $X$ gives us that $U$ is locally noetherian.
+  $U=V_x\cup V_y$ is a union of finitely many affine--in particular quasi-compact--open subschemes.
+  Thus, $U$ is itself quasi-compact, and hence noetherian.
+  (4.4) gives us
+  \begin{align*}
+    H^\bullet(U,\O_U)\cong \wcheck H^\bullet(\V,\O_U).
+  \end{align*}
+
+  We write
+  \begin{align*}
+    C^\bullet(\V,\O_U)
+    &= [0\to \O_U(V_x)\oplus \O_U(V_y)\xrightarrow{d} \O_U(V_x\cap V_y)\to 0] \\
+    &= [0\to k[x^{\pm 1},y]\oplus k[x,y^{\pm1}]\xrightarrow{d}k[x^{\pm1},y^{\pm1}]\to 0],
+  \end{align*}
+  where $d(f(x,y),g(x,y)) = f(x,y)-g(x,y)$.
+  As a vector space, then, $\im d$ is spanned by $\{x^iy^j:i\geqs 0\}\cup \{x^iy^j:j\geqs 0\}$.
+  Then
+  \begin{align*}
+    H^1(U,\O_U) 
+    &=\cok d \\
+    &= \frac{k[x^{\pm1},y^{\pm1}]}{\im d} \\
+    &\cong k\la x^iy^j :i,j<0\ra,
+  \end{align*}
+  where $k\la X\ra$ denotes the $k$-span of $X$.
+\end{proof}
+
+\begin{enumerate}
+  \item[4.7.] {
+      Let $X$ be a subscheme of $\PP_k^2$ defined by a single homogeneous equation $f(x_0,x_1,x_2)=0$ of degree $d$.
+      (Do not assume $f$ is irreducible.)
+      Assume that $(1,0,0)\notin X$.
+      Then show that $X$ can be covered by the two open affine subsets $U=X\cap \{x_1\neq 0\}$ and $V=X\cap \{x_2\neq 0\}$.
+      Now, calculate the \v{C}ech complex explicitly, and thus show that
+      \begin{align*}
+        &\dim H^0(X,\O_X)=1, \\
+        &\dim H^1(X,\O_X)=\frac12(d-1)(d-2).
+      \end{align*}
+    }
+\end{enumerate}
+
+\begin{proof}
+  Since $(1,0,0)\notin X$, we have $X=U\cup V$.
+  Further, 
+  \begin{align*}
+    U &= \Spec\left(\frac{k[\frac{x_0}{x_1},\frac{x_2}{x_1}]}{(f(\frac{x_0}{x_1},1,\frac{x_2}{x_1}))}\right), \\
+    V &= \Spec\left(\frac{k[\frac{x_0}{x_2},\frac{x_1}{x_2}]}{(f(\frac{x_0}{x_2},\frac{x_1}{x_2},1))}\right)
+  \end{align*}
+  are affine.
+  We compute
+  \begin{align*}
+    C^\bullet &= [0\to \frac{k[\frac{x_0}{x_1},\frac{x_2}{x_1}]}{(f(\frac{x_0}{x_1},1,\frac{x_2}{x_1}))}\oplus \frac{k[\frac{x_0}{x_2},\frac{x_1}{x_2}]}{(f(\frac{x_0}{x_2},\frac{x_1}{x_2},1))}\xrightarrow{d} \frac{k[y_1,y_2^{\pm1}]}{f} ]
+  \end{align*}
+\end{proof}
+
+\end{document}

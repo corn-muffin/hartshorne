@@ -1,0 +1,329 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\newcommand{\longto}{\longrightarrow}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {4-21-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.3}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[3.1.] {
+      Let $X$ be a noetherian scheme.
+      Show that $X$ is affine if and only if $X_{\red}$ is affine.
+      [Hint: Use (3.7), and for any coherent sheaf $\F$ on $X$, consider the filtration $\F\supset \N\cdot \F\supset \N^2\cdot\F\supset\cdots$, where $\N$ is the sheaf of nilpotent elements on $X$.]
+    }
+\end{enumerate}
+
+\begin{proof}
+  If $X=\Spec A$ is affine, then $X_\red=\Spec (A/\nil A)$ is affine.
+  Conversely, suppose that $X_\red$ is affine.
+  For any quasi-coherent sheaf $\F$ on $X$, consider the filtration $\F\supset \N\F\supset \N^2\F\supset\cdots$, where $\N$ is the sheaf of nilpotent elements on $X$.
+
+  Noetherianity of $X$ gives us a finite affine open cover $\{U_i\}$, where each $\N(U_i)$ is a finitely generated $\O_X(U_i)$-module since $\O_X(U_i)$ is noetherian.
+  Thus, we can take $n\geqs 0$ such that $\N^n(U_i)=0$ for each $i$, whence $\N^n=0$.
+  This gives us a finite filtration
+  \begin{align*}
+    0=\N^n\F\subset\cdots \subset \N\F\subset \F,
+  \end{align*}
+  and thus the short exact sequences
+  \begin{equation}
+    0\to \N^{k+1}\F\to\N^k\F\to \frac{\N^k\F}{\N^{k+1}\F}\to 0
+  \end{equation}
+  for all $0\leqs k<n$.
+
+  Clearly 
+  \[
+    \N\subset \Ann \left(\frac{\N^k\F}{\N^{k+1}\F}\right),
+  \] 
+  so there is a quasi-coherent scheme $\G$ on $X_\red$ such that
+  \[
+    \frac{\N^k\F}{\N^{k+1}\F}\cong i_*\G
+  \] 
+  with $i:X_\red\to X$ the inclusion.
+  It follows from (2.10) that
+  \begin{align*}
+    H^\bullet(X,\frac{\N^k\F}{\N^{k+1}\F})\cong H^\bullet(X_\red, \G).
+  \end{align*}
+  (3.7) implies $H^i(X_\red,\G) =0$ for $i>0$, so the long exact sequence of homology for (1) gives us exactness of
+  \begin{align*}
+    H^i(X,\N^{k+1}\F)\to H^i(X,\N^k\F)\to H^i(X_\red,\G)=0
+  \end{align*}
+  for all $i>0$.
+  $H^\bullet(X,\N^n\F)=0$, so induction gives us $H^i(X,\N^k\F)=0$ for all $i>0$ and $0\leqs k\leqs n$.
+  In particular, $H^i(X,\F)=0$ for all $i>0$.
+  $\F$ is an arbitrary quasi-coherent sheaf on $X$, so that $X$ is affine by (3.7).
+\end{proof}
+
+\begin{enumerate}
+  \item[3.2.] {
+      Let $X$ be a reduced noetherian scheme.
+      Show that $X$ is affine if and only if each irreducible component is affine.
+    }
+\end{enumerate}
+
+\begin{proof}
+  One implication is clear.
+  Suppose, then, that each irreducible component of $X$ is affine.
+  $X$ is noetherian, so we can write a finite irreducible decomposition $X=Y_1\cup\cdots\cup Y_r$, with each $Y_1,\ldots, Y_r$ affine.
+  By (Ex. 3.1), we may assume $X$ is reduced.
+  Now, fix a quasi-coherent sheaf $\F$ on $X$.
+  We have a filtration
+  \[
+    \F\supset \I_{Y_1}\F\supset \I_{Y_1\cup Y_2}\F\supset \cdots \supset \I_{Y_1\cup\cdots \cup Y_r}\F= \I_X =0,
+  \] 
+  where each $Y_1\cup\cdots \cup Y_k$ is given the reduced induced subscheme structure.
+  This gives us exact sequences
+  \[
+    0\to \I_{Y_1\cup\cdots\cup Y_{k+1}}\F\to \I_{Y_1\cup\cdots \cup Y_k}\F\to \frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F} \to 0
+  \] 
+  for all $0\leqs k<r$, where
+  \[
+    \I_{Y_{k+1}}\subset \Ann \left(\frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F}\right).
+  \] 
+  Then by (2.10) we have quasi-coherent sheaves $\G_{k+1}$ on $Y_{k+1}$ such that
+  \[
+    H^\bullet(X,\frac{\I_{Y_1\cup\cdots \cup Y_k}\F} {\I_{Y_1\cup\cdots \cup Y_{k+1}} \F})\cong H^\bullet(Y_{k+1},\G_{k+1}).
+  \] 
+  each $Y_{k+1}$ is affine, so $H^p(Y_{k+1},\G_{k+1})=0$ for all $p>0$.
+  Hence, the maps 
+  \[
+    H^p(X,\I_{Y_1\cup\cdots \cup Y_{k+1}}\F)\to H^p(X,\I_{Y_1\cup\cdots\cup Y_k}\F)
+  \]
+  are surjective for all $0\leqs k<r$ and $p>0$ as in (Ex. 3.1).
+  It follows that $H^p(X,\F)=0$ for all $p>0$ by induction on $r-k$, so that $X$ is affine by (3.7).
+\end{proof}
+
+\begin{enumerate}
+  \item[3.3.] {
+      Let $A$ be a noetherian ring, and let $\a$ be an ideal of $X$.
+      \begin{enumerate}
+        \item Show that $\Gamma_\a(\cdot)$ (II, Ex. 5.6) is a left-exact functor from the category of $A$-modules to itself.
+          We denote its right derived functors, calculated in $\Mod(A)$, by $H_\a^i(\cdot)$.
+        \item Now let $X=\Spec A$, $Y=V(\a)$.
+          Show that for any $A$-module $M$,
+          \[
+            H_\a^i(M)= H_Y^i(X,\wtilde M).
+          \] 
+        \item For any $i$, show that $\Gamma_\a(H_\a^i(M))=H_\a^i(M)$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Let $0\to M'\xrightarrow{\phi} M\xrightarrow{\psi} M''$ be a left exact sequence in $\Mod_A$, and consider the following diagram.
+  \[
+    \begin{tikzcd}
+      0\ar[r] &M'\ar[r,"\phi"] &M\ar[r,"\psi"] &M'' \\
+      0\ar[r] &\Gamma_\a(M')\ar[r,"\phi_\a"]\ar[u,hook] &\Gamma_\a(M)\ar[u, hook]\ar[r,"\psi_\a"] & \Gamma_\a(M'')\ar[u,hook]
+    \end{tikzcd}
+  \] 
+  We clearly have $\phi_\a$ injective and $\im\phi_\a\subset\ker\psi_\a$.
+  It suffices to show $\ker\psi_\a\subset \im\phi_\a$.
+
+  Take $m\in \ker\psi_\a\subset\ker\psi$, and $m'\in M'$ such that $\phi(m')=m$.
+  We have $n>0$ such that $0=\a^n\phi(m')=\phi(\a^nm')$, whence $\a^nm'=0$ by injectivity of $\phi$.
+  We conclude that $m'\in \Gamma_\a(M')$, so that $m=\phi_\a(m')\in \im\phi_\a$ gives us exactness.
+
+  (b) Let $0\to M\to I^\bullet$ be an injective resolution of $M$ in $\Mod_A$.
+  Then $\wtilde I^\bullet$ is a flasque resolution of $\wtilde M$ by (3.4).
+  Thus, it suffices to show that $\Gamma_\a(I^\bullet)\cong \Gamma_Y(\wtilde I^\bullet)$.
+  This follows from the more general fact that $\Gamma_\a(N)\cong \Gamma_Y(\wtilde N)$, which is a corollary of (II, Ex. 5.6c).
+
+  % If $m\in\Gamma_\a(M)$ and $\p\notin V(\a)$, then there is some $a\in \a\setminus \p$ so that $m_\p=\frac{a^n m}{a^n}\in M_\p$ for all $n\geqs 0$ implies $m_\p=0$.
+  % Conversely, take $m\in \Gamma_Y(M)$.
+
+  (c) Let $0\to M\to I^\bullet$ be an injective resolution of $M$, so that $H_\a^\bullet(M)= h^\bullet(\Gamma_\a(I^\bullet))$.
+  Then, with boundary maps $d^p:\Gamma_\a(I^p)\to \Gamma_\a(I^{p+1})$,
+  \begin{align*}
+    \Gamma_\a(h^p(\Gamma_\a(I^\bullet)))
+    &= \Gamma_\a\left(\frac{\ker d^p}{\im d^{p-1}}\right) \\
+    &\supset\frac{\Gamma_\a(\ker d^p)}{\im d^{p-1}} \\
+    &=h^p(\Gamma_\a(I^\bullet)),
+  \end{align*}
+  since $\ker d^p\subset \Gamma_\a (I^p)$.
+  That is,
+  \[
+    \Gamma_\a(H_\a^\bullet(M))=H_\a^\bullet(M),
+  \] 
+  as desired.
+\end{proof}
+
+\begin{enumerate}
+  \item[3.7] {
+      Let $A$ be a noetherian ring, let $X=\Spec A$, let $\a\lideal A$ be an ideal, and let $U\subset X$ be the open set $X-V(\a)$.
+      \begin{enumerate}
+        \item For any $A$-module $M$, establish the following formula of Deligne:
+          \[
+            \Gamma(U,\wtilde M)\cong \dlim_n\Hom_A(\a^n,M).
+          \] 
+        \item Apply this in the case of an injective $A$-module $I$ to give another proof of (3.4).
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Fix $f\in \a$, and consider the direct system $\{\Hom_A(\a^n,M)\}_{n>0}$ with compatibility given by restriction.
+  For any $n>0$, we have a natural map
+  \begin{align*}
+    \Psi_{n,f}:\Hom_A(\a^n,M) &\longto M_f \\
+    \phi &\longmapsto \frac{\phi(f^n)}{f^n}.
+  \end{align*}
+  We see that
+  \begin{align*}
+    \Psi_{n+1,f}(\phi|_{\a^{n+1}})
+    &= \frac{\phi|_{\a^{n+1}}(f^{n+1})}{f^{n+1}} \\
+    &= \frac{\phi(f^n)}{f^n} \\
+    &= \Psi_{n,f}(\phi),
+  \end{align*}
+  so the $\Psi_{n,f}$ induce a natural map
+  \[
+    \Psi_f:\dlim_n\Hom_A(\a^n,M)\to M_f.
+  \] 
+  Surjectivity is clear, as $\Psi_f(f^n\mapsto m)=m/f^n\in M_f$ for arbitrary $m\in M$ and $n>0$.
+
+  Recall that 
+  \begin{align*}
+    \Gamma(U,\wtilde M)
+    &=\ilim_{f\in \a}\Gamma(D_f,\wtilde M) 
+    = \ilim_{f\in \a}M_f,
+  \end{align*}
+  where the inverse system is given by $g\leqs f$ iff $\sqrt{(g)}\subset \sqrt{(f)}$, with maps
+  \begin{align*}
+    \rho^f_g:M_f&\longto M_g \\
+    \frac{m}{f^n}&\longto \frac{mu^n}{g^{kn}},
+  \end{align*}
+  where $u\in A$ such that $g^k=uf$ is supplied by $(g)\subset \sqrt{(g)}\subset\sqrt{(f)}$.
+  We compute
+  \begin{align*}
+    \rho^f_g\Psi_f(\phi)
+    &= \rho^f_g\left(\frac{\phi(f^n)}{f^n}\right) \\
+    &= \frac{\phi(f^n)u^n}{g^{kn}} \\
+    &= \frac{\phi(f^nu^n)}{g^{kn}} \\
+    &= \frac{\phi(g^{kn})}{g^{kn}} \\
+    &= \Psi_g(\phi),
+  \end{align*}
+  so that the $\Psi_f$ glue to give us a natural morphism $\Psi:\dlim\Hom_A(\a^n,M)\to \Gamma(U,\wtilde M)$.
+  It suffices to show that this map is indeed an isomorphism.
+
+  We begin by showing the map is injective.
+  If $\Psi(\phi)=0$, then $\Psi(\phi)|_{D_f}=0$ for all $f\in \a$.
+  Thus, for any $f\in \a$ there exists $n>0$ such that $\phi(f^n)/f^n=0\in M_f$.
+  That is,
+  \begin{align*}
+    \phi(f^{n+k})=f^k\phi(f^n)=0
+  \end{align*}
+  for $k\geqs 0$.
+  Taking generators $f_1,\ldots, f_r\in \a$ supplied by noetherianity of $A$, we have that 
+  \[
+    \phi(\a^n)=\phi((f_1,\ldots, f_r)^n)=0
+  \] 
+  for $n\gg0$.
+  Hence, $\phi=0\in \dlim \Hom_A(\a^n,M)$.
+
+  We conclude by showing that $\Psi$ is surjective.
+  Fix $s\in \Gamma(U,\wtilde M)$, and recall that our generators $f_1,\ldots ,f_r$ give us a finite cover $\{D_{f_i}\}_{i=1}^r$ of $U$.
+  It suffices to find $\phi\in \dlim\Hom_A(\a^n,M)$ such that $\Psi_{f_i}(\phi)= s_i :=s|_{D_{f_i}}$ for each $i=1,\ldots, r$.
+  Recall that $\Psi_{f_i}$ is surjective, so we can choose $\phi_i$ such that $\Psi_{f_i}(\phi_i)=s_i$.
+  Then $s_i=\phi_i(f_i^n)/f_i^n$ for $n\gg 0$, so
+  \begin{align*}
+    \frac{\phi_i(f_i^n)f_j^n}{f_i^nf_j^n}
+    = s_i|_{D_{f_j}}
+    = s_j|_{D_{f_i}}
+    = \frac{f_i^n\phi_j(f_j^n)}{f_i^nf_j^n}
+  \end{align*}
+  for $i,j$.
+  Thus,
+  \[
+    \phi_i(f_i^nf_j^n)=\phi_j(f_i^nf_j^n)\in M
+  \] 
+  for $n\gg0$.
+
+  We define a map $\phi:\a^n\to M$ for $n\gg0$ on the generators $\{f_1^{e_1}\cdots f_r^{e_r}\}_{\sum_ie_i=n}$ of $\a^n=(f_1,\ldots, f_r)^n$ by
+  \[
+    \phi(f_1^{e_1}\cdots f_r^{e_r})=\phi_i(f_1^{e_1}\cdots f_r^{e_r}),
+  \] 
+  where $i$ maximizes $e_i$.
+  If $e_i=e_j$ for some $i,j$, then $e_i,e_j\geqs n/r\gg0$, so that 
+  \[
+    \phi_i(f_1^{e_1}\cdots f_r^{e_r})=\phi_j(f_1^{e_1}\cdots f_r^{e_r})
+  \]
+  by the above.
+  If we can write a generator as $f_1^{e_1}\cdots f_r^{e_r}=af_1^{l_1}\cdots f_r^{l_r}$, where $e_i\neq l_j$ and $a\in A$, then we can remove the former term from our generating set.
+  It suffices, then, to show that $\phi$ is an $A$-module homomorphism.
+
+  Fix some $n>0$ so that there are well-defined representatives $\phi_i:\a^n\to M$ for each $i=1,\ldots, r$, and $\phi_i(f_i^nf_j^n)=\phi_j(f_i^nf_j^n)$.
+  We define a morphism $\phi:(f_1^n,\ldots, f_r^n)\to M$ by $\phi(f_i^n)=\phi_i(f_i^n)$.
+
+  % (a) We show first for distinguished affines $U=D(f)$, where the formula becomes
+  % \begin{align*}
+  %   M_f&\cong \dlim_n \Hom_A((f^n),M) \\
+  %      &\cong \Hom_A(\dlim_n(f^n),M).
+  % \end{align*}
+  % First, consider
+  % \begin{align*}
+  %   \Hom_A((a),M) 
+  %   &\cong \Hom_A(A/\Ann(a),M) \\
+  %   &\cong \{\phi\in \Hom_A(A,M): 0=\phi(\Ann(a))= \phi(a)\Ann(a)\} \\
+  %   &\cong \{m\in M: \Ann(m)\supset \Ann(a)\}.
+  % \end{align*}
+  % We have $\Ann(f^n)\supset \Ann(f^{n'})$ whenever $n'\geqs n$.
+
+  % Now, let $U=X-V(\a)$ for arbitrary $\a$.
+  % Then we can write
+  % \begin{align*}
+  %   \Gamma(U,\wtilde M)
+  %   &\cong \ilim_{D(f)\subset U}\Gamma(D(f),\wtilde M) \\
+  %   &\cong \ilim_{V(\a)\subset V(f)}\dlim_n\Hom_A((f^n),M) \\
+  %   &\cong \ilim_{f\in \sqrt{\a}}\dlim_n \Hom_A((f^n),M).
+  % \end{align*}
+  % Replacing each $f$ by $f^m\in \a$, we have
+  % \begin{align*}
+  %   \ilim_{f\in \a}\dlim_n\Hom_A((f^n),M).
+  % \end{align*}
+
+  % Let $U=X-V(\a)$ be arbitrary, and recall that
+  % \begin{align*}
+  %   \Gamma(U,\wtilde M)
+  %   &= \{s:U\to \prod_{\p\in U}M_\p\mid s(\p)\in M_\p,\; \exists V_\p\text{ s.t. }\forall\q\in V_\p,\; s(\q)=(m/f)_\q\}.
+  % \end{align*}
+  % Fix $\p\in V_\p\subset U$, $m\in M$, and $f\in A$ as above.
+  % We can write $V_\p=X-V(\b)$, where $V_\p\subset D(f)$ implies $V(f)\subset V(\b)$, i.e. $\sqrt \b\subset \sqrt{(f)}$.
+
+  (b) Fix an injective $A$-module $I$, let $V\subset U$ be another open set, and let $\b\lideal A$ an ideal such that $V=X-V(\b)$.
+  Then $V(\a)\subset V(\b)$, so $\sqrt{\a}\supset \sqrt{\b}$.
+  $A$ noetherian implies $\a,\b$ finitely generated, so we can find $m>0$ such that $\a= \sqrt{\a}^m$ and $\b=\sqrt{\b}^m$.
+  Then $\a\supset \b$, so $I$ injective implies the restriction map
+  \begin{align*}
+    \Hom_A(\a^n,I)\to \Hom_A(\b^n,I)
+  \end{align*}
+  is surjective for any $n$.
+  A direct limit of epimorphisms is itself an epimorphism, so
+  \[
+    \Gamma(U,\wtilde I)\to \Gamma(V,\wtilde I)
+  \] 
+  is surjective by (a).
+\end{proof}
+
+\end{document}

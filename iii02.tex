@@ -1,0 +1,293 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\DeclareMathOperator{\CaCl}{CaCl}
+\DeclareMathOperator{\Pic}{Pic}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\sR}{{\mathscr R}}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+{Hartshorne} \hfill {4-08-2025}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.2}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+% \begin{enumerate}
+%   \item[2.1.] {
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
+
+\begin{enumerate}
+  \item[2.3.] {
+      \emph{Cohomology with supports}.
+      Let $X$ be a topological space, let $Y$ be a closed subset, and let $\F$ be a sheaf of abelian groups.
+      Let $\Gamma_Y(X,\F)$ denote the group of sections  of $\F$ with support in $Y$.
+      \begin{enumerate}
+        \item Show that $\Gamma_Y(X,\cdot)$ is a left exact functor $\Ab(X)\to \Ab$.
+          \\ We denote the right derived functors of $\Gamma_Y(X,\cdot)$ by $H_Y^i(X,\cdot)$.
+          They are the \emph{cohomology groups of $X$ with supports in $Y$}, and coefficients in a given sheaf.
+        \item If $0\to \F'\to\F\to\F''\to 0$ is an exact sequence of sheaves, with $\F'$ flasque, show that
+          \[
+            0\to \Gamma_Y(X,\F')\to \Gamma_Y(X,\F)\to \Gamma_Y(X,\F'')\to 0
+          \] 
+          is exact.
+        \item Show that if $\F$ is flasque, then $H_Y^i(X,\F)=0$ for all $i>0$.
+        \item The sequence
+          \[
+            0\to \Gamma_Y(X,\F)\to \Gamma(X,\F)\to \Gamma(X-Y,\F)
+          \] 
+          is exact, with surjectivity of the second map if $\F$ is flasque.
+        \item Let $U=X-Y$.
+          Show that for any $\F$, there is a long exact sequence of cohomology groups
+          \begin{align*}
+            0\; &\to H_Y^0(X,\F)\to H^0(X,\F)\to H^0(U,\F|_U)\to \\
+                &\to H_Y^1(X,\F)\to H^1(X,\F)\to H^1(U,\F|_U)\to  \\
+                &\to H_Y^2(X,\F)\to \cdots
+          \end{align*}
+        \item \emph{Excision.} Let $V$ be an open subset of $X$ containing $Y$.
+          Then there are natural functorial isomorphisms, for all $i$ and $\F$,
+          \[
+            H_Y^i(X,\F)\cong H_Y^i(V,\F|_V).
+          \] 
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Let $0\to \F'\to \F\to \F''$ be a left exact sequence, and apply $\Gamma(X,\cdot)$ to get a left exact sequence
+  \[
+    0\to \Gamma(X,\F')\xrightarrow{\phi} \Gamma(X,\F)\xrightarrow{\psi} \Gamma(X,\F'')
+  \] 
+  For any $s\in \Gamma(X,\F)$ and $p\in X$, $\psi(s)_p=\psi_p(s_p)$.
+  Defining $\psi_Y:=\psi|_{\Gamma_Y(X,\F)}$, we have $\im \psi_Y\subset \Gamma_Y(X,\F'')$.
+  Defining $\phi_Y$ similarly, injectivity of each $\phi_p$ implies $\im\phi_Y=\im \phi\cap \Gamma_Y(X,\F')$.
+  Thus, we can restrict to a sequence
+  \[
+    0\to \Gamma_Y(X,\F')\xrightarrow{\phi_Y} \Gamma_Y(X,\F)\xrightarrow{\psi_Y} \Gamma_Y(X,\F'').
+  \] 
+  Clearly $\phi_Y$ is still injective.
+  Then
+  \begin{align*}
+    \ker \psi_Y &= \ker\psi\cap \Gamma_Y(X,\F) \\
+                &= \im \phi\cap \Gamma_Y(X,\F) \\
+                &= \im\phi_Y
+  \end{align*}
+  gives us exactness.
+
+  (d) First, take $\F$ arbitrary. 
+  Injectivity of the first map is clear.
+  The sheaf axiom gives us that $s|_U=0$ iff $s_p=0$ for all $p\in U$, whence we have exactness at the middle term.
+  If we suppose further that $\F$ is flasque, then surjectivity of the second map follows by definition.
+
+  (b) (a) and (II, Ex. 1.16b) give us that the following diagram has exact rows, while exactness of the columns follows from (d), using once again that $\F'$ is flasque.
+  \[
+    \begin{tikzcd}
+      &0\ar[d] &0\ar[d] &0\ar[d] \\
+      0\ar[r] &\Gamma_Y(X,\F')\ar[d]\ar[r,"\phi_Y"] &\Gamma_Y(X,\F)\ar[d]\ar[r, "\psi_Y"] &\Gamma_Y(X,\F'')\ar[d] \\
+      0\ar[r] &\Gamma(X,\F')\ar[d]\ar[r,"\phi"] &\Gamma(X,\F)\ar[r, "\psi"]\ar[d] &\Gamma(X,\F'')\ar[d]\ar[r] &0 \\
+      0\ar[r] &\Gamma(U,\F')\ar[d]\ar[r,"\phi|_U"] &\Gamma(U,\F)\ar[r, "\psi|_U"] &\Gamma(U,\F'')\ar[r] &0 \\
+              &0
+    \end{tikzcd}
+  \] 
+  It suffices to show surjectivity of $\psi_Y$, which we deduce from the following lemma.
+  The following is quite a simple diagram chase, but it is still far clearer to draw out on a whiteboard than to read.
+
+  \begin{lemma}
+    If the following commutative diagram of $R$-modules has exact rows and columns,
+    \[
+      \begin{tikzcd}
+        &&0\ar[d] \\
+        &A\ar[d,"m"]\ar[r, "f"] &B\ar[d,"n"] \\
+        C\ar[d,"p"]\ar[r,"g"] &A'\ar[r,"f'"]\ar[d,"m'"] &B'\ar[d,"n'"]\ar[r] & 0 \\
+        C'\ar[d]\ar[r,"g'"] &A''\ar[r,"f''"] &B'' \\
+        0
+      \end{tikzcd}
+    \] 
+    then $f:A\to B$ is surjective.
+  \end{lemma}
+
+  \begin{proof}
+    Fix $b\in B$, and take $a'\in A'$ with $f'a'=nb$.
+    Then $f''m'a'=n'nb=0$ gives us $c'\in C'$ with $g'c=m'a'$.
+    Surjectivtiy of $p$ supplies us with $c\in C$ such that $pc = c'$.
+    Then $m'(a'-gc)=0$ gives $a\in A$ such that $ma=a'-gc$.
+    Finally, we have
+    \[
+      nfa = f'ma = f'a' -fgc = nb,
+    \] 
+    so that $fa=b$ by injectivity of $n$.
+  \end{proof}
+
+  % Take $s''\in \Gamma_Y(X,\F'')$, and let $s_0\in \Gamma(X,\F)$ such that $\psi(s_0)=s''$.
+  % Then $\phi|_U(s_0|_U)=\psi(s_0)|_U=0$, so we can take $s_1'|_U\in \Gamma(U,\F')$ with $\phi|_U(s_1'|_U)=s_0|_U$.
+  % Then take $s_1'\in \Gamma(X,\F')$ such that 
+  % \[
+  %   \phi(s_1')|_U =\phi|_U(s_1'|_U)=s_0|_U.
+  % \]
+  % Defining $s:=s_1-s_0$, we have that $\psi(s)=s''$, and $s|_U=0$ implies $s\in \Gamma_Y(X,\F)$, as desired.
+
+  (c) Embed $\F$ in an injective sheaf $\I$, and let $\G$ be the quotient, so that we have an exact sequence
+  \[
+    0\to \F\to \I\to \G\to 0.
+  \] 
+  $\I$ is flasque by (2.4), so that $\G$ is flasque as well by (II, 1.16).
+  Taking the long exact sequence of $H_Y^i(X,\cdot)$, (b) gives us $H_Y^1(X,\F)=0$.
+  Then $H_Y^1(X,\I)=H_Y^1(X,\G)=0$, so that $H_Y^i(X,\F)=H_Y^i(X,\I)=H_Y^i(X,\G)=0$ for all $i>0$ by induction on $i$.
+
+  % (e) First, we note that $\cdot|_U$ is an additive exact functor, so $\Gamma(U,\cdot|_U)$ is an additive left-exact functor $\Ab(X)\to \Ab$.
+  % Also, the restriction $\F|_U$ of any flasque sheaf is clearly flasque, so $\cdot |_U$ maps flasque resolutions to flasque resolutions.
+  % Thus, we have a natural isomorphism $R^\bullet\Gamma(U,\cdot|_U)\cong H^\bullet(U,\cdot|_U)$, where the latter are the sheaf cohomology functors on $\Ab(U)$.
+
+  (e) Take an injective resolution $0\to \F\to \I^\bullet$ of $\F$.
+  Injective sheaves are flasque, so (e) gives us an exact sequence
+  \[
+    0\to \Gamma_Y(X,\I^\bullet)\to \Gamma(X,\I^\bullet) \to \Gamma(U,\I^\bullet)\to 0
+  \] 
+  of complexes.
+  Then, for each $j\geqs 0$, we receive the following commutative diagram.
+  \[
+    \begin{tikzcd}
+      %& \vdots\ar[d]&\vdots\ar[d]&\vdots\ar[d] \\
+      0\ar[r] &\Gamma_Y(X,\I^j)\ar[d]\ar[r] &\Gamma(X,\I^j)\ar[d]\ar[r] &\Gamma(U,\I^j)\ar[d]\ar[r] &0 \\
+      0\ar[r] &\Gamma_Y(X,\I^{j+1})\ar[r] &\Gamma(X,\I^{j+1})\ar[r] &\Gamma(U,\I^{j+1})\ar[r] &0
+    \end{tikzcd}
+  \] 
+  Applying the snake lemma gives us an exact sequence
+  \begin{align*}
+    0\to H_Y^i(X,\F)\to H^i(X,\F)\to H^i(U,\F)\to H_Y^{i+1}(X,\F)\to H^{i+1}(X,\F)\to H^{i+1}(U,\F),
+  \end{align*}
+  whence we receive our long exact sequence.
+
+  (f) Fix a sheaf $\F$, and take $U:=X-Y$, so $X=U\cup V$.
+  The sheaf axiom gives us that the map
+  \begin{align*}
+    \Gamma(X,\F)\to \Gamma(V,\F)\oplus \Gamma(U,\F)
+  \end{align*}
+  is injective, so the restriction
+  \[
+    \Gamma_Y(X,\F)\to \Gamma_Y(V,\F)\oplus \Gamma_Y(U,\F)
+  \] 
+  is injective as well.
+  However, $\Gamma_Y(U,\F)=0$, so the restriction map $\Gamma_Y(X,\F)\to \Gamma_Y(V,\F)$ is injective.
+  If we suppose further that $\F$ is flasque, then it is surjective, so we have an isomorphism
+  \[
+    \Gamma_Y(X,\F) \iso \Gamma_Y(V,\F)\cong \Gamma_Y(V,\F|_V).
+  \] 
+
+  Now, take an arbitrary sheaf $\F$, and let $0\to \F\to \I^\bullet$ be an injective resolution.
+  Each $\I^j$ is flasque, so we have an isomorphism
+  \[
+    \Gamma_Y(X,\I^\bullet)\iso \Gamma_Y(V,\I^\bullet|_V)
+  \] 
+  of complexes.
+  $\I^\bullet|_V$ is a flasque resolution of $\F|_V$, so the homology of the latter still computes $H^\bullet(V,\F|_V)$.
+  Hence, we have an isomorphism
+  \[
+    H^\bullet(X,\F)\cong H^\bullet(V,\F|_V),
+  \] 
+  as desired.
+\end{proof}
+
+\begin{enumerate}
+  \item[2.4.] {
+      \emph{Mayer-Vietoris Sequence.} 
+      Let $Y_1,Y_2$ be two closed subsets of $X$.
+      Then there is a long exact sequence of cohomology with supports
+      \begin{align*}
+        \cdots\,&\to H_{Y_1\cap Y_2}^i(X,\F) \to H_{Y_1}^i(X,\F)\oplus H_{Y_2}^i(X,\F)\to H_{Y_1\cup Y_2}^i(X,\F) \to \\
+        &\to H_{Y_1\cap Y_2}^{i_1}(X,\F)\to \cdots.
+      \end{align*}
+    }
+\end{enumerate}
+
+\begin{proof}
+  It suffices to show that the sequence
+  \[
+    0\to \Gamma_{Y_1\cap Y_2}(X,\F)\to \Gamma_{Y_1}(X,\F)\oplus \Gamma_{Y_2}(X,\F)\to \Gamma_{Y_1\cup Y_2}(X,\F)\to 0,
+  \] 
+  with the second map given by $(s_1,s_2)\mapsto s_1-s_2$, is exact whenever $\F$ is flasque.
+  Exactness in the first two terms is trivial, so it suffices to show surjectivity of the second map.
+  For this, we will once again appeal to the lemma from 2.3(b).
+
+  Fix $U_1:=X-Y_1$, $U_2:=X-Y_2$, and consider the following commutative diagram.
+  The columns are exact by flasqueness of $\F$, 2.3(d), and because a component-wise direct sum of two exact sequences is exact.
+  \[
+    \begin{tikzcd}
+      &0\ar[d]&0\ar[d]&0\ar[d] \\
+      0\ar[r] &\Gamma_{Y_1\cap Y_2}(X,\F)\ar[d]\ar[r] &\Gamma_{Y_1}(X,\F)\oplus \Gamma_{Y_2}(X,\F)\ar[d]\ar[r] &\Gamma_{Y_1\cup Y_2}(X,\F)\ar[d] \\
+      0\ar[r] &\Gamma(X,\F)\ar[d]\ar[r] &\Gamma(X,\F)\oplus \Gamma(X,\F)\ar[d]\ar[r] &\Gamma(X,\F)\ar[d]\ar[r] &0 \\
+      0\ar[r] &\Gamma(U_1\cup U_2,\F)\ar[d]\ar[r] &\Gamma(U_1,\F)\oplus \Gamma(U_2,\F)\ar[r]\ar[d] &\Gamma(U_1\cap U_2,\F)\ar[r]\ar[d] &0 \\
+              &0 & 0 &0
+    \end{tikzcd}
+  \] 
+  The top and middles rows are clearly exact. 
+  The bottom row is left exact by the sheaf axiom, with surjectivity of the last map following from $\F$ being flasque.
+  %\footnote{The middle row is triviall exact without any of this, but it technically also follows from these facts that are necessary for the bottom row...} 
+  Note that exactness of this bottom row, with $U_1\cup U_2$ taken to be $X$, gives rise to what is normally referred to as the (non-relative) Mayer-Vietoris sequence in sheaf cohomology.\footnote{It seems like Lemma 1 reduces exact sequences in relative cohomology to exact sequences in absolute cohomology, as here and in 2.3(b).}
+
+  Now, we conclude by Lemma 1 that
+  \[
+    0\to \Gamma_{Y_1\cap Y_2}(X,\F)\to \Gamma_{Y_1}(X,\F)\oplus \Gamma_{Y_2}(X,\F)\to \Gamma_{Y_1\cup Y_2}(X,\F)\to 0
+  \] 
+  is exact for $\F$ flasque.
+  Taking an injective resolution $0\to \F\to \I^\bullet$, each $\I^j$ is in particular flasque, so we have an exact sequence of chain complexes
+  \[
+    0\to \Gamma_{Y_1\cap Y_2}(X,\I^\bullet)\to \Gamma_{Y_1}(X,\I^\bullet)\oplus \Gamma_{Y_2}(X,\I^\bullet)\to \Gamma_{Y_1\cup Y_2}(X,\I^\bullet)\to 0.
+  \] 
+  Applying the snake lemma as in 2.3(e) gives us our result.
+\end{proof}
+
+\begin{enumerate}
+  \item[2.7.] {
+      (*) Let $S^1$ be the circle (with its usual topology), and let $\ZZ$ be the constant sheaf $\ZZ$.
+      \begin{enumerate}
+        \item Show that $H^1(S^1,\ZZ)\cong \ZZ$, using our definition of cohomology.
+        \item Now let $\cR$ be the sheaf of continuous real-valued functions on $S^1$.
+          Show that $H^1(S^1,\cR)$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+
+\begin{enumerate}
+  \item[2.5.] {
+      Let $X$ be a Zariski space (II, Ex. 3.17).
+      Let $p\in X$ be a closed point, and let $X_p$ be the subset of $X$ consisting of all points $q\in X$ such that $p\in \{q\}^-$.
+      We call $X_p$ the \emph{local space} of $X$ at $p$, and give it the induced topology.
+      Let $j:X_p\to X$ be the inclusion, and for any sheaf $\F$ on $X$, let $\F_p=j^*\F$.
+      Show that for ally $i$, $\F$, we have
+      \[
+        H^i_p(X,\F) = H_p^i(X_p,\F_p).
+      \] 
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\end{document}

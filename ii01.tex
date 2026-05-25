@@ -75,7 +75,18 @@
   This occurs iff each $(\im\vphi)_p\to \G_p$ is an isomorphism, which occurs iff each $\im(\vphi_p)\xrightarrow{\sim} (\im\vphi)_p\to \G_p$ is an isomorphism. 
   This map is the inclusion $\im(\vphi_p)\to \G_p$, so the result follows.
 
-  (c) It suffices to show the result for short exact sequences $0\to \F'\xrightarrow{\vphi}\F\xrightarrow{\psi}\F''\to 0$.
+  (c) Consider the following diagram:
+  \[
+    \begin{tikzcd}[column sep=small,row sep=small]%[column sep= 0.2cm, row sep =0.5cm]
+      0\ar[dr]&&0&&0\ar[dr]&&0 \\
+      &\ker\vphi_{i-1}\ar[dr]\ar[ur] &&&&\ker\vphi_{i+1}\ar[dr]\ar[ur]\\
+      \cdots\ar[ur]\ar[rr]&&\F_{i-1}\ar[rr,"\vphi_{i-1}"]\ar[dr] && \F_i\ar[rr,"\vphi_i"]\ar[ur] && \F_{i+1}\ar[rr,"\vphi_{i+2}"]\ar[dr] &&\cdots \\
+                          &&&\ker\vphi_i\ar[ur]\ar[dr]&&&&\ker\vphi_{i+2}\ar[ur]\ar[dr] \\
+                          &&0\ar[ur]&&0&&0\ar[ur]&&0
+    \end{tikzcd}
+  \] 
+  Clearly our original diagram is exact if and only if each diagonal $0\to \ker\vphi_i\to \F_i\to \ker\vphi_{i+1}\to0$ is exact.
+  Thus, it suffices to show the result for short exact sequences $0\to \F'\xrightarrow{\vphi}\F\xrightarrow{\psi}\F''\to 0$.
   (b) gives us $\vphi$ injective iff each $\vphi_p$ is injective, $\psi$ surjective iff each $\psi_p$ is surjective. 
 
   If $\im\vphi=\ker\psi$, then this induces natural isomorphisms $\im\vphi_p\cong\ker\psi_p$ for all $p\in X$.
@@ -130,42 +141,112 @@
       A sheaf $\F$ on a topological space $X$ is \emph{flasque} if for every inclusion $V\subset U$ of open sets, the restriction map $\F(U)\to \F(V)$ is surjective.
       \begin{enumerate}
         \item Show that a constant sheaf on an irreducible topological space is flasque.
-        \item If $0\to \F'\to \F\to \F''\to 0$ is an exact sequence of sheaves, and if $\F'$ is flasque, then for any open set $U$, the sequence $0\to \F'(U)\to \F(U)\to \F''(U)\to 0$ of abelian groups is also exact.
-          \item If $0\to \F'\to \F\to \F''\to 0$ is an exact sequence of sheaves, and if $\F'$ and $\F$ are flasque, then $\F''$ is flasque.
-          \item If $f:X\to Y$ is a continuous map and $\F$ is a flasque sheaf on $X$, then $f_*\F$ is a flasque sheaf on $Y$.
-          \item Let $\F$ be any sheaf on $X$.
-            We define a new sheaf $\G$, called the sheaf of \emph{discontinuous sections} of $\F$ as follows.
-            For each open set $U\subset X$, $\G(U)$ is the set of maps $s:U\to \bigcup_{p\in U}\F_p$ such that for each $p\in U$, $s(p)\in \F_p$.
-            Show that $\G$ is a flasque sheaf, and that there is a natural injective morphism $\F\inj \G$.
+        \item If $0\to \F'\to \F\xrightarrow{\vphi} \F''\to 0$ is an exact sequence of sheaves, and if $\F'$ is flasque, then for any open set $U$, the sequence $0\to \F'(U)\to \F(U)\xrightarrow{\vphi} \F''(U)\to 0$ of abelian groups is also exact.
+        \item If $0\to \F'\to \F\xrightarrow{\vphi} \F''\to 0$ is an exact sequence of sheaves, and if $\F'$ and $\F$ are flasque, then $\F''$ is flasque.
+        \item If $f:X\to Y$ is a continuous map and $\F$ is a flasque sheaf on $X$, then $f_*\F$ is a flasque sheaf on $Y$.
+        \item Let $\F$ be any sheaf on $X$.
+          We define a new sheaf $\G$, called the sheaf of \emph{discontinuous sections} of $\F$ as follows.
+          For each open set $U\subset X$, $\G(U)$ is the set of maps $s:U\to \bigcup_{p\in U}\F_p$ such that for each $p\in U$, $s(p)\in \F_p$.
+          Show that $\G$ is a flasque sheaf, and that there is a natural injective morphism $\F\inj \G$.
       \end{enumerate}
     }
 \end{enumerate}
 
 \begin{proof}
+  (a) Let $X$ be irreducible, $\ol A$ a constant sheaf on $X$.
+  Any open subset of an irreducible topological space is connected, so $\ol A(U) \cong A$ for all open sets $U\subset X$.
+  Then the restriction map $\ol A(U)\to \ol A(V)$ is the identity $A\to A$, which is in particular surjective.
+
+  (b) The sequence is left exact by (Ex. 1.8), so it suffices to show surjectivity of $\vphi(U):\F(U)\to \F''(U)$.
+  First, take $\vphi(s_1)\in \F''(U_1)$ and $\vphi(s_2)\in \F''(U_2)$ such that $\vphi(s_1)|_{U_{12}}=\vphi(s_2)|_{U_{12}}$.
+  Then $s_1-s_2\in\F'(U_{12})$, so $\F'$ flasque supplies us with $t_{12}\in \F'(U_1\cup U_2)$ such that $t_{12}|_{U_{12}}=s_1-s_2$.
+  Then $s_1\in \F(U_1)$ and $t_{12}+s_2\in \F(U_2)$ glue to a section $s\in \F(U_1\cup U_2)$ such that 
+  \begin{align*}
+    &s|_{U_1} =s_1,
+    &\vphi(s)|_{U_2} =\vphi(t_{12}+s_2) =\vphi(s_2).
+  \end{align*}
+
+  Fix $s''\in \F''(U)$.
+  By (Ex. 1.4), we can take $s_i\in \F(U_i)$ such that $\vphi(s_i)=s''|_{U_i}$.
+  Consider the poset
+  \[
+    \Sigma = \{(s\in \F(V),V\subset U) ~:~ \vphi(s)= s''|_V\}, \\
+  \] 
+  ordered by
+  \begin{align*}
+    (s,V)\leqs (t,W) \iff V\subset W~\&~ s=t|_V.
+  \end{align*}
+  It is clearly nonempty, as each $(s_i,U_i)\in \Sigma$.
+  If $C=\{(t_j,W_j)\}_{j\in J}$ is a nonempty chain, then we can glue to receive a section $t\in \F(\bigcup_{j\in J}W_j)$ such that $\vphi(t)|_{W_j}=\vphi(t_j)=s''|_{W_j}$ for all $j\in J$.
+  It follows by uniqueness of gluing in $\F''$ that $\vphi(t)=s''|_{\bigcup_{j\in J}W_j}$, whence $(t,\bigcup_{j\in J}W_j)\in \Sigma$.
+
+  By the proceeding paragraph Zorn's lemma supplies us with a maximal element $(s,V)\in \Sigma$.
+  Suppose, by way of contradiction, that $V\neq U$.
+  We can take some $U_i$ such that $V\subsetneq V\cup U_i$.
+  The construction from the first paragraph supplies us with a section $t\in \F(V\cup U_i)$ such that $t|_V= s$, and $\vphi(t)|_{U_i}=\vphi(s_i)$.
+  Then uniquness of gluing in $\F''$ gives us $\vphi(t)=s''|_{V\cup U_i}$, so that $(s,V)<(t,V\cup U_i)\in \Sigma$, contradicting maximality of $(s,V)$.
+  Hence, $V=U$, so we have $s\in \F(U)$ such that $\vphi(s)= s''$, as desired.
+
+  (c) The following diagram is exact by (b), whence a trivial diagram chase gives us our result.
+  \[
+    \begin{tikzcd}
+      \F(U)\ar[r,"\vphi(U)"]\ar[d] &\F''(U) \ar[d] \\
+      \F(V)\ar[r, "\vphi(V)"]\ar[d] &\F''(V)\ar[r] &0 \\
+              0
+    \end{tikzcd}
+    % \begin{tikzcd}
+    %   0\ar[r] &\F'(U)\ar[d]\ar[r] &\F(U)\ar[r,"\vphi(U)"]\ar[d] &\F''(U) \ar[d]\ar[r] &0 \\
+    %   0\ar[r] &\F'(V)\ar[d]\ar[r] &\F(V)\ar[r, "\vphi(V)"]\ar[d] &\F''(V)\ar[r] &0 \\
+    %           &0&0
+    % \end{tikzcd}
+  \] 
+
+  (d) Fix open subsets $V\subset U\subset Y$.
+  Then the restriction $f_*\F(U)\to f_*\F(V)$ is simply the restriction
+  \[
+    \F(f^{-1}(U))\to \F(f^{-1}(V)),
+  \] 
+  which is surjective since $\F$ is flasque.
+
+  (e) Trivial.
 \end{proof}
 
-\begin{enumerate}
-  \item[1.19.] {
-      \emph{Extending a Sheaf by Zero}.
-      Let $X$ be a topological space, $Z$ a closed subset, $i:Z\to X$ the inclusion, $U=X-Z$ the complimentary open subset, and $j:U\to X$ its inclusion.
-      \begin{enumerate}
-        \item Let $\F$ be a sheaf on $Z$.
-          Show that $(i_*\F)_p$ is $\F_p$ if $p\in Z$, and 0 if $p\notin Z$.
-      \end{enumerate}
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
-
-\begin{enumerate}
-  \item[1.20.] {
-    }
-\end{enumerate}
+% \begin{enumerate}
+%   \item[1.19.] {
+%       \emph{Extending a Sheaf by Zero}.
+%       Let $X$ be a topological space, $Z$ a closed subset, $i:Z\to X$ the inclusion, $U=X-Z$ the complimentary open subset, and $j:U\to X$ its inclusion.
+%       \begin{enumerate}
+%         \item Let $\F$ be a sheaf on $Z$.
+%           Show that $(i_*\F)_p$ is $\F_p$ if $p\in Z$, and 0 if $p\notin Z$.
+%       \end{enumerate}
+%     }
+% \end{enumerate}
 % 
 % \begin{proof}
 % \end{proof}
-% 
+
+\begin{enumerate}
+  \item[1.20.] {
+      \emph{Subsheaf with Supports}.
+      Let $Z$ be a closed subset of $X$, and let $\F$ be a sheaf on $X$.
+      We define $\Gamma_Z(X,\F)$ to be the subgroup of $\Gamma(X,\F)$ consisting of all sections whose support (Ex. 1.14) is containing in $Z$.
+      \begin{enumerate}
+        \item Show that the presheaf $V\mapsto \Gamma_{Z\cap V}(V,\F|_Y)$ is a sheaf.
+          It is called the subsheaf of $\F$ with supports in $Z$ and is denoted by $\H_Z^0(\F)$.
+        \item Let $U=X-Z$, and let $j:U\to X$ be the inclusion.
+          Show there is an exact sequence of sheaves on $X$
+          \[
+            0\to \H_Z^0(\F)\to \F\to j_*(\F|_U).
+          \] 
+          Furthermore, if $\F$ is flasque, the map $\F\to j_*(\F|_U)$ is surjective.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a)
+\end{proof}
+
 % \begin{enumerate}
 %   \item[17.] {
 %     }

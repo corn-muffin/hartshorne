@@ -55,37 +55,43 @@
   \begin{align*}
     D(f)~&\longleftrightarrow Y \\
     \p ~&\longrightarrow S^{-1}\p, \\
-    \phi^*(\q)~&\longleftarrow \q.
+    \phi^{-1}(\q)~&\longleftarrow \q.
   \end{align*}
-  Clearly the map $\q\mapsto \phi^*(\q)$ is continuous, so it suffices to show that $\p\mapsto S^{-1}\p$ is continuous.
+  Clearly the map $\q\mapsto \phi^{-1}(\q)$ is continuous, so it suffices to show that $\p\mapsto S^{-1}\p$ is continuous.
 
   Let $V(\b)\subset A_f$ be closed, and denote $\psi:\p\mapsto S^{-1}\p$. 
-  AM 3.11.i gives us that $\b=S^{-1}\a$ is extended.
-  Then $\p\supset \a$ implies $S^{-1}\p\supset S^{-1}\a=\b$ whenever $f\notin \a,\p$, so that $V(\a)\cap D(f)\subset \psi^{-1}(\b)$.
-  Similarly, $S^{-1}\p\supset S^{-1}\a$ implies $\phi^*(S^{-1}\p)\supset \phi^*(S^{-1}\a)\supset \a$.
+  AM 3.11.i gives us that $\b=S^{-1}\a$ for some ideal $\a\lideal A$.
+  Then $\p\supset \a$ implies $S^{-1}\p\supset S^{-1}\a=\b$, so that $V(\a)\cap D(f)\subset \psi^{-1}(V(\b))$.
+  Similarly, $S^{-1}\p\supset S^{-1}\a$ implies $\phi^{-1}(S^{-1}\p)\supset \phi^{-1}(S^{-1}\a)\supset \a$.
   % That is, for all $a\in \a$, there is some $x\in \p$ and $n\geqs 1$ such that $f^n(a-x)=0$.
   % Hence, $f^na\in \p$, so that $\p$ prime and $f\notin \p$ gives us $a\in \p$.%\footnote{As a sanity check, $f\notin \p$ also implies $f\notin \a$, so that $V(\a)\neq 0$!}
   We conclude that $\psi^{-1}(V(\b))=V(\a)\cap D(f)\subset D(f)$ is closed, so that $\psi=(\psi^*)^{-1}$ is continuous.
 
-  Note that $(\O_X|_{D(f)})_\p\cong A_\p\cong (A_\p)_f\cong (A_f)_{\psi(\p)}\cong (\O_Y)_{\psi(\p)}$ for each $\p\not\ni f$.
-  Call this isomorphism $\alpha_\p:(\O_X|_{D(f)})_\p\to (\O_Y)_{\psi(\p)}$, and let 
+  By the above, $\phi:A\to A_f$ induces a map $(g,g^\sharp):(\Spec A_f, \O_{\Spec A_f})\to (D(f),\O_X|_{D(f)})$ which is a homeomorphism on underlying topological spaces.
+  For each $\q\not\ni f$,
   \[
-    \alpha:\sqcup_{\p\in D(f)}(\O_X|_{D(f)})_\p
-    \to \sqcup_{\q\in Y}(\O_Y)_\q
+    g^\sharp_\q:\O_{Y,\q}\cong (A_f)_\q\iso (A_{g(\q)})_f\cong (\O_X|_{D(f)})_{g(\q)}
   \]
-  be defined by $\alpha|_{(\O_X|_{D(f)})_\p}=\alpha_\p$.
-  Then we have a map
-  \begin{align*}
-    \phi^\sharp(U):\O_X|_{D(f)}(U)~&\to (\phi^*)_*\O_{Y}(U) \\
-                        s~&\mapsto \alpha\circ s\circ\phi^*.
-  \end{align*}
-  We have that 
-  \[
-    \alpha\circ s|_V\circ \phi^*=\alpha\circ s\circ \phi^*|_{(\phi^*)^{-1}(V)}
-  \]
-  as functions on $(\phi^*)^{-1}(V)$ whenever $V\subset U\subset D(f)$ are open and $s\in \O_X(U)$, so $\phi^\sharp(U)$ gives a sheaf homomorphism $\phi^\sharp:\O_X|_{D(f)}\to \O_Y$.
-  $\phi^\sharp_\p=\alpha_\p$ is an isomorphism of rings for all $\p\in D(f)$, so $\phi^\sharp$ is itself a sheaf isomorphism.
-  Then $(f,f^\sharp)$ is an isomorphism of locally ringed spaces, since ring isomorphisms preserve maximality.
+  is an isomorphism, so $g^\sharp$ is an isomorphism of sheaves.
+  Hence, $(g,g^\sharp)$ is an isomorphism of schemes.
+  % Call this isomorphism $\alpha_\p:(\O_X|_{D(f)})_\p\to (\O_Y)_{\psi(\p)}$, and let 
+  % \[
+  %   \alpha:\sqcup_{\p\in D(f)}(\O_X|_{D(f)})_\p
+  %   \to \sqcup_{\q\in Y}(\O_Y)_\q
+  % \]
+  % be defined by $\alpha|_{(\O_X|_{D(f)})_\p}=\alpha_\p$.
+  % Then we have a map
+  % \begin{align*}
+  %   \phi^\sharp(U):\O_X|_{D(f)}(U)~&\to (\phi^*)_*\O_{Y}(U) \\
+  %                       s~&\mapsto \alpha\circ s\circ\phi^*.
+  % \end{align*}
+  % We have that 
+  % \[
+  %   \alpha\circ s|_V\circ \phi^*=\alpha\circ s\circ \phi^*|_{(\phi^*)^{-1}(V)}
+  % \]
+  % as functions on $(\phi^*)^{-1}(V)$ whenever $V\subset U\subset D(f)$ are open and $s\in \O_X(U)$, so $\phi^\sharp(U)$ gives a sheaf homomorphism $\phi^\sharp:\O_X|_{D(f)}\to \O_Y$.
+  % $\phi^\sharp_\p=\alpha_\p$ is an isomorphism of rings for all $\p\in D(f)$, so $\phi^\sharp$ is itself a sheaf isomorphism.
+  % Then $(f,f^\sharp)$ is an isomorphism of locally ringed spaces, since ring isomorphisms preserve maximality.
 \end{proof}
 
 \begin{enumerate}
@@ -111,7 +117,7 @@
 	\item[2.3.] {
       $(*)$ A scheme $(X,\O_X)$ is \emph{reduced} if for every open set $U\subset X$, the ring $\O_X(U)$ has no nilpotent elements.
       \begin{enumerate}
-        \item Show that $(X,\O_X)$ is reduced if and only if for every $p\in X$, the local ring $\O_{X,p}$ as no nilpotent elements.
+        \item Show that $(X,\O_X)$ is reduced if and only if for every $x\in X$, the local ring $\O_{X,x}$ as no nilpotent elements.
         \item Let $(X,\O_X)$ be a scheme.
           Let $(\O_X)_{\red}$ be the sheaf associated to the presheaf $U\mapsto \O_X(U)_{\red}$, where for any ring $A$, we denote by $A_{\red}$ the quotient of $A$ by its nilradical $\fR(A)$. 
           Show that $(X,(\O_X)_{\red})$ is a scheme.
@@ -123,11 +129,131 @@
     }
 \end{enumerate}
 
+\begin{proof}
+  (a) If $(X,\O_X)$ is not reduced, then we can take $U\neq \0$ and $s\in \O_X(U)$ such that $s^n=0$, whence $s^n_p=0$ for all $x\in U$.
+  Suppose conversely that there is $x\in X$ such that $\O_{X,x}$ has nilpotent elements.
+  Take such a $(s,U)\in \O_{X,x}$ with $(s,U)^n=0$.
+  Then there is $V\supset U\supset p$ such that $(s|_V)^n=s^n|_V=0$.
+
+  (b) %Let $\Spec A\cong U\subset X$ be an open affine neighborhood.
+  % Clearly
+  % \begin{align*}
+  %   (X_\red)|_{\Spec A}
+  %   &= (\Spec A,((\O_X)_\red)|_{\Spec A}) \\
+  %   &\cong (\Spec A,(\O_{\Spec A})_\red) \\
+  %   &= (\Spec A)_\red.
+  % \end{align*}
+  Consider first the case of $X=\Spec A$ affine.
+  Denote by $\wtilde{(\O_{\Spec A})}_\red$ the presheaf $U\mapsto \O_{\Spec A}(U)_\red$, so that $(\O_{\Spec A})_\red= (\wtilde{((\O)_{\Spec A})}_\red)^+$.
+  By (AM, 3.11), there are isomorphisms $(A_\red)_f\iso (A_f)_\red$ whenever $f\notin \fR(A)$.
+  The same proposition gives us $A_f=0$ iff $f\in \p$ for all primes $\p$, i.e. $f\in \fR(A)$, in which case $(A_\red)_f=0$ as well.
+  Then there is an isomorphism of presheaves $\phi:\O_{\Spec (A_\red)}\to\wtilde{(\O_{\Spec A})}_\red$ given on a the distinguished affine opens by $(A_\red)_f\iso (A_f)_\red$.
+  Hence, $\wtilde{(\O_{\Spec A})}_\red$ is itself a sheaf, and
+  \begin{align*}
+    (\Spec A)_\red \cong \Spec A_\red
+  \end{align*}
+  is an affine scheme.
+
+  (2.3b) gives a natural map of affine schemes
+  \[
+    (f,f^\sharp):\Spec A_\red\to \Spec A
+  \] 
+  induced by the natural projection $\pi:A\surj A_\red$.
+  The map $f:\Spec A_\red\to \Spec A$ of topological spaces is a homeomorphism onto its image $V(\fR(A))=\Spec A$, as desired.
+
+  Now, take $X$ to be an arbitrary scheme, and $\Spec A\cong U\subset X$ an open affine neighborhood.
+  We have
+  \begin{align*}
+    (U,\O_{X_\red}|_U) 
+    &\cong (\Spec A, \O_{(\Spec A)_\red}) \\
+    &\cong (\Spec (A_\red), \O_{\Spec (A_\red)})
+  \end{align*}
+  is affine, so that $X_\red$ is a scheme.
+  It suffices to supply a map $X_\red\to X$ which is a homeomorphism on topological spaces.
+
+  Take an open cover $\{\Spec A_i\cong U_i\subset X\}_{i\in I}$ of $X$.
+  The affine case gives us maps $\vphi_i:\Spec (A_i)_\red\to \Spec A_i$.
+  For $i,j\in I$, the affine communication lemma gives a cover of $U_{ij}$ by $D(f_k)$ which are distinguished affine in both $A_i,A_j$.
+  Since $\O_X(D(f_k))\cong (A_i)_{f_k}\cong (A_j)_{f_k}$, the restrictions 
+  \begin{align*}
+    &\vphi_i|_{D(f_k)}:D(f_k)_\red\to D(f_k), \\
+    &\vphi_j|_{D(f_k)}:D(f_k)_\red\to D(f_k)
+  \end{align*}
+  are induced by the same ring map $\O_X(D(f_k))\epi \O_X(D(f_k))_\red$, and are hence equal by (2.3).
+  We proceed by making use of the following lemma.
+
+  \begin{lemma}
+    For any schemes $(X,\O_X)$ and $(Y,\O_Y)$, $U\mapsto \Hom_{\Sch}((U,\O_X|_U),(Y,\O_Y))$ defines a sheaf of sets.
+  \end{lemma}
+
+  \begin{proof}
+    Fix a cover $U_i$ of $X$, and take maps $(f_i,f_i^\sharp):(U_i,\O_X|_{U_i})\to (Y,\O_Y)$ such that $(f_i,f_i^\sharp)|_{U_{ij}}=(f_j,f_j^\sharp)_{U_{ij}}$.
+    That is, $f_i|_{U_{ij}}=f_j|_{U_{ij}}$, and the sheaf maps 
+    \[
+      f_i^\sharp|_{U_{ij}},f_j^\sharp|_{U_{ij}}:U_{ij}\to (f_i|_{U_{ij}})_*\O_Y%=(f_j|_{U_{ij}})_*\O_Y
+    \]
+    coincide.
+    It is elementary to show that $U\mapsto \Hom_{\Top}(U,Y)$ is a sheaf of sets, whence the $f_i:U_i\to Y$ glue to a unique continuous map $f:X\to Y$.
+  By (Ex. 1.15), $\sHom(\O_X,f_*\O_Y)$ is a sheaf, so the $f_i^\sharp:\O_X|_{U_i}\to (f_i)_*\O_Y$ glue to a unique sheaf morphism $f^\sharp:O_X\to f_*\O_Y$.
+  The morphism $f^\sharp_x:\O_{X,x}\to (f_*\O_Y)_x$ is determined locally, and is thus a local morphism by locality of the $f_i$.
+  Hence, our morphisms of locally ringed spaces $(f_i,f_i^\sharp)$ glue to a unique morphism of locally ringed spaces $(f,f^\sharp):(X,\O_X)\to (Y,\O_Y)$, as desired.
+  \end{proof}
+
+  Composing of the inclusion $D(f_k)\inc U_{ij}$, uniqueness of gluing implies that $\vphi_i|_{U_{ij}}:(U_{ij})_\red\inc U_{ij}$ and $\vphi_j|_{U_{ij}}:(U_{ij})_\red\inc U_{ij}$ coincide.
+  Composing our $\vphi_i:\Spec (A_i)_\red\to \Spec A_i$ with the inclusion $\Spec A_i\inc Y$, existence supplies us with our natural sheaf map $\vphi:X_\red\to X$, as desired.
+  % (Ex. 1.15) itself gives us that $\sHom(\O_{X_\red},\vphi_*\O_X)$ is a sheaf.
+  % Then uniqueness of gluing implies $\vphi_i^\sharp|_{U_{ij}}=\vphi_j^\sharp|_{U_{ij}}$, whence existence supplies us with our sheaf map $\vphi^\sharp:\O_{X_\red}\to \vphi_*X$.
+
+  Let $\psi_i:=\vphi_i^{-1}:\Spec A_i\to \Spec (A_i)_\red$ be the inverse maps on the underlying topological spaces.
+  Then
+  \[
+    \psi_i|_{U_{ij}}=(\vphi_i|_{U_{ij}})^{-1} = (\vphi_j|_{U_{ij}})^{-1}= \psi_j|_{U_{ij}}
+  \] 
+  for all $i,j\in I$, so that the $\psi_i$ glue to a continuous map $\psi:\Spec A\to (\Spec A)_\red$.
+  Then 
+  \[
+    (\vphi\circ\psi)|_{U_i}=\psi_i\circ\phi_i=\id_{\Spec A_i}
+  \]
+  for all $i\in I$ implies that $\vphi\circ \psi=\id_X$, and similarly we conclude $\psi\circ \vphi=\id_{X_\red}$.
+  Hence, $\vphi:X_\red\to X$ is a homeomorphism on the underlying topological spaces.
+
+  (c) Suppose first that $Y\cong \Spec A$ is affine.
+  Then (Ex. 2.4) gives a bijection between scheme maps $f:X\to \Spec A$ and ring maps $\vphi:=\Gamma(X,f^\sharp):A\to \Gamma(X,\O_X)$.
+  Note that the natural map $\Spec A_\red\inc \Spec A$ corresponds to the projection $\pi:A\epi A_\red$.
+  $X$ reduced gives us $\vphi(\fR(A))\subset\fR(\Gamma(X,\O_X))=0$, whence the universal property of quotients supplies us with a unique morphism $\psi:A_\red\to \Gamma(X,\O_X)$ such that $\psi\circ \pi= \vphi$.
+  Under the correspondence, this $\psi$ corresponds to a unique map $g:X\to \Spec A_\red$ such that the diagram
+  \[
+    \begin{tikzcd}
+    X\ar[dr,"g"']\ar[r,"f"] & \Spec A\\
+                & \Spec A_\red\ar[u,hook]
+    \end{tikzcd}
+  \] 
+  commutes, as desired.
+
+  Let $f:X\to Y$, take a cover $\{U_i\cong \Spec A_i\}$ of $Y$, and let $V_i:= f^{-1}(\Spec A_i)$.
+  Then for each $f_i:=f|_{V_i}:V_i\to \Spec A_i$, there is a unique scheme morphism $g_i:V_i\to \Spec (A_i)_\red$ making the following diagram commute.
+  \[
+    \begin{tikzcd}
+    V_i\ar[dr,"g_i"']\ar[r,"f_i"] & \Spec A_i\\
+                & \Spec (A_i)_\red\ar[u,hook]
+    \end{tikzcd}
+  \] 
+  Cover $U_{ij}$ by distinguished affines $D(a_k)$. 
+  The maps $g_i|_{D(f^\sharp *(a_k))}$ and $g_j|_{D(f^\sharp(a_k))}$ satisfy the given universal property for $f|_{D(f^\sharp(a_k))}:D(f^\sharp(a_k))\to D(a_k)$, where $D(a_k)\cong \Spec (A_i)_{a_k}$ is affine.
+  Hence, they are equal by the first case.
+
+  Composing with our inclusion, we have unqiue maps $g_i':V_i\to \Spec (A_i)_\red\inc Y_\red$ which restrict to the $g_i$.
+  The proceeding lemma allows us to glue our $g_i'$ to a unique map $g:X\to Y_\red$ such that $g|_{V_i}=g_i:V_i\to \Spec (A_i)_\red$.
+  Let $j_i:\Spec (A_i)_\red\inc \Spec A_i$ and $j:Y_\red\inc Y$ be the natural maps.
+  If $g':X\to Y_\red$ has $f=j\circ g'$, then $f_i=j_i \circ g'|_{V_i}$ implies $g'|_{V_i}=g|_{V_i}$, whence $g'=g$.%, whence $g_i'=V_i\xrightarrow{g'|_{V_i}}\Spec A_\red\inc Y_\red$, so that $
+  We conclude that $g:X\to Y_\red$ is in fact the unique map with this property, as desired.
+\end{proof}
+
 \begin{enumerate}
 	\item[2.4.] {
       Let $A$ be a ring, and let $(X,\O_X)$ be a scheme.
       Given a morphism $f:X\to\Spec A$, we have an associated map $f^\sharp:\O_{\Spec A}\to f_*\O_X$ on sheaves.
-      Taking Global sections, we obtain a homomorphism $A\to\Gamma(X,\O_X)$.
+      Taking global sections, we obtain a homomorphism $A\to\Gamma(X,\O_X)$.
       Thus, there is a natural map
       \begin{align*}
         \alpha:\Hom_{\Sch}(X,\Spec A)\to \Hom_{\Ring}(A,\Gamma(X,\O_X)).
@@ -284,23 +410,32 @@
       For any point $x\in X$, let $\O_x$ be the local ring at $x$, and $m_x$ its maximal ideal.
       We define the \emph{residue field} of $x$ on $X$ to be the field $k(x)=\O_x/m_x$.
       Now, let $K$ be any field.
-      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to giving a point $x\in X$ and an inclusion map $k(x)\to K$.
+      Show that to give a morphism of $\Spec K$ to $X$, it is equivalent to giving a point $x\in X$ and an inclusion $k(x)\inj K$.
     }
 \end{enumerate}
 
 \begin{proof}
   Note that $\Spec K=\{(0)\}$ is singleton, so a morphism $f:\Spec K\to X$ is a point $x=f((0))\in X$, as well as the information $f^\sharp(U): \O_X(U)\to K$ for every $x\in U\subset X$ open.
-  Restriction is the identity on $\O_{\Spec K}$, so this defines a map $f^\sharp_x:\O_x\to K$.
-  Since each element of $m_x$ is not invertible, this gives us a map $\ol{f^\sharp_x}:k(x)\to K$.
+  There is a single non-empty open set $\{(0)\}=\Spec K$ $\O_{\Spec K}$, so this gives us a map $f^\sharp_x:\O_{X,x}\to K$.
+  Since $f^\sharp_x$ is a local morphism, we have ${f^\sharp_x}^{-1}(\m_K)\subset\m_{\O_{X,x}}$.
+  Hence, $f^\sharp_x$ descends to a map $\ol{f^\sharp_x}:k(x)\to K$.
   It is a morphism of fields, and thus an injection.
 
-  Conversely, suppose we have an inclusion $k(x)\hookrightarrow K$.
+  Conversely, suppose we have an inclusion $k(x)\mono K$.
   Then, for each $x\in U\subset X$, we have a map 
   \[
-    f^\sharp(U):\O(U)\to \O_x\to k(x)\hookrightarrow K.
+    f^\sharp(U):\O(U)\to \O_{X,x}\epi k(x)\mono K.
   \]
-  These maps play well with restriction, thus giving us a morphism $f^\sharp:\O_X\to \O_{\Spec K}$ of sheaves.
-  Defining $f:\Spec K\to X:(0)\mapsto x$ gives us a morphism $(f,f^\sharp):\Spec K\to X$ of schemes, as desired.
+  These maps commute with restriction, thus giving us a morphism $f^\sharp:\O_X\to \O_{\Spec K}$ of sheaves.
+  Defining $f:\Spec K\to X:(0)\mapsto x$ gives us a morphism $(f,f^\sharp):\Spec K\to X$ of ringed spaces.
+  It suffices to show that $f^\sharp_x:\O_{X,x}\to K$ is local.
+  We have 
+  \begin{align*}
+    {f^\sharp_x}^{-1}(\m_K)
+    &= \ker(\O_{X,x} \epi k(x))
+    = \m_{\O_{X,x}},
+  \end{align*}
+  as desired.
 \end{proof}
 
 \begin{enumerate}

@@ -19,6 +19,7 @@
 
 \newtheorem*{lemma}{Lemma}
 
+\newcommand{\vepsilon}{\varepsilon}
 
 \begin{document}
 
@@ -438,14 +439,18 @@
   as desired.
 \end{proof}
 
-\begin{enumerate}
-	\item[2.8.] {
-      $(*)$ Let $X$ be a scheme.
-      For any point $x\in X$, we define the \emph{Zariski tangent space $T_x$} at $x\in X$ to be the dual of the $k(x)$-vector space $m_x/m_x^2$.
-      Now, assume that $X$ is a scheme over a field $k$, and let $k[\epsilon]/\epsilon^2$ be the \emph{ring of dual numbers} over $k$.
-      Show that to give a $k$-morphism of $\Spec k[\epsilon]/\epsilon^2$ to $X$ is equivalent to giving a point $x\in X$, \emph{rational over $k$} (i.e. such that $k(x)=k$), and an element of $T_x$.
-    }
-\end{enumerate}
+% \begin{enumerate}
+% 	\item[2.8.] {
+%       Let $X$ be a scheme.
+%       For any point $x\in X$, we define the \emph{Zariski tangent space $T_x$} at $x\in X$ to be the dual of the $k(x)$-vector space $m_x/m_x^2$.
+%       Now, assume that $X$ is a scheme over a field $k$, and let $k[\vepsilon]/\vepsilon^2$ be the \emph{ring of dual numbers} over $k$.
+%       Show that to give a $k$-morphism of $\Spec k[\vepsilon]/\vepsilon^2$ to $X$ is equivalent to giving a point $x\in X$, \emph{rational over $k$} (i.e. such that $k(x)=k$), and an element of $T_x$.
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+%   Note that ideals of $k[\vepsilon]/\vepsilon^2$ are in correspondence with ideals of $k[\vepsilon]$ contained in $(\vepsilon^2)$.
+% \end{proof}
 
 \begin{enumerate}
   \item[2.9.] {
@@ -509,18 +514,18 @@
   Any generic point $\zeta'$ of $Z$ must also be a generic point of each of the $U_i\cap Z$, so uniqueness follows from the affine case.
 \end{proof}
 
-\begin{enumerate}
-  \item[2.10.] {
-      Describe $\Spec \R[x]$. How does its topological space compare to the set $\R$? To $\CC$?
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
+% \begin{enumerate}
+%   \item[2.10.] {
+%       Describe $\Spec \R[x]$. How does its topological space compare to the set $\R$? To $\CC$?
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
 
 \begin{enumerate}
   \item[2.13.] {
-      $(*)$ A topological space is \emph{quasi-compact} if every open cover has a finite sub-cover.
+      A topological space is \emph{quasi-compact} if every open cover has a finite sub-cover.
       \begin{enumerate}
         \item Show that a topological space $X$ is noetherian if and only if every open subset is quasi-compact.
         \item If $A$ is a noetherian ring, show that $\Sp(\Spec A)$ is a noetherian topological space.
@@ -772,7 +777,21 @@
 \end{enumerate}
 
 \begin{proof}
-  (a) Let 
+  (a) Let $f_i:=f|_{U_i}:f^{-1}(U_i)\to U_i$, and take inverses $g_i=f_i^{-1}:U_i\to f^{-1}(U_i)$.
+  We have
+  \[
+    g_i|_{U_{ij}}=f_i^{-1}|_{U_{ij}}= f_j^{-1}|_{U_{ij}}=g_j|_{U_{ij}},
+  \] 
+  so the maps agree on overlap.
+  Hence, they glue to a unique map $g:Y\to X$ such that 
+  \begin{align*}
+    (g\circ f)|_{f^{-1}(U_i)}
+      &=g_i\circ f_i =\id_{f^{-1}(U_i)}, \\
+    (f\circ g)|_{U_i} 
+      &=f_i\circ g_i=\id_{U_i}.
+  \end{align*}
+  Then $g\circ f=\id_X$ and $f\circ g=\id_Y$ by uniqueness of gluing, so that $g=f^{-1}$.
+  We conclude that $f$ is indeed an isomorphism.
 
   (b) If $X$ is affine, then we can take $(f_1,\ldots, f_r)=(1)$ to be a finite set of generators of the unit ideal, so that $X_{f_i}=D(f_i)$ are distinguished affines covering $X$.
   

@@ -229,9 +229,9 @@
   \item[1.20.] {
       \emph{Subsheaf with Supports}.
       Let $Z$ be a closed subset of $X$, and let $\F$ be a sheaf on $X$.
-      We define $\Gamma_Z(X,\F)$ to be the subgroup of $\Gamma(X,\F)$ consisting of all sections whose support (Ex. 1.14) is containing in $Z$.
+      We define $\Gamma_Z(X,\F)$ to be the subgroup of $\Gamma(X,\F)$ consisting of all sections whose support (Ex. 1.14) is contained in $Z$.
       \begin{enumerate}
-        \item Show that the presheaf $V\mapsto \Gamma_{Z\cap V}(V,\F|_Y)$ is a sheaf.
+        \item Show that the presheaf $V\mapsto \Gamma_{Z\cap V}(V,\F|_V)$ is a sheaf.
           It is called the subsheaf of $\F$ with supports in $Z$ and is denoted by $\H_Z^0(\F)$.
         \item Let $U=X-Z$, and let $j:U\to X$ be the inclusion.
           Show there is an exact sequence of sheaves on $X$
@@ -244,41 +244,41 @@
 \end{enumerate}
 
 \begin{proof}
-  (a)
+  (a) It suffices to show that the gluing $s\in \Gamma(V,\F|_V)$ of sections $s_i\in \Gamma(V_i, \F|_V)$ with $\Supp s_i\subset V_i\cap Z$ must have $\Supp s\subset V\cap Z$.
+  Then $s_x=(s_i)_x$ for all $x\in U_i$ gives us 
+  \[
+    \Supp s = \bigcup_i \Supp s_i\subset \bigcup_i V_i\cap Z=V\cap Z,
+  \]
+  as desired.
+
+  (b) Note that
+  \[
+    \rho(V)= \rho^V_{V\cap U}:\F(V)\to\F(V\cap U) = \F|_U(j^{-1}(V)) = j_*(\F|_U),
+  \]
+  so $\rho$ is indeed surjective if $\F$ is flasque.
+  Now, let $\F$ be arbitrary, take $x\in X$, and consider
+  \[
+    0\to \H_Z^0(\F)_x\inc \F_x\xrightarrow{\rho} j_*(\F|_U)_x.
+  \] 
+  %We have $s\in \H_Z^0(\F)$ if and only if $s_x$ for all $x\in U$.
+  Suppose first that $x\in U$.
+  Then $\H_Z^0(\F)=0$, so it suffices to show that $\F_x=j_*(\F|_U)_x$.
+  We have that
+  \begin{align*}
+    \rho_x 
+      &=\dlim_{V\ni x}\rho_{V\cap U}^V:\F(V)\to \F(V\cap U) \\
+      &= \dlim_{U\supset V\ni x}\id_\F(V):\F(V)\to \F(V) \\
+  \end{align*}
+  is a direct limit of isomorphisms, and hence an isomorphism.
+
+  Now, take $x\in Z$, and let $(s,V)\in\F_x$.
+  We have $\rho_x(s,V)=0$ iff there exists some open set $x\in W\subset V$ with $s|_{W\setminus Z}=0$.
+  If $(s,V)\in \H^0_Z(\F)_x$, then we can take $x\in W\subset V$ such that $s|_W\in \H^0_Z(\F,W)$.
+  Then $\Supp s|_W\subset Z$ implies $s|_{W\setminus Z}=0$, as desired.
+  Conversely, if $s|_{W\setminus Z}=0$, then $s|_W\in \H^0_Z(\F,W)$ gives us $(s,V)=(s|_W,W)\in \H^0_Z(\F)_x$.
+  We conclude that the sequence is, indeed, exact.
 \end{proof}
 
-% \begin{enumerate}
-%   \item[17.] {
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-%   \item[18.] {
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-%   \item[19.] {
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
-% \begin{enumerate}
-%   \item[20.] {
-%     }
-% \end{enumerate}
-% 
-% \begin{proof}
-% \end{proof}
-% 
 % \begin{enumerate}
 %   \item[21.] {
 %     }

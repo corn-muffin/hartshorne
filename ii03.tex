@@ -4,7 +4,8 @@
 
 %\graphicspath{ {./diagrams/} }
 
-\newtheorem*{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}{Lemma}
 
 \begin{document}
 
@@ -38,7 +39,7 @@
   To proceed, we must first prove the following lemma.
 
   \begin{lemma}
-    Fix a sheaf morphism $f:X\to Y$ of finite type, $\Spec A\cong U\subset X$, $\Spec B\cong V\subset Y$, $f(U)\subset Y$ as above, and denote the map of rings associated to $f|_U:U\to V$ by $\vphi:B\to A$.
+    Fix a sheaf morphism $f:X\to Y$ which is locally of finite type, $\Spec A\cong U\subset X$, $\Spec B\cong V\subset Y$, $f(U)\subset Y$ as above, and denote the map of rings associated to $f|_U:U\to V$ by $\vphi:B\to A$.
     There exist $f_{11},\ldots, f_{rs}\in A$ and $g_1,\ldots, g_r\in B$ such that
     \begin{align*}
       \Spec A &= D(f_{11})\cup\cdots \cup D(f_{rs}), \\
@@ -159,25 +160,60 @@
    \begin{align*}
      V&= \bigcup_{i,j}D(g_{ij}) = \bigcup_{1\leqs i,j\leqs n}D(g_{ij})
    \end{align*}
-   by quasi-compactness of $V_i$.
-   A finite union of compact sets is compact, so it suffices to show the following lemma.%that $f^{-1}(D(g))$ is compact for each $g\in B_i$.
+   by quasi-compactness of $V$.
+   Note that $D(g_{ij})=(V_i)_{g_{ij}}$, in the sense of (Ex. 2.16).
+   Thus, we proceed via two brief lemmas.
 
    \begin{lemma}
-     Let $f:X\to Y$ be a map of schemes, and $\Spec A\cong U\subset Y$ an affine open such that $f^{-1}(U)$ is quasi-compact.
-     For any $h\in A$, $f^{-1}(D(h))$ is also quasi-compact.
+     Let $f:X\to Y$ be a map of schemes.
+     For any $g\in \Gamma(\O_Y,Y)$, we have
+     \[
+       f^{-1}(Y_g)\cong X_{f^\sharp(g)}.
+     \] 
    \end{lemma}
 
    \begin{proof}
-     Take a cover $\{U_\alpha\}_\alpha$ of $f^{-1}(D(h))$, and note that
-     \begin{align*}
-       f
-     \end{align*}
+     Recall that
+     \[
+       Y_g = \{y\in Y~:~ f_y\notin \m_y\subset \O_{Y,y}\}.
+     \] 
+     Thus, we can write
+     \[
+       f^{-1}(Y_g) = \{x\in X ~:~f_{f(x)}\notin \m_{f(x)}\subset \O_{Y,f(x)}\}.
+     \] 
+     $f^\sharp_x:\O_{Y,f(x)}\to \O_{X,x}$ is a local morphism, so ${f^\sharp_x}^{-1}(\m_x)=\m_{f(x)}$.
+     Hence, $h_{f(x)}\in \m_{f(x)}$ if and only if $f^\sharp_x(h_{f(x)})=f^\sharp(h)_x\in \m_x$.
+     This gives us
+     \[
+       f^{-1}(Y_g)=X_{f^\sharp(g)},
+     \] 
+     as desired.
    \end{proof}
+
+   \begin{lemma}
+     Let $f:X\to Y$ be a map of schemes, and $\Spec B\cong V\subset Y$ an affine open with quasi-compact preimage $U:=f^{-1}(V)$.
+     For any $g\in B$, $f^{-1}(D(g))$ is quasi-compact.
+   \end{lemma}
+
+   \begin{proof}
+     Take a finite cover $\{U_i\}$ of $U$ by open affines.
+     The proceeding lemma and (Ex. 2.16a) give us that
+     \[
+       f^{-1}(D(g))\cap U_i = U_{f^\sharp(g)}\cap U_i
+     \] 
+     is affine.
+     Then 
+     \begin{align*}
+       f^{-1}(D(g)) &= \bigcup_{i=1}^n f^{-1}(D(g))\cap U_i
+     \end{align*}
+     is a finite union of quasi-compact spaces, and is thus quasi-compact.
+   \end{proof}
+   
+   The above lemma gives us that each $f^{-1}(D(g_{ij}))\subset f^{-1}(V_i)$ is quasi-compact, whence $f^{-1}(V)$ is quasi-compact, as desired.
  \end{proof}
  
  \begin{enumerate}
  	\item[3.3.] {
-       $(*)$
        \begin{enumerate}
          \item Show that a morphism $f:X\to Y$ is of finite type if and only if it is locally of finite type and quasi-compact.
          \item Conclude from this that $f$ is of finite type if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ can be covered by a finite number of open affines $U_j=\Spec A_j$, where each $A_j$ is a finitely generated $B$-algebra.
@@ -185,10 +221,21 @@
        \end{enumerate}
      }
  \end{enumerate}
+
+ \begin{proof}
+   (a) One direction is clear.
+   Suppose $f$ is locally of finite type and quasi-compact, and fix an open affine cover of $\{V_i\cong \Spec B_i\}$.
+   By (Ex. 3.1) and (Ex. 3.2), each $f^{-1}(V_i)$ is quasi-compact and covered by open affines $U_{ij}\cong \Spec A_{ij}$ such that $A_{ij}$ is a finitely generated $B_i$-algebra.
+   Hence, the $f^{-1}(V_i)$ are covered by finitely many such $U_{ij}$, and we're done.
+
+   (b) This is a corollary of (a), (Ex. 3.1), and (Ex. 3.2).
+
+   (c) This follows from Lemma 1 and Lemma 2, which were given in the proof of (Ex. 3.1).
+ \end{proof}
  
  \begin{enumerate}
    \item[3.4.] {
-       Show that a morphism $f:X\to Y$ is finite if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)$ is affine, equal to $\Spec A$, where $A$ is a finite $B$-module.
+       Show that a morphism $f:X\to Y$ is finite if and only if for \emph{every} open affine subset $V=\Spec B$ of $Y$, $f^{-1}(V)\cong \Spec A$ is affine with $A$ a finite $B$-module.
      }
  \end{enumerate}
  
@@ -217,8 +264,8 @@
       Recall that in the category of varieties, the Zariski topology on the product of two varieties is not equal to the product topology.
       Now, we see that in the category of schemes, the underlying point set of a product of schemes is not even the product set.
       \begin{enumerate}
-        \item Let $k$ be a field, and let $\A^1_k=\Spec k[x]$ be the affine line over $k$.
-          Show that $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$, and show that the underlying point set of the product is not the product of the underlying point set of the factors (even if $k$ is algebraically closed).
+        \item Let $k$ be a field, and let $\AA^1_k=\Spec k[x]$ be the affine line over $k$.
+          Show that $\AA_k^1\times_{\Spec k}\AA_k^1\cong \AA_k^2$, and show that the underlying point set of the product is not the product of the underlying point set of the factors (even if $k$ is algebraically closed).
         \item Let $k$ be a field with $s$ and $t$ indeterminates over $k$.
           Then $\Spec k(s)$, $\Spec k(t)$, and $\Spec k$ are all one point spaces.
           Describe the product scheme $\Spec k(s)\times_{\Spec k}\Spec k(t)$.
@@ -227,12 +274,12 @@
 \end{enumerate}
 
 \begin{proof}
-  (a) We have that $k[x]\otimes_k k[x]\cong k[x,y]$ as $k$-algebras, so $\A_k^1\times_{\Spec k}\A_k^1\cong \A_k^2$ as schemes over $k$.
-  Fix $k=\CC$, and consider the generic points of $\A_k^2$.
-  %If there were a bijection between $\A_k^2$ and the set theoretic product, then this would give us a bijection of generic points, and thus a bijection of irreducible components.
-  %There is an injection of point sets $f:\A_k^1\times\A_k^1\to \A_k^2$ given by $(\p,\q)\mapsto \p^e + \q^e$.
+  (a) We have that $k[x]\otimes_k k[x]\cong k[x,y]$ as $k$-algebras, so $\AA_k^1\times_{\Spec k}\AA_k^1\cong \AA_k^2$ as schemes over $k$.
+  Fix $k=\CC$, and consider the generic points of $\AA_k^2$.
+  %If there were a bijection between $\AA_k^2$ and the set theoretic product, then this would give us a bijection of generic points, and thus a bijection of irreducible components.
+  %There is an injection of point sets $f:\AA_k^1\times\AA_k^1\to \AA_k^2$ given by $(\p,\q)\mapsto \p^e + \q^e$.
   A bijection of sets would give us a bijection of generic points, and thus a bijection of irreducible polynomials.
-  This is clearly false, so that $\A_k^2\neq \A_k^1\times \A_k^1$ as sets.
+  This is clearly false, so that $\AA_k^2\neq \AA_k^1\times \AA_k^1$ as sets.
 
   (b) Fix $A=k(s)\otimes_k k(t)$, so that the product scheme is given by $X=\Spec A$.
   Consider the ideal $\p=(s\otimes 1 +1\otimes t)\subset A$.
@@ -360,7 +407,7 @@
               & \Spec(B/\b)\ar[u,"\pi_B^*"'] \ar[l,"\ol{f}^*"]
       \end{tikzcd}
     \] 
-    By Exercise 2.18, $\pi_A^*$ and $\pi_B^*$ are homeomorphisms onto their images $V(\a)$ and $V(\b)$, so that the result follows.
+    By (Ex. 2.18), $\pi_A^*$ and $\pi_B^*$ are homeomorphisms onto their images $V(\a)$ and $V(\b)$, so that the result follows.
   \end{proof}
 
   Finally, we set $X=\Spec B$, $Y= \Spec A$, and fix $y=\p\in \Spec A$.
@@ -371,7 +418,7 @@
        &\cong \Spec(B_{A_\p}/\p B_{A_\p}) \\
        &\cong V(\p B_{A_\p}),
   \end{align*}
-  where the last equality follows from Exercise 2.18 as before.
+  where the last equality follows from (Ex. 2.18) as before.
   Then equalities
   \begin{align*}
        &\cong V(\vphi_\p (\m_\p)B_{A_\p}) \\
@@ -379,7 +426,8 @@
        &\cong f_\p^{-1}(\m_\p) \\
        &\cong f^{-1}(\p).
   \end{align*}
-  follow from minimality of the extension of an ideal, maximality of $\m_\p\lideal A_\p$, and the second lemma respectively.\footnote{I originally wrote this out a while ago, so I hadn't written it up again, let alone in simplied form, when we had our meeting. For some reason I thought (b) was the interesting part lol.}
+  follow from minimality of the extension of an ideal, maximality of $\m_\p\lideal A_\p$, and the second lemma respectively.
+  %\footnote{I originally wrote this out a while ago, so I hadn't written it up again, let alone in simplied form, when we had our meeting. For some reason I thought (b) was the interesting part lol.}
 
   %(a) The affine case is Ex. 3.20 in Atiyah-MacDonald. %\footnote{I did it on paper, and it's a tad boring to write out. Just a series of commutative diagrams, and a repeat argument from Ex 2.1 of Hartshorne.} 
   Fix affine open covers $\{U_i=\Spec A_i\}$ of $X$ and $\{V_j=\Spec B_j\}$ of $Y$.
@@ -424,16 +472,16 @@
   \begin{align*}
     A_\eta &\cong \frac{k[s,t]}{(s-t^2)}\otimes_{k[s]}\frac{k[s]_{(0)}}{(0)k[s]_{(0)}} \\
            &\cong k[t]\otimes_{k[t^2]}k(t^2) \\
-           &\cong k(s)[\sqrt{s}].
+           &\cong k(s)[\sqrt{s}] \\
+           &\cong k(\sqrt{s}).
   \end{align*}
-  Then $A_\eta$ is a PID, so its only ideals are of the form $(f(\sqrt{s}))$ for $f(\sqrt{s})= f_1(s)+f_2(s)\sqrt{s}$.
-  Then $f\ol{f}(\sqrt{s})\in k(s)$ defined in the obvious manner is invertible whenever $f\neq 0$, so $(f(\sqrt{s}))=0,A_\eta$ gives us that $\Spec A_\eta$ is singleton.
-  Furthermore, $(A_\eta)_{(0)}\cong k(\sqrt{s})$, which is a degree two extension over $k(\eta)=k(s)$, as desired.
+  $A_\eta$ is a field, so $\Spec A_\eta$ is singleton.
+  Furthermore, it is a degree two extension over $k(\eta)=k(s)$, as desired.
 \end{proof}
 
 \begin{enumerate}
 	\item[3.11.] {
-     $(*)$ \emph{Closed Subschemes.}
+     \emph{Closed Subschemes.}
      \begin{enumerate}
        \item Closed immersions are stable under base extension: if $f:Y\to X$ is a closed immersion, and if $X'\to X$ is any morphism, then $f':Y\times_X X' \to X'$ is also a closed immersion.
        \item If $Y$ is a closed subscheme of an affine scheme $X=\Spec A$, then $Y$ is also affine, and in fact $Y$ is the closed subscheme determined by a suitable ideal $\a\subset A$ as the image of the closed immersion $\Spec A/\a\to \Spec A$.
@@ -447,12 +495,23 @@
          We express this property by saying that the reduced induced structure is the smallest subscheme structure on a closed subset.
        \item Let $f:Z\to X$ be a morphism.
          Then there is a unique closed subscheme $Y$ of $X$ with the following property:
-         the morphism $f$ factors through $Y$, and if $Y'$ is any other closed subscheme of $X$ through with $f$ factors, then $Y\to X$ factors throuogh $Y'$ also.
+         the morphism $f$ factors through $Y$, and if $Y'$ is any other closed subscheme of $X$ through with $f$ factors, then $Y\to X$ factors through $Y'$ also.
          We call $Y$ the \emph{scheme-theoretic image} of $f$.
          If $Z$ is a reduced scheme, then $Y$ is just the reduced induced structure on the closure of the image $f(Z)$.
      \end{enumerate}
     }
 \end{enumerate}
+
+\begin{proof}
+  (a) Take an affine open cover $\{X_i\cong \Spec A_i\}$ of $X$ and let $Y_i\cong \Spec B_i$, $X'_i\cong \Spec C_i$ be the inverse images of the $X_i$.
+  This is wrong I think!
+  $f|_{Y_i}:Y_i\to X_i$ corresponds to a map $\phi_i:$
+  Then $Y\times_XX'$ is the gluing of the open affine sets 
+  \[
+    U_i:=Y_i\times_{X_i}X'_i\cong\Spec (B_i\otimes_{A_i}C_i),
+  \]
+  and $f'|_{U_i}:\Spec(B_i\otimes_{A_i}C_i)\to \Spec C_i$ corresponds to the map $\phi$
+\end{proof}
  
 \begin{enumerate}
  	\item[3.12.] {
@@ -540,14 +599,14 @@
 
 \begin{enumerate}
   \item[3.14.] {
-      $(*)$ If $X$ is a scheme of finite type over a field, show that the closed points of $X$ are dense.
+      If $X$ is a scheme of finite type over a field, show that the closed points of $X$ are dense.
       Give an example to show that this is note true for arbitrary schemes.
     }
 \end{enumerate}
 
 \begin{enumerate}
   \item[3.15.] {
-      $(*)$ Let $X$ be a scheme of finite type over a field $k$ (not necessarily algebraically closed).
+      Let $X$ be a scheme of finite type over a field $k$ (not necessarily algebraically closed).
       \begin{enumerate}
         \item Show that the following three conditions are equivalent (in which case we say that $X$ is \emph{geometrically irreducible}).
           \begin{enumerate}
@@ -569,11 +628,35 @@
 \end{enumerate}
 
 \begin{enumerate}
+  \item[3.16.] {
+      \emph{Noetherian Induction.}
+      Let $X$ be a noetherian topological space, and let $\P$ be a property of closed subsets of $X$.
+      Assume that for any closed subset $Y$ of $X$, if $\P$ holds for every proper closed subset of $Y$, then $\P$ holds for $Y$. 
+      (In particular, $\P$ must hold for the empty set.)
+      Then $\P$ holds for $X$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $\Sigma$ be the poset of closed subsets of $X$ such that $\P$ holds, which is nonempty since $\0\in \Sigma$.
+  Let $Y_1\subset Y_2\subset \cdots$ be a chain in $\Sigma$.
+  If any 
+\end{proof}
+
+\begin{enumerate}
+  \item[3.17.] {
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
   \item[3.20.] {
-      $(*)$ \emph{Dimension}. Let $X$ be an integral scheme of finite type over a field $k$ (not necessarily closed).
+      \emph{Dimension}. Let $X$ be an integral scheme of finite type over a field $k$ (not necessarily algebraically closed).
       Use results about varieties to prove the following.
       \begin{enumerate}
-        \item For any closed point $p\in X$, $\dim X=\dim \O_P$, where for rings we always mean the Krull dimension.
+        \item For any closed point $p\in X$, $\dim X=\dim \O_p$, where for rings we always mean the Krull dimension.
         \item Let $K(X)$ be the function field of $X$.
           Then $\dim X=\trd K(X)/k$.
         \item If $Y$ is a closed subset of $X$, then $\codim(Y,X)=\inf{\dim \O_{X,p}|p\in Y}$.
@@ -587,7 +670,7 @@
 \end{proof}
 
 % \begin{enumerate}
-%   \item[2.13.] {
+%   \item[3.16.] {
 %     }
 % \end{enumerate}
 % 

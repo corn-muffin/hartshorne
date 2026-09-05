@@ -1,0 +1,259 @@
+\documentclass[12pt]{amsart} 
+
+\input{./latex-preamble/cm-preamble.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\renewcommand{\Mod}{\fr{Mod}}
+\renewcommand{\Coh}{\fr{Coh}}
+\renewcommand{\QCoh}{\fr{QCoh}}
+\renewcommand{\F}{{\mathscr F}}
+\renewcommand{\G}{{\mathscr G}}
+\renewcommand{\O}{{\sO}}
+\renewcommand{\L}{{\sL}}
+\renewcommand{\I}{{\sI}}
+\renewcommand{\A}{{\sA}}
+\renewcommand{\B}{{\sB}}
+\newcommand{\hd}{\mb{hd}}
+\newcommand{\pd}{\mb{pd}}
+\newcommand{\Ext}{\mb{Ext}}
+\newcommand{\sExt}{{\sE xt}}
+\newcommand{\wt}{\wtilde} % could cause conflicts. override locally if being annoying.
+
+
+\begin{document}
+
+{Hartshorne} \hfill {8-28-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.6, Week 1}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[6.1.] {
+      Let $(X,\O_X)$ be a ringed space, and let $\F',\F''\in \Mod(X)$.
+      An extension of $\F''$ by $\F'$ is a short exact sequence
+      \[
+        0\to \F'\to \F\to \F''\to 0
+      \] 
+      in $\Mod(X)$.
+      Two extensions are \emph{isomorphic} if there is an isomorphism of the short exact seuqences, inducing the identity maps on $\F'$ and $\F''$.
+      Given an extension as above, consider the long exact sequence arising from $\Hom(\F'',\cdot)$, in particular the map
+      \[
+        \delta:\Hom(\F'',\F'')\to \Ext^1(\F'',\F'),
+      \] 
+      and let $\xi\in \Ext^1(\F'',\F')$ be $\delta(1_{\F''})$.
+      Show that this process gives a one-to-one correspondence between isomorphism classes of extensions of $\F''$ by $\F'$, and elements of the group $\Ext^1(\F'',\F')$.
+      For more details, see, e.g., Hilton and Stammbach, Ch. III.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We define a map from $\Ext^1(\F'',\F')$ to extensions $0\to \F'\to \E\to \F''\to 0$ as follows.
+  Fix an injective resolution $0\to \F'\xrightarrow{d^{-1}} \I^\bullet$ of $\F'$ with maps $d^i:\I^i\to \I^{i+1}$, so that 
+  \begin{align*}
+    \Ext^1(\F'',\F') &\cong h^1(\Hom(\F'',\I^\bullet)) \\
+                     &\cong \frac{\ker d^1}{\im d^0}.
+  \end{align*}
+  Thus, we can regard an element $[\xi]\in \Ext^1(\F'',\F')$ as the class of a map $\xi:\F''\to \I^1$ with $d^1\xi=0$.
+  Fix such an element $[\xi]$ with representative $\xi$, and take the pullout $\P :=\I^0\times_{\I^1}\F''$ in the following diagram:
+  \[
+    \begin{tikzcd}
+      0\ar[r] &\F'\ar[r,"d^{-1}"]&\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
+              && \P\ar[u,"\gamma"]\ar[r,"\psi"']\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[u,"\xi"']
+    \end{tikzcd}
+  \] 
+  Then we have $d^0\phi =0$, so the universal property of $\P$ supplies a unique map $\phi:\F'\to \P$ such that the following diagram commutes:
+  \[
+    \begin{tikzcd}
+      0\ar[r] &\F'\ar[r,"d^{-1}"]&\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
+              &\F'\ar[ur, "d^{-1}"]
+              \ar[rr, bend right = 30,"0"']
+              \ar[r,dotted,"\exists!\phi"]
+              & \P\ar[u,"\gamma"]\ar[r,"\psi"]\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[u,"\xi"']
+    \end{tikzcd}
+  \] 
+  We will now show that $0\to \F'\xrightarrow{\phi}\P \xrightarrow\psi \F''\to 0$ is a short exact sequence.
+
+  $\phi$ is monic since $d^{-1}=\gamma\phi$ is monic, and $\psi\phi=0$ by construction.
+  To show exactness at the middle, it suffices to show that $\im\phi$ satisfies the universal property of $\ker\psi$.
+  Let $\alpha:\A\to \P$ be a morphism such that $\psi\alpha=0$.
+  It suffices to show that $\alpha$ factors through $\im\phi$.
+  Recall that $\phi, d^{-1}$ are monic and $\F'\to \I^0\to \I^1$ is exact, so
+  \[
+    \im\phi \cong \coim\phi\cong  \F'\cong \im d^{-1}\cong \ker d^0.
+  \] 
+  Then $d^0\gamma\alpha = \xi\psi\alpha = 0$, so the universal property of kernels supplies a unique map $\wtilde \alpha:\A\to \F'$ such that $\gamma\alpha = d^{-1}\wtilde \alpha$.
+  Further, $\gamma \phi\wtilde\alpha = \gamma\alpha$ and $\psi\phi\wtilde \alpha=0=\psi\alpha$ imply that $\alpha=\phi\wtilde\alpha$ via universal property of pullbacks.
+  \[
+    \begin{tikzcd}
+      %&\im d^{-1}\ar[r,hook]
+      &\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
+       \F'\ar[ur,hook, "d^{-1}"]
+              %\ar[rrr, bend right = 30,"0"']
+              \ar[r,hook,"\phi"]
+              %&\im \phi\ar[r,hook]
+              & \P\ar[u,"\gamma"]\ar[r,"\psi"]\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[u,"\xi"'] \\
+              &\A\ar[u,"\alpha"]\ar[ul,dotted, "\exists!\wtilde \alpha"]\ar[ur,"0"']
+    \end{tikzcd}
+  \] 
+  Hence, the above diagram commutes, and $\wtilde\alpha$ is indeed unique since $\phi$ is monic.
+
+  Finally, we show that $\psi$ is epic.
+  $d^1\xi = 0$ allows us to factor $\xi$ through $\ker d^1=\im d^0$, giving us the following diagram, where the rightmost square is a pullback.
+  \[
+    \begin{tikzcd}
+      \I^0\ar[r, twoheadrightarrow,"\wtilde d^0"]&\im d^1\ar[r,hook,"i"]&\I^1 \\
+      \P\ar[u,"\gamma"]\ar[r,"\psi"]\ar[ur,phantom,very near start, "\urcorner"]
+      &\F''\ar[u,dotted,"\wtilde \xi"]\ar[r,"\id"]\ar[ur,phantom,very near start, "\urcorner"]
+      &\F''\ar[u,"\xi"']
+    \end{tikzcd}
+  \] 
+  It follows from the following elementary lemma on pullbacks that the lefthand square is a pullback as well.
+
+  \begin{lemma}
+    Suppose that the rightmost square is a pullback.
+    Then the leftmost square is a pullback if and only if the entire rectangle is a pullback.
+    \[
+      \begin{tikzcd}
+        \bullet\ar[r]&\bullet\ar[r]&\bullet\\
+        \bullet\ar[u]\ar[r]&\bullet\ar[u]\ar[r]\ar[ur,phantom,very near start,"\urcorner"]&\bullet\ar[u]
+      \end{tikzcd}
+    \] 
+  \end{lemma}
+
+  Recall that coequalizers are epic in any category.
+  Conversely, an epic morphism in an abelian category is the cokernel of its kernel, so, in particular a coequalizer.
+  Thus, we say that abelian categories are \emph{regular}.
+  $\psi$ epic will follow from the following result on general categories.
+
+  \begin{proposition}
+    Let $\cA$ be an abelian category.
+    We say that an epimorphism $f:A\to B$ is regular if it is the coequalizer of some pair of morphisms $c_1,c_2:C\to A$.
+    Then
+    \begin{enumerate}[label=(\alph*)]
+      \item $\cA$ is finitely complete;
+      \item If $f:A\to B$ is a regular epimorphism and $B'\to B$ is a morphism, then the pullback $f':A'\to B'$ depicted below is a regular epimorphism;
+    \[
+      \begin{tikzcd}
+        A\ar[r,"f"] & B\\
+        A'\ar[ur,phantom,very near start, "\urcorner"]\ar[u]\ar[r,"f'"']&B'\ar[u]
+      \end{tikzcd}
+    \] 
+      \item Every epimorphism is regular.
+    \end{enumerate}
+    We say that $\cA$ is a \emph{regular category}.
+    In particular, epimorphisms in an abelian category are preserved under pullbacks.
+  \end{proposition}
+  
+  \begin{proof}
+    (a) holds by definition, as does (c) after noting that coequalizers and cokernals coincide in an abelian category.
+    Thus, it suffices to show (b).
+    Namely, that the pullback of a cokernel is a cokernel.
+
+    Suppose that $f:A\to B$ is the cokernel of $g:C\to A$.
+    Then there is a unique map $g':C\to A'$ such that the following diagram commutes.
+    \[
+      \begin{tikzcd}
+        &A\ar[r,twoheadrightarrow,"f"] & B\\
+        &A'\ar[ur,phantom,very near start, "\urcorner"]\ar[u,"a"]\ar[r,"f'"']&B'\ar[u,"b"']\\
+        C\ar[uur,bend left=30,"g"]
+        \ar[ur,dotted,"\exists!g'"]\ar[urr,bend right=30, "0"']
+      \end{tikzcd}
+    \] 
+    Taking the cokernal $f'':A'\to B''$ of our new map $g':C\to A'$ gives us a unique map $b':B''\to B'$ such that the following diagram commutes.
+    \[
+      \begin{tikzcd}
+        A\ar[r,twoheadrightarrow,"f"] & B\\
+        A'\ar[ur,phantom,very near start, "\urcorner"]\ar[u,"a"]\ar[r,"f'"]
+        &B'\ar[u,"b"']\\
+        %C\ar[uur,bend left=30,"g"]
+        %\ar[ur,"g'"]\ar[rr,"0"']
+        A'\ar[u,"\id"]\ar[r,"f''"]&B''\ar[u,dotted, "\exists!b'"']
+      \end{tikzcd}
+    \] 
+  \end{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[6.2.] {
+      Let $X=\PP_k^1$, with $k$ an infinite field.
+      \begin{enumerate}
+        \item Show that there does not exist a projective object $\P\in \Mod(X)$, together with a surjective map $\P\to \O_X\to 0$. [\emph{Hint}: Consider surjections of the form $\O_V\to k(x)\to 0$, where $x\in X$ is a closed point, $V$ is an open neighborhood of $x$, and $\O_V=j_!(\O_X|_V)$, where $j:V\to X$ is the inclusion.]
+        \item Show that there does not exist a projective object $\P$ in either $\QCoh(X)$ or $\Coh(X)$ together with a surjection $\P\to \O_X\to 0$ [\emph{Hint}: Consider surjections of the form $\L\to \L\otimes k(x)\to 0$, where $x\in X$ is a closed point, and $\L$ is an invertible sheaf on $X$.]
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  Take a closed point $x\in X$, and let $U,V\ni x$ be neighborhoods of $x$ such that $U\not\subset V$ and $V\not\subset U$.
+\end{proof}
+
+\begin{enumerate}
+  \item[6.3.] {
+      Let $X$ be a noetherian, and let $\F,\G\in \Mod(X)$.
+      \begin{enumerate}
+        \item If $\F,\G$ are both coherent, then $\sExt^i(\F,\G)$ is coherent, for all $i\geqs 0$.
+        \item If $\F$ is coherent and $\G$ is quasi-coherent, then $\sExt^i(\F,\G)$ is quasi-coherent, for all $i\geqs 0$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) We begin by showing the result for $i=0$.
+  Take an affine open $\Spec A\cong U\subset X$ and finitely generated $A$-modules $M,N$ such that $\F|_U\cong \wtilde{M}$ and $\G|_U\cong \wtilde{N}$.
+  Then
+  \begin{align*}
+    \Hom_{\O_U}(\F|_U,\G|_U)\cong \Hom_A(M,N)
+  \end{align*}
+  is a finitely generated $A$-module.
+  Namely, it's generated by $\psi_{m,n}:M\to N:x\mapsto \delta_{x,m}n$. (\textbf{Is this really true?})
+  In particular, we can take a distinguished affine $D(f)\subset \Spec A$ for $f\in A$, and see that
+  \begin{align*}
+    \Hom_{\O_{D(f)}}(\F|_{D(f)}),\G|_{D(f)})
+      &\cong \Hom_{A_f}(M_f,N_f) \\
+      &\cong \Hom_A(M,N)_f, \ \ (\textbf{Please justify this!})
+  \end{align*}
+  whence
+  \[
+    \sHom_{\O_U}(\F|_U,\G|_U)\cong \wtilde{\Hom_A(M,N)}.
+  \] 
+  
+  Now, fix an open affine $\Spec A\cong U\subset X$ once more so that $\F|_U=M$ and $\G|_U=N$, and take a free resolution $L_\bullet\to M\to 0$, with $L_i = A^{l_i}$ for $l_i\geqs 0$.
+  Then
+  \[
+    \sExt
+  \] 
+\end{proof}
+
+\begin{enumerate}
+  \item[6.5.] {
+      Let $X$ be a noetherian scheme, and assume that $\Coh(X)$ has enough locally frees (Ex. 6.4).
+      Then for any coherent sheaf $\F$ we define the \emph{homological dimension} of $\F$, denoted $\hd(\F)$, to be the least length of a locally free resolution of $\F$ (or $+\infty$ if there is no finite one).
+      Show:
+      \begin{enumerate}
+        \item $\F$ is locally free $\iff$ $\sExt^i(\F,\G)=0$ for all $\G\in \Mod(X)$;
+        \item $\hd(\F)\leqs n\iff \sExt^i(\F,\G)=0$ for all $i>n$ and all $\G\in \Mod(X)$;
+        \item $\hd(\F)=\sup_x\pd_{\O_x}\F_x$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[6.8.] {
+    }
+\end{enumerate}
+
+\end{document}

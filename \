@@ -300,37 +300,15 @@
     \end{tikzcd}
   \] 
   so that
-  \begin{align*}
-    \Hom_A(M,N)_f 
-      &\cong \ker(\Hom_{A_f}(A_f^n,N_f)\to \Hom_{A_f}(A_f^l,N_f))\cong \Hom_{A_f}(M_f,N_f).
-  \end{align*}
-  We conclude that $\sHom_{\O_X}(\F,\G)$ is indeed coherent.
-
-  %Take $\Spec A\cong U\subset X$ open affine and write $\F|_U\cong \wt U$ and $\G|_U\cong \wt N$ for $M$, $N$ finitely generated $A$-modules, as before.
-  %Then (3.4) and $(\cdot)^\sim$ exact imply that both $\sHom((\cdot)^\sim,(\cdot)^\sim$
+  \[
+    \Hom_A(M,N)_f
+  \] 
   
-
-  Finally, we show that $\sExt^i(\F,\G)$ is coherent for all $i$.
-  $X$ is noetherian and $\F$ is coherent, so we can take an exact sequence $0\to \K\to \E\to \F\to 0$ with $\E$ locally free and $\K$ coherent.
-  Take the corresponding long exact sequence.
+  Now, fix an open affine $\Spec A\cong U\subset X$ once more so that $\F|_U=M$ and $\G|_U=N$, and take a free resolution $L_\bullet\to M\to 0$, with $L_i = A^{l_i}$ for $l_i\geqs 0$.
+  Then
   \[
-    \begin{tikzcd}[column sep=0.6cm,row sep = 0.3cm]
-      0\ar[r]& \sHom(\F,\G)\ar[r]&\sHom(\E,\G)\ar[r]& \sHom(\K,\G) \ar[r]&\cdots\\
-      \cdots\ar[r]&\sExt^i(\F,\G)\ar[r]&\sExt^i(\E,\G)\ar[r]& \sExt^i(\K,\G)\ar[r]&\cdots
-    \end{tikzcd}
+    \sExt
   \] 
-  (6.7) and (6.3) give us that 
-  \[
-    \sExt^i(\E,\G)\cong\sExt^i(\O_X,\E^\vee\otimes \G)=0
-  \]
-  for all $i>0$, so the connecting maps are in fact isomorphisms
-  \[
-    \sExt^i(\K,\G)\cong \sExt^{i+1}(\F,\G).
-  \] 
-  Recall that $\K$ is coherent, and thus $\sExt^0(\K,\G)\cong \sHom(\K,\G)$ is coherent.
-  The result holds by induction on $i$.
-
-  (b) $\G$ coherent was only used to show that $\Hom_A(M,N)$ is finitely generated, so we are done.
 \end{proof}
 
 \begin{enumerate}

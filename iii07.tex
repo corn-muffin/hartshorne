@@ -1,0 +1,159 @@
+\documentclass[12pt]{amsart} 
+\usepackage{mathtools}
+
+\input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
+\input{./latex-preamble/fr-mod.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\begin{document}
+
+{Hartshorne} \hfill {9-17-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.7}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[II.8.1.] {
+      Here we will strengthen the results of the text to include information about the sheaf of differentials at a not necessarily closed point of a scheme $X$.
+      \begin{enumerate}
+        \item Generalize (8.7) as follows.
+          Let $B$ be a local ring containing a field $k$, and assume that the residue field $k(B)=B/\m$ of $B$ is a separably generated extension of $k$.
+          Then the exact sequence of (8.4A),
+          \[
+            0\to \m/\m^2\xrightarrow\delta \Omega_{B/k}\otimes k(B)\to \Omega_{k(B)/k}\to 0
+          \] 
+          is exact on the left also.
+          [\emph{Hint}: In copying the proof of (8.7), first pass to $B/\m^2$, which is a complete local ring, and then use (8.25A) to choose representatives for $B/\m^2$.]
+        \item Generalize (8.8) as follows.
+          With $B$, $k$ as above, assume furthermore that $k$ is perfect, and that $B$ is a localization of an algebra of finite type over $k$.
+          Then show that $B$ is a regular local ring if and only if $\Omega_{B/k}$ is free of rank $=\dim B+\mb{tr.d.}\,k(B)/k$.
+        \item Strengthen (8.15) as follows.
+          Let $X$ be an irreducible scheme of finite type over a perfect field $k$, and let $\dim X=n$.
+          For any point $x\in X$, not necessarily closed, show that the local ring $\O_{X,x}$ is a regular local ring if and only if the stalk $(\Omega_{X/k})_x$ of the sheaf of differentials at $x$ is free of rank $n$.
+        \item Strengthen (8.16) as follows.
+          If $X$ is a variety over and algebraically closed field $k$, then $U=\{x\in X|\O_x\textup{ is a regular local ring}\}$ is an open dense subset of $X$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[II.8.6.] {
+      \emph{The Infinitesimal Lifting Prperty}.
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[6.10.] {
+      \emph{Duality for a Finite Flat Morphism.}
+      \begin{enumerate}
+        \item Let $f:X\to Y$ be a finite morphism of noetherian schemes.
+          For any quasi-coherent $\O_Y$-module $\G$, $\sHom_Y(f_*\O_Y,\G)$ is a quasi-coherent $f_*\O_Y$-module, and hence corresponds to a quasi-coherent $\O_X$-module, which we call $f^!\G$ (II, Ex. 5.17e).
+        \item Show that for any coherent $\F$ on $X$ and any quasi-coherent $\G$ on $Y$, there is a natural isomorphism
+          \[
+            f_*\sHom_X(\F,f^!\G)\iso \sHom_Y(f_*\F,\G).
+          \] 
+        \item For each $i\geqs 0$, there is a natural map
+          \[
+            \phi_i:\Ext^i_X(\F,f^!\G)\to \Ext^i_Y(f_*\F,\G)
+          \] 
+          [\emph{Hint}: First construct a map
+          \[
+            \Ext^i_X(\F,f^!\G)\to \Ext^i_Y(f_*\F,f_*f^!\G).
+          \] 
+          Then compose with a suitable map from $f_*f^!\G\to G$.]
+        \item Now assume that $X$ and $Y$ are separated, $\Coh(X)$ has enough locally frees, and assume that $f_*\O_X$ is locally free on $Y$ (this is equivalent to saying $f$ is flat--see Section 9).
+        Show that $\phi_i$ is an isomorphism for all $i$, all $\F$ coherent on $X$, and all $\G$ quasi-coherent on $Y$.
+        [\emph{Hints}: First do $i=0$.
+        Then do $\F=\O_X$, using (Ex. 4.1).
+        Then do $\F$ locally free.
+        Do the general case by induction on $i$, writing $\F$ as a quotient of a locally free sheaf.]
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[7.2.] {
+      Let $f:X\to Y$ be a finite morphism of projective schemes over a field $k$, and let $\omega_Y^\circ$ be a dualizing sheaf for $Y$.
+      \begin{enumerate}
+        \item Show that $f^!\omega_Y^\circ$ is a dualizing sheaf for $X$, where $f^!$ is defined as in (Ex. 6.10).
+        \item If $X$ and $Y$ are both nonsingular, and $k$ is algebraically closed, conclude that there is a natural trace map $t:f_*\omega_X\to \omega_Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Fix a coherent sheaf $\F\in \Mod(X)$, and a trace map $t_Y:H^n(Y,\omega_Y^\circ)\to k$. 
+  (Ex. 6.10c) Gives us a map
+  \begin{align*}
+    \phi_0:\Hom_X(\F,f^!\omega_Y^\circ)\iso \Hom_Y(f_*\F,\omega_Y^\circ),
+  \end{align*}
+  which is
+  $f_*\F$ is coherent by (Ex. II.5.5), so there is a map
+  \begin{align*}
+    \Hom_Y(f_*\F,\omega_Y^\circ)\times H^n(Y,f_*\F)\to H^n(Y,\omega_Y^\circ)
+  \end{align*}
+  which, composed with $t_Y:H^n(Y,\omega_Y^\circ)\to k$, induces a perfect pairing.
+
+  (b) Part (a), (Ex. 6.10b), and give us isomorphisms
+  \begin{align*}
+    f_*\omega_X&\cong f_*\sHom_X(\O_X,\omega_X) \\
+               &\cong f_*\sHom_X(\O_X,\omega_Y)
+  \end{align*}
+\end{proof}
+
+\begin{enumerate}
+  \item[7.3.] {
+      Let $X=\P_k^n$.
+      Show that $H^q(X,\Omega_X^p)=0$ for $p\neq q$, $k$ for $p=q, 0\leqs p,q\leqs n$.
+    }
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{enumerate}
+  \item[7.4.] {
+      \emph{The Cohomology Class of a Subvariety.}
+      Let $X$ be a nonsingular projective variety of dimension $n$ over an algebraically closed field $k$.
+      Let $Y$ be a nonsingular subvariety of codimension $p$ (hence dimension $n-p$).
+      From the natural map $\Omega_X\otimes \O_Y\to \Omega_Y$ (II, 8.12) we deduce a map $\Omega_X^{n-p}\to \Omega_Y^{n-p}$.
+      This induces a map on cohomology $H^{n-p}(X,\Omega_X^{n-p})\to H^{n-p}(Y,\Omega_Y^{-n-p})$.
+      Now $\Omega_Y^{n-p}=\omega_Y$ is a dualizing sheaf for $Y$, so we have the trace map $t_Y:H^{n-p}(Y,\Omega_Y^{n-p})\to k$.
+      Composing, we obtain a linear map $H^{n-p}(X,\Omega_X^{n-p})\to k$.
+      By (7.13) this corresponds to an element $\eta(Y)\in H^p(X,\Omega_X^p)$, which we call the \emph{cohomology clas} of $Y$.
+      \begin{enumerate}
+        \item If $P\in X$ is a closed point, show that $t_X(\eta(P))=1$, where $\eta(P)\in H^n(X,\Omega^n)$, and $t_X$ is the trace map.
+        \item If $X=\PP^n$, identify $H^p(X,\Omega^p)$ with $k$ by (Ex. 7.3), and show that $\eta(Y)=(\deg Y)\cdot 1$, where $\deg Y$ is its \emph{degree} as a projective variety.
+          [\emph{Hint}: Cut with hyperplanes $H\subset X$, and use Bertini's Theorem (II, 8.18) to reduce to the  case $Y$ is a finite set of points.]
+        \item For any scheme $X$ of finite type over $k$, we define a homomorphism of sheaves of abelian groups $d\log:\O_X^\times\to \Omega_X$ by $d\log(f)=f^{-1}df$.
+          Here $\O^\times$ is a group under multiplication, and $\Omega_X$ is a group under addition.
+          This induces a map on cohomology $\Pic X=H^1(X,\O_X^\times)\to H^1(X,\Omega_X)$, which we denote by $c$-see (Ex. 4.5).
+        \item Returning to the hypotheses above, suppose $p=1$.
+          Show that $\eta(Y)=c(\L(Y))$, where $\L(Y)$ is the invertible sheaf corresponding to the divisor $Y$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a)
+\end{proof}
+
+\end{document}

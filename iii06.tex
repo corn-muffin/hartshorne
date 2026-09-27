@@ -158,24 +158,32 @@
   % \]
 
   (2) Now, we must show the extension $0\to \F'\xrightarrow{\phi} \P\xrightarrow{\psi} \F''\to 0$ depends only on the cohomology class of $\xi$.
-  First, suppose $\xi=d^0\zeta$ for some $\zeta\in \Hom(\F'',\I^0)$, and consider the following pullback square.
-  \[
-    \begin{tikzcd}
-      0\ar[r] &\F'\ar[r,"d^{-1}"]&\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
-      && \P\ar[u,"\gamma"]\ar[r,"\psi"']\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[ul,"\zeta"']\ar[u,"\xi"'] \\%\ar[u,shift left, "\xi"]\ar[u,shift right,"\xi'"']
-      &\P'\ar[uur, bend left=20, "\gamma'"]\ar[urr,bend right =20, "\psi'"']
-    \end{tikzcd}
-  \] 
+  % First, suppose $\xi=d^0\zeta$ for some $\zeta\in \Hom(\F'',\I^0)$, and consider the following pullback square.
+  % \[
+  %   \begin{tikzcd}
+  %     0\ar[r] &\F'\ar[r,"d^{-1}"]&\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
+  %     && \P\ar[u,"\gamma"]\ar[r,"\psi"']\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[ul,"\zeta"']\ar[u,"\xi"'] \\%\ar[u,shift left, "\xi"]\ar[u,shift right,"\xi'"']
+  %     &\P'\ar[uur, bend left=20, "\gamma'"]\ar[urr,bend right =20, "\psi'"']
+  %   \end{tikzcd}
+  % \] 
   Let $\xi,\xi'\in \Hom(\F'',\I^1)$ be cohomologous maps, and take $\zeta\in \Hom(\F'',\I^0)$ such that $\xi=\xi'+d^0\zeta$.
-  Then it consider the following diagram.
+  Consider the following diagram.
   \[
     \begin{tikzcd}
       0\ar[r] &\F'\ar[r,"d^{-1}"]&\I^0\ar[r,"d^0"]&\I^1\ar[r,"d^1"]&\I^2 \\
-      && \P\ar[u,"\gamma"]\ar[r,"\psi"']\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[ul,"\zeta"']\ar[u,"\xi"'] \\%\ar[u,shift left, "\xi"]\ar[u,shift right,"\xi'"']
-      &\P'\ar[uur, bend left=20, "\gamma'"]\ar[urr,bend right =20, "\psi'"']
+      && \P\ar[u,"\gamma'"]\ar[r,"\psi'"']\ar[ur,phantom,very near start, "\urcorner"] &\F''\ar[u,"\xi'"'] \\%\ar[u,shift left, "\xi"]\ar[u,shift right,"\xi'"']
+      &\P'\ar[uur, bend left=20, "\gamma"]\ar[urr,bend right =20, "\psi"']
     \end{tikzcd}
   \] 
-  We have $\xi\psi = \xi'\psi + d^0\zeta\psi =$
+  We have 
+  \begin{align*}
+    \xi'\psi &= \xi\psi - d^0\zeta\psi
+             = d^0\gamma - d^0\zeta\psi,
+  \end{align*}
+  so that $d^0\gamma-\xi'\psi = d^0\zeta\psi$.
+  We proceed by giving up.
+
+  (3) It suffices to show that our two maps are indeed inverse to eachother.
 \end{proof}
 
 \begin{enumerate}
@@ -277,29 +285,18 @@
   \[
     \sHom_{\O_U}(\F|_U,\G|_U)\cong \wtilde{\Hom_A(M,N)}.
   \] 
-  Fix presentations $A^l\to A^m\to M\to 0$ and $A^l\to A^n\to N\to 0$ as before.
-  Clearly the result holds when $M$, $N$ are both free modules, as 
+  Fix a presentations $A^l\to A^m\to M\to 0$. %and $A^l\to A^n\to N\to 0$ as before.
+  Clearly the result holds when $M$ is a free module, as 
   \[
-    \Hom_A(A^m,A^l)_f\cong A^{m\times l}_f \cong \Hom_{A_f}(A_f^m,A_f^l).
+    \Hom_A(A^m,N)_f\cong N^{\oplus m}_f \cong \Hom_{A_f}(A_f^m,N).
   \]
-  Localization is exact, so the following sequence is exact,
-  \[
-    \begin{tikzcd}
-      \Hom_{A_f}(A^m_f,A^l_f)\ar[r] &\Hom_{A_f}(A^m_f,A^n_f)\ar[r] &\Hom_A(A^m, N)_f\ar[r]& 0
-    \end{tikzcd}
-  \] 
-  whence
-  \[
-    \Hom_A(A^m,N)_f\cong \frac{\Hom_{A_f}(A_f^m,A_f^n)}{\Hom_{A_f}(A_f^m,A_f^l)} \cong \Hom_{A_f}(A^m_f,N_f).
-  \] 
-  That is, the result holds when $M$ is free.
-  Finally, the same trick gives us exactness of the following diagram,
+  Localization is exact, so the above gives us that the following sequence is exact,
   \[
     \begin{tikzcd}
       0\ar[r] &\Hom_{A}(M,N)_f\ar[r] &\Hom_{A_f}(A^n_f,N_f)\ar[r] &\Hom_{A_f}(A^l_f, N_f)
     \end{tikzcd}
   \] 
-  so that
+  whence
   \begin{align*}
     \Hom_A(M,N)_f 
       &\cong \ker(\Hom_{A_f}(A_f^n,N_f)\to \Hom_{A_f}(A_f^l,N_f))\cong \Hom_{A_f}(M_f,N_f).
@@ -311,7 +308,8 @@
   
 
   Finally, we show that $\sExt^i(\F,\G)$ is coherent for all $i$.
-  $X$ is noetherian and $\F$ is coherent, so we can take an exact sequence $0\to \K\to \E\to \F\to 0$ with $\E$ locally free and $\K$ coherent.
+  The question is local, so we will take $X$ to be affine.
+  Then $X$ is noetherian and $\F$ is coherent, so we can take an exact sequence $0\to \K\to \E\to \F\to 0$ with $\E$ locally free and $\K$ coherent.
   Take the corresponding long exact sequence.
   \[
     \begin{tikzcd}[column sep=0.6cm,row sep = 0.3cm]
@@ -323,36 +321,44 @@
   \[
     \sExt^i(\E,\G)\cong\sExt^i(\O_X,\E^\vee\otimes \G)=0
   \]
-  for all $i>0$, so the connecting maps are in fact isomorphisms
-  \[
-    \sExt^i(\K,\G)\cong \sExt^{i+1}(\F,\G).
-  \] 
-  Recall that $\K$ is coherent, and thus $\sExt^0(\K,\G)\cong \sHom(\K,\G)$ is coherent.
-  The result holds by induction on $i$.
+  for all $i>0$, we have
+  \begin{align*}
+    \sExt^1(\F,\G) &\cong \cok(\sHom(\E,\G)\to\sHom(\K,\G)), \\
+    \sExt^i(\F,\G) &\cong \sExt^{i-1}(\K,\G)
+    \ \ \forall \; i\geqs 2.
+  \end{align*}
+  %Recall that $\K$ is coherent, and thus $\sExt^0(\K,\G)\cong \sHom(\K,\G)$ is coherent.
+  $\K$ is coherent, so the result holds by induction on $i$.
 
-  (b) $\G$ coherent was only used to show that $\Hom_A(M,N)$ is finitely generated, so we are done.
+  (b) $\G$ coherent was only used to show that $\Hom_A(M,N)$ is finitely generated, so we're done.
 \end{proof}
 
-\begin{enumerate}
-  \item[6.5.] {
-      Let $X$ be a noetherian scheme, and assume that $\Coh(X)$ has enough locally frees (Ex. 6.4).
-      Then for any coherent sheaf $\F$ we define the \emph{homological dimension} of $\F$, denoted $\hd(\F)$, to be the least length of a locally free resolution of $\F$ (or $+\infty$ if there is no finite one).
-      Show:
-      \begin{enumerate}
-        \item $\F$ is locally free $\iff$ $\sExt^i(\F,\G)=0$ for all $\G\in \Mod(X)$;
-        \item $\hd(\F)\leqs n\iff \sExt^i(\F,\G)=0$ for all $i>n$ and all $\G\in \Mod(X)$;
-        \item $\hd(\F)=\sup_x\pd_{\O_x}\F_x$.
-      \end{enumerate}
-    }
-\end{enumerate}
-
-\begin{proof}
-  f
-\end{proof}
-
-\begin{enumerate}
-  \item[6.8.] {
-    }
-\end{enumerate}
+% \begin{enumerate}
+%   \item[6.5.] {
+%       Let $X$ be a noetherian scheme, and assume that $\Coh(X)$ has enough locally frees (Ex. 6.4).
+%       Then for any coherent sheaf $\F$ we define the \emph{homological dimension} of $\F$, denoted $\hd(\F)$, to be the least length of a locally free resolution of $\F$ (or $+\infty$ if there is no finite one).
+%       Show:
+%       \begin{enumerate}
+%         \item $\F$ is locally free $\iff$ $\sExt^i(\F,\G)=0$ for all $i>1$ and all $\G\in \Mod(X)$;
+%         \item $\hd(\F)\leqs n\iff \sExt^i(\F,\G)=0$ for all $i>n$ and all $\G\in \Mod(X)$;
+%         \item $\hd(\F)=\sup_x\pd_{\O_x}\F_x$.
+%       \end{enumerate}
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+%   (a) if $\F$ is locally free, then
+%   \[
+%     \sExt^i(\F,\G)\cong \sExt^i(\O_X,\G\otimes \E^\vee)=0
+%   \] 
+%   by (6.7) and (6.3) respectively.
+%   Suppose conversely that $\sExt^i(\F,\G)=0$ for all $i>1$ and all $\G\in \Mod(X)$.
+%   Then 
+% \end{proof}
+% 
+% \begin{enumerate}
+%   \item[6.8.] {
+%     }
+% \end{enumerate}
 
 \end{document}

@@ -1,0 +1,110 @@
+\documentclass[12pt]{amsart} 
+\usepackage{mathtools}
+
+\input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
+\input{./latex-preamble/fr-mod.tex}
+
+%\graphicspath{ {./diagrams/} }
+
+\begin{document}
+
+{Hartshorne} \hfill {9-23-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.8}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[8.1.] {
+      Let $f:X\to Y$ be a continuous map of topological spaces.
+      Let $\F$ be a sheaf of abelian groups on $X$, and assume that $R^if_*(\F)=0$ for all $i>0$.
+      Show that there is a natural isomorphism
+      \[
+        H^\bullet(X,\F)\cong H^\bullet(Y,f_*\F).
+      \] 
+      (This is a degenerate case of the Leray spectral sequence.)
+    }
+\end{enumerate}
+
+\begin{proof}
+  Note that we may regard $X$ as a ringed space by setting $\O_X=\ul \ZZ$, so that $\Ab(X)\cong\Mod(X)$.
+  We also have 
+  \[
+    H^0(X,\F)=\Gamma(X,\F)=\Gamma(Y,f_*\F)= H^0(Y,f_*\F).
+  \]
+  Thus, it suffices to show that $H^\bullet(Y,f_*(-))$ is a universal $\delta$-functor.
+  $f_*$ is exact by assumption, so it suffices by (1.3A) to show that $H^i(Y, f_*(-))$ is effaceable for each $i>0$.
+  Each injective object $\I$ of $\Ab(X)$ is flasque by (2.4), so each $f_*\I$ is flasque by (II, Ex. 1.16d).
+  Then $H^i(f_*\I)=0$ for all $i>0$ by (2.5), so we're done.
+  % Take an injective resolution $0\to \F\to \I^\bullet$ for $\F$.
+  % Then each $\I^i$ is flasque by (2.4), so each $f_*\I^\bullet$ is flasque as well by (Ex. II.1.16d).
+  % $f_*$ is exact since $R^if_*(\F)$, so $0\to f_*\F\to f_*\I^\bullet$ is a flasque resolution of $\F$.
+  % It follows that $H^\bullet(Y,f_*\F)\cong h^\bullet(f_*\I^\bullet)$.
+  % Clearly $H^\bullet(X,\F)\cong h^\bullet(\I^\bullet)$, so
+\end{proof}
+
+\begin{enumerate}
+  \item[8.2.] {
+      Let $f:X\to Y$ be an affine morphism of schemes with $X$ noetherian, and let $\F$ be a quasi-coherent sheaf on $X$.
+      Show that the hypotheses of (Ex. 8.1) are satisfied, and hence that $H^\bullet(X,\F)\cong H^\bullet(Y,f_*\F)$.
+      (This gives another proof of (Ex. 4.1).)
+    }
+\end{enumerate}
+
+\begin{proof}
+  It suffices to show that $R^if_*(\F)=0$ for all $i>0$.
+  Take $U\subset Y$ an affine open, so that $V:=f^{-1}(U)$ is affine.
+  (8.2) and (8.5) imply
+  \[
+    R^\bullet f_*(\F)|_U\cong R^\bullet(f|_V)_*(\F|_V)\cong  H^\bullet(V,\F)^\sim,
+  \] 
+  whence
+  \[
+    R^i f_*(\F)|_U\cong H^i(V,\F)^\sim = 0
+  \] 
+  for all $i>0$ by (3.5).
+  It follows that $R^if_*(\F)=0$ for all $i>0$, as desired.
+\end{proof}
+
+\begin{enumerate}
+  \item[8.3.] {
+      Let $f:X\to Y$ be a morphism of ringed spaces, let $\F$ be an $\O_X$-module, and let $\E$ be a locally free $\O_Y$-module of finite rank.
+      Prove the \emph{projection formula} (cf. (II, Ex. 5.1))
+      \[
+        R^\bullet f_*(\F\otimes f^*\E)\cong R^\bullet f_*(\F)\otimes \E.
+      \] 
+    }
+\end{enumerate}
+
+\begin{proof}
+  For $i=0$, this is precisely the projection formula (II, Ex. 5.1d).
+  $f^*$ is right adjoint and thus commutes with inverse limits, and in particular finite direct sums.
+  $f^*(\O_X)=\O_Y$, so this gives us $f^*\E$ locally free of finite rank.
+  Then both $R^\bullet f_*(-\otimes f^*\E)$ and $R^\bullet f_*(-)\otimes \E$ are $\delta$-functors, so it suffices to show each is effaceable.
+
+  Clearly the latter is effaceable.
+  Now, take and embedding $\F\inc \I$ of $\F$ into an injective object of $\Mod(X)$.
+  (II, Ex. 5.1abc) gives us an isomorphism
+  \begin{align*}
+    \Hom(-, \I\otimes f^*\E)
+      &\cong \Hom(-\otimes (f^*\E)^\vee, \I),
+  \end{align*}
+  where the latter functor is exact since $(f^*\E)^\vee$ is locally free of finite rank and $\I$ is injective.
+  Then $\I\otimes f^*\E$ is injective, whence $R^\bullet f_*(-\otimes f^*\E)$ is effaceable.
+  The result follows from (1.3A).
+\end{proof}
+
+\end{document}

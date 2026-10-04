@@ -1,11 +1,9 @@
 \documentclass[12pt]{amsart} 
 
 \input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
 
 %\graphicspath{ {./diagrams/} }
-
-\newtheorem*{lemma*}{Lemma}
-\newtheorem{lemma}{Lemma}
 
 \begin{document}
 
@@ -638,17 +636,20 @@
 \end{enumerate}
 
 \begin{proof}
-  Let $\Sigma$ be the poset of closed subsets of $X$ such that $\P$ holds, which is nonempty since $\0\in \Sigma$.
-  Let $Y_1\subset Y_2\subset \cdots$ be a chain in $\Sigma$.
-  If any 
-\end{proof}
+  We induct on $\dim X$.
+  Noetherianity allows us to write $X=\bigcup_{i=1}^s X_i$ for $X_i$ irreducible.
+  If $\dim X=0$
+  We claim that, if $\P$ holds for each $X_i$, then $\P$ holds for $X$.
+  Namely, if $Y=\bigcup_{i=1}^s Y_i$ with $Y_i=Y\cap Y_i$, then
 
-\begin{enumerate}
-  \item[3.17.] {
-    }
-\end{enumerate}
+  We begin by showing the result for $X$ irreducible.
+  $X$ irreducible implies $\dim X=n$ is finite, so we may induct on $n$.
+  If $n=0$, then the only proper closed subset of $X$ is $\0$, for which $\P$ holds.
+  Hence, $\P$ holds for $X$.
 
-\begin{proof}
+  Suppose now that the result holds for $n-1$.
+  Then, for any closed subset $Y\subsetneq X$, noetherianity allows us to write $Y=\bigcup_{i=1}^s Y_i$ for finitely many irreducible schemes $Y_i$ with $\dim Y_i\leqs \dim Y<\dim X$.
+  By induction, $\P$ holds each of the $Y_i$,
 \end{proof}
 
 \begin{enumerate}

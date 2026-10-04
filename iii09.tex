@@ -5,6 +5,9 @@
 \input{./latex-preamble/use-scr.tex}
 \input{./latex-preamble/fr-mod.tex}
 
+\newcommand{\fF}{\fr{F}}
+\newcommand{\fL}{\fr{L}}
+
 %\graphicspath{ {./diagrams/} }
 
 \begin{document}
@@ -27,10 +30,181 @@
 
 \bigskip\bigskip
 
+
 \begin{enumerate}
-  \item[9.1.] {
+  \item[II.3.17] {
+      \emph{Zariski Spaces}.
+      A topological space $X$ is a \emph{Zariski space} if it is noetherian and every (nonempty) closed irreducible subset of $X$ has a unique generic point.
+      \begin{enumerate}
+        \item Show that if $X$ is a noetherian scheme, then $\Sp(X)$ is a Zariski space.
+        \item show that any minimal nonempty closed subset of a Zariski space onsists of one point.
+  We call these \emph{closed points}.
+        \item Show that a Zariski space $X$ satisfies the axiom $T_0$: given any two distinct points of $X$, there is an open set containing one but not the other.
+        \item If $X$ is an irreducible Zariski space, then its generic point is contained in every nonempty open subset of $X$.
+        \item If $x_0,x_1$ are points of a topological space $X$ ,and if $x_0\in \{x_1\}^-$, then we say $x_1$ \emph{specializes} to $x_0$, written $x_1\rightsquigarrow x_0$.
+          We also say $x_0$ is a \emph{specialization} of $x_1$, or that $x_1$ is a \emph{generalization of $x_0$}.
+          Now, let $X$ be a Zariski space.
+          Show that the minimal points, for the partial ordering determined by $x_1>x_0$ if $x_1\specto x_0$, are the closed points, and the maximal points are the generic points of the irreducible components of $X$.
+          Show also that a closed subset contains every specialization of any of its points. (We say closed subsets are \emph{stable under specialization}.)
+          Similarly, open subsets are \emph{stable under generalization.}
+        \item Show that the maximal spectrum of a ring $A$ is Zariski if and only if it is equal to $\Spec A$.
+      \end{enumerate}
     }
 \end{enumerate}
+
+\begin{proof}
+  (a) Trivial, given (II, Ex. 2.9).
+
+  (b) Let $X$ be a Zariski space, and let $\0\neq Y\subset X$ be a minimal nonempty closed subset of $X$.
+  In particular, $Y$ is irreducible, and thus contains a unique generic point $\zeta\in Y$.
+  Minimality implies $\{y\}^-= Y$ for all $y\in Y$, but then uniqueness implies $Y=\{\zeta\}$, as desired.
+
+  (c) Let $x,y\in X$ be points such that $x\in U$ open implies $y\in U$.
+  Then $y\in C$ closed implies $x\in C$, so that $\{y\in C\textup{ closed}\}\subset \{x\in C\textup{ closed}\}$.
+  Hence,
+  \[
+    \{x\}^-=\bigcap_{x\in C}C\subset \bigcap_{y\in C}C = \{y\}^-.
+  \] 
+  If $x,y\in X$ have $x\in U$ if and only if $y\in U$, then $\{x\}^-=\{y\}^-$ implies $x=y$.
+
+  (d) If $\0\neq U\subset X$ is a nonempty open set, then $x\notin U$ implies $\{x\}^-\subset U^c\subsetneq X$ is proper, and hence $x$ is not generic.
+
+  (e) Let $x\in X$ be minimal.
+  $y\in \{x\}^-$ implies $x\specto y$, so that $y=x$.
+  Hence, $x$ is closed.
+  Now, let $\zeta\in X$ be maximal.
+  $\{\zeta\}^-\subset \{y\}^-$ implies $y\specto \zeta$, so that $y=\zeta$.
+  Each irreducible closed subset of $X$ has a generic point by definition, so we have that $\{\zeta\}^-$ is indeed an irreducible component of $X$.
+
+  Let $x\in C$ be contained in a closed set $C$, and take $y$ such that $x\specto y$.
+  Then $y\in \{x\}^-\subset C$, as desired.
+  Now, we claim that $S\in X$ is closed under generalization if and only if $S^c$ is closed under specialization.
+  If $x\in S$ and $y\specto x$, then $y\in S^c$ and $S^c$ closed under specialization would imply $x\in S^c$, a contradiction.
+  The converse is identical, and our result for open sets follows.
+
+  (f) One direction is clear.
+\end{proof}
+
+\begin{enumerate}
+  \item[II.3.18] {
+      \emph{Constructible Sets}.
+      Let $X$ be a Zariski topological space.
+      A \emph{constructible subset} is a subset which belongs to the smallest family $\fF$ such that (1) every open subset is in $\fF$, (2) a finite intersection of elements of $\fF$ is in $\fF$, and (3) the complement of any element of $\fF$ is in $\fF$.
+      \begin{enumerate}
+        \item A subset of $X$ is \emph{locally closed} if it is the intersection of an open subset with a closed subset.
+          Show that a subset of $X$ is constructible if and only if it can be written a finite disjoint union of locally closed subsets.
+        \item Show that a constructible subset of an irreducible zariski space $X$ is dense if and only if it contains the generic point.
+          Furthermore, in that case it contains a nonempty open subset.
+        \item A subset $S$ of $X$ is closed if and only if it is constructible and stable under specialization.
+          Similarly, a subset $T$ of $X$ is open if and only if it is constructible and stable under generalization.
+        \item If $f:X\to Y$ is a continuous map of Zariski spaces, then the inverse image of any constructible set of $Y$ is constructible in $X$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Write $\fL$ for the family of finite disjoint unions of locally closed subsets. 
+  It is clear that $\fL\subset \fF$, so it suffices to show that $\fF\subset \fL$.
+  We will do so by showing $\fL$ satisfies (1-3), and conclude our result via minimality.
+
+  (1) is trivial.
+  If $X=X_1\cap X_2$ for $X_i\in \fL$, then we can write
+  \[
+    X_i= U_{i1}\cap C_{i1}\sqcup\cdots\sqcup U_{im}\cap C_{im}\quad (i=1,2),
+  \]
+  adding null sets if necessary so that each is a union of $m$ locally closed sets.
+  Then
+  \begin{align*}
+    X
+      &= \left(\bigsqcup_{j=1}^m (U_{1j}\cap C_{1j})\right)\cap \left(\bigsqcup_{j=1}^m (U_{2j}\cap C_{2j})\right) \\
+      &= \bigsqcup_{1\leqs j,k\leqs m}(U_{1j}\cap U_{2k})\cap (C_{1j}\cap C_{2k})\in \fL,
+  \end{align*}
+  Since the union is clearly disjoint.
+  Arbitrary finite intersections follow by induction, giving us (2).
+
+  Suppose 
+  \[
+    X= U_1\cap C_1\sqcup\cdots\sqcup U_m\cap C_m\in \fL.
+  \]
+  Then
+  \begin{align*}
+    X^c &= U_1\cap C_1\sqcup\cdots\sqcup U_m\cap C_m \\
+        &= (U_1^c\cup C_1^c) \cap\cdots \cap (U_m^c\cup C_m^c) \\
+        &= ((U_1\cap C_1^c)\sqcup U_1^c)\cap\cdots \cap((U_m\cap C_m^c)\sqcup U_m^c) \in \fL
+  \end{align*}
+  by (2), whence we $\fL$ satisfies (3).
+  We conclude that in fact $\fF=\fL$
+
+  (b) Let $X$ be an irreducible Zariski space with generic point $\zeta$, and let $Y\in \fF$ be constructible and dense, i.e. $Y^-=X$.
+  By (a), we can write $Y=\bigsqcup_{i=1}^n(U_i\cap C_i)\in \fF$ for $U_i\neq \0$ open and $C_i\neq \0$ closed.
+  Then certainly $X=Y^-\subset \bigcup_{i=1}^n C_i$, so $X$ irreducible implies $X= C_i$ for some $i$, say $X= C_1$.
+  In particular, $\zeta\in C_1$.
+  Further, we have $\zeta\in U_1$, as otherwise $\zeta\in U_1^c\subsetneq X$ contradicts genericity of $\zeta$.
+  We conclude that, $\zeta\in U_1=C_1\cap U_1\subset Y$, whence both results follow.
+
+  (c) (a) and (Ex. 3.17e) give us one direction, while the proof of the latter gives us that $S$ is closed under specialization if and only if $S^c$ is closed under generalization.
+  Now, let $S\in \fF$ be constructible and closed under specialization.
+  It suffices to show that $S$ is closed.
+  Suppose first that $S=U\cap C\neq \0$ for $C$ irreducible with generic point $\zeta$.
+  Then (b) implies $\zeta\in S$, whence $S=C$ by stability under generalization.
+
+  Now, take $S=\bigcup_{i=1}^n U\cap C_i$ for $C_i$ irreducible and $U\cap C_i\neq \0$.
+  We claim that each $U\cap C_i$ is closed under specialization.
+  Let $x\in U\cap C_i$ and take $x\specto y$.
+  Then $y\in C_i$ and $y\in U\cap C_j\subset U$ for some $j$, so, indeed, $y\in U\cap C_i$.
+  It follows that the result holds when $S=U\cap C$ for $U$ open and $C$ closed.
+
+  Finally, (a) allows us to write $S=\bigsqcup_{i=1}^n(U_i\cap C_i)$ for $U_i$ open and $C_i$ closed.
+  We claim that each $U_i\cap C_i$ is closed under specialization, whence the result would follow from our previous claim.
+  Let $x\in U_i\cap C_i$ and take $x\specto y$.
+  Then $y\in U_j\cap C_j$ for some $j$, so closure of open sets under generalization gives us $x\in U_j$, 
+  Suppose, by way of contradiction, that $i\neq j$.
+  Disjointness implies $y\in U_i^c$ and $x\in C_j^c$.
+  Then 
+  \[
+    \{y\}^-\subset \{x\}^- \cap C_j\subset\{x\}^-\setminus \{x\}.
+  \]
+  FINISH THIS
+  
+  (d) If $S=\bigsqcup_{i=1}^n(U_i\cap C_i)$ is constructible in $Y$, then
+  \begin{align*}
+    f^{-1}(S) &= \bigcup_{i=1}^n f^{-1}(U_i\cap C_i) \\
+              &= \left(\bigcap_{i=1}^n (f^{-1}(U_i)\cap f^{-1}(C_i))^c\right)^c
+  \end{align*}
+  is constructible in $X$.
+\end{proof}
+
+\begin{enumerate}
+  \item[II.3.19] {
+      Let $f:X\to Y$ be a morphism of finite type of noetherian schemes.
+      Then the image of any constructible subset of $X$ is a constructible subset of $Y$.
+      Prove this theorem in the following steps.
+      \begin{enumerate}
+        \item Reduce to showing that $f(X)$ itself is constructible, in the case where $X$ and $Y$ are affine, integral noetherian schemes, and $f$ is a dominant morphism.
+        \item In that case, show that $f(X)$ contains a nonempty open subset of $Y$ by using the following result from commutative algebra:
+          let $A\subset B$ be an inclusion of noetherian integral domains, with $B$ a finitely generated $A$-algebra.
+          Then, given a nonzero element $b\in B$, there is a nonzero element $a\in A$ with the following property: if $\phi:A\to K$ is any homomorphism of $A$ to any algebraically closed field $K$, such that $\phi(a)\neq 0$, then $\phi$ extends to a homomorphism $\phi'$ of $B$ into $K$, such that $\phi'(b)\neq 0$.
+          [\emph{hint}: Prove the algebraic result by induction on the number of generators of $B$ over $A$, with a direct proof for $B$ cyclic over $A$. In the application, take $b=1$.]
+        \item Now use noetherian induction on $Y$ to complete the proof.
+        \item Give some examples of morphisms $f:X\to Y$ of varieties over an algebraically closed field $k$, to show that $f(X)$ need not be either open or closed.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a)
+\end{proof}
+
+\begin{enumerate}
+  \item[9.1.] {
+      A flat morphism $f:X\to Y$ of finite type of noetherian schemes is open, i.e. for every open subset $U\subset X$, $f(U)$ is open in $Y$.
+      [\emph{Hint}: show that $f(U)$ is constructible and stable under generalization (II, Ex. 3.18) and (II, Ex. 3.19).]
+    }
+\end{enumerate}
+
+\begin{proof}
+  $f(U)$ is constructible by (II, Ex. 3.19), so it suffices to show it is stable under generalization by (II, Ex. 3.18c).
+\end{proof}
 
 \begin{enumerate}
   \item[9.3.] {
@@ -49,8 +223,14 @@
 \begin{enumerate}
   \item[9.4.] {
       \emph{Open Nature of Flatness}.
+      Let $f:X\to Y$ be a morphism of finite type of noetherian schemes.
+      Then $\{x\in X|\textup{$f$ if flat at $x$}\}$ is an open subset of $X$ (possibly empty).
     }
 \end{enumerate}
+
+\begin{proof}
+  
+\end{proof}
 
 \begin{enumerate}
   \item[9.5.] {
@@ -59,11 +239,32 @@
 
 \begin{enumerate}
   \item[9.7.] {
+      Let $Y\subset X$ be a closed subscheme, where $X$ is a scheme of finite type over a field $k$.
+      Let $D=k[t]/t^2$ be the ring of dual numbers, and define an \emph{infinitesimal deformation of $Y$ as a closed subscheme of $X$}, to be a closed subscheme $Y'\subset X\times_k D$, which is flat over $D$ and whose closed fibre is $Y$.
+      Show that there are classified by $H^0(Y,\N_{Y/X})$, where
+      \[
+        \N_{Y/X} = \sHom_{\O_X}(\I_Y/\I_Y^2,\O_Y).
+      \] 
     }
 \end{enumerate}
 
+\begin{proof}
+  The universal property of $X\times_k D$ gives us that maps $Y'\to X\times_k D$ are in correspondence with commuting diagrams of the following form.
+  \[
+    \begin{tikzcd}[column sep = 0.3cm]
+      &X\ar[r] & \Spec k \\
+      &X\times_k D \ar[u]\ar[r] & D\ar[u] \\
+      Y'\ar[ur,dotted,"\exists!"']\ar[uur, bend left = 30]\ar[urr, bend right = 30]
+    \end{tikzcd}
+  \] 
+\end{proof}
+
 \begin{enumerate}
   \item[9.10] {
+      A scheme $X_0$ over a field $k$ is \emph{rigid} if it has no infinitesimal deformations.
+      \begin{enumerate}
+        \item Show that $\PP_k^1$ is rigid, using (9.13.2).
+      \end{enumerate}
     }
 \end{enumerate}
 

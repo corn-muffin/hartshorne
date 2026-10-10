@@ -1,0 +1,185 @@
+\documentclass[12pt]{amsart} 
+\usepackage{mathtools}
+
+\input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
+\input{./latex-preamble/fr-mod.tex}
+
+\newcommand{\fF}{\fr{F}}
+\newcommand{\fL}{\fr{L}}
+\renewcommand{\O}{\cO}
+
+%\graphicspath{ {./diagrams/} }
+
+\begin{document}
+
+{Hartshorne} \hfill {9-27-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter III.10}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+  \item[II.8.6.] {
+      \emph{The Infinitesimal Lifting Property}.
+      The following is very important in studying deformations of nonsingular varieties.
+      Let $k$ be an algebraically closed field, let $A$ be a finitely generated $k$-algebra such that $\Spec A$ is a nonsingular variety over $k$.
+      Let $0\to I\to B'\to B\to 0$ be an exact sequence, where $B'$ is a $k$-algebra, and $I$ is an ideal with $I^2=0$.
+      Finally, suppose we are given a $k$-algebra homomorphism $f:A\to B$.
+      Then there exists a $k$-algebra homomorphism $g:A\to B'$ making the following diagram commute:
+      \[
+        \begin{tikzcd}[row sep = 0.4cm]
+          & 0\ar[d] \\
+          & I\ar[d] \\
+          & B'\ar[d] \\
+          A\ar[r,"f"]\ar[ur,dotted, "g"]& B\ar[d] \\
+          & 0
+        \end{tikzcd}
+      \] 
+      We call this result the \emph{infinitesimal lifting property} for $A$.
+      We prove this result in several steps.
+      \begin{enumerate}
+        \item First suppose that $g:A\to B'$ is a given homomorphism lifting $f$.
+          If $g':A\to B'$ is another such homomorphism, show that $\theta=g-g'$ is a $k$-derivation of $A$ into $I$, which we can consider as an element of $\Hom_A(\Omega_{A/k},I)$.
+          Note that since $I^2=0$, $I$ has a natural structure of a $B$-module and hence also of an $A$-module.
+          Conversely, for any $\theta\in \Hom_A(\Omega_{A/k},I)$, $g'=g+\theta$ is another homomorphism lifting $f$.
+          (For this step, you do not need the hypothesis about $\Spec A$ being nonsingular.)
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) Exactness gives us our map $\theta:A\to I$.
+  Clearly $\theta$ is additive, and $\theta(1)=0$ since $g(1)=1=g'(1)$, so that $\theta(k)=k\cdot\theta(1)=0$.
+  If $a,a'\in A$, then we have
+  \begin{align*}
+    a\cdot \theta(a') + a'\cdot \theta(a)
+      &= f(a)\theta(a') + f(a')\theta(a) \\
+      &= g(a)\theta(a') + g'(a')\theta(a) \\
+      &= g(a)(g(a')- g'(a')) + g'(a')(g(a)-g'(a')) \\
+      &= g(aa') - g(a)g'(a') + g'(a')g(a) - g'(aa') \\
+      &= \theta(aa'),
+  \end{align*}
+  as desired.
+
+  Now, take $\theta\in \Hom_A(\Omega_{A/k},I)$ and let $g'= g+\theta$.
+  Clearly $g':A\to B'$ is a $k$-module homorphism lifting $f$.
+  If $a,a'\in A$, then
+  \begin{align*}
+    g'(a)g'(a')
+      &= (g(a) + \theta(a))(g(a')+\theta(a')) \\
+      &= g(a)g(a') + g(a)\theta(a') + g(a')\theta(a) + \theta(a)\theta(a') \\
+      &= g(aa') + \theta(aa') \\
+      &=g'(aa')
+  \end{align*}
+  gives us that $g':A\to B'$ is in fact a $k$-algebra morphism, as desired.
+
+  (b)
+\end{proof}
+
+\begin{enumerate}
+  \item[10.1] {
+      Over a nonperfect field, smooth and regular are not equivalent.
+      For example, let $k_0$ be a field of characteristic $p>0$, let $k=k_0(t)$, and let $X\subset \AA_k^2$ be the curve defined by $y^2 = x^p-t$.
+      Show that every local ring of $X$ is a regular local ring, but $X$ is not smooth over $k$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We begin by showing that each local ring at a closed point of $X$ is regular, whence it will follow that all of its local rings are regular by (II, 8.14A).
+  We must first find all the closed points of $X$.
+
+  Write $A=k[x,y]/(y^2-x^p+1)$, so that $X=\Spec A$.
+  Any maximal ideal of $\m\lideal A$ corresponds to a maximal ideal $\wt\m\lideal k[x,y]$.
+  Taking an algebraic closure $\ol k/k$, we have that the induced map $k[x,y]\inc \ol k[x,y]$ is integral, so (AM, 5.10) gives us a maximal ideal $\n\lideal \ol k[x,y]$ such that $\n\cap k[x,y] = \wt\m$.
+
+  Hilbert's Nullstellensatz says that $\n=(x-a,y-b)$ for $a,b\in \ol k$.
+  Then $\m = (x-a,y-b)\cap A$ for $b^2-a^p+t=0$, and $A/\m\cong k(a,b)\subset\ol k$.
+  If $b\neq 0$, then $b=\sqrt{a^p-t}$.
+  If $a=\sum_i a_it^i\in k$, then $b=\sqrt{\sum_i a_i^pt^{ip} - t}\notin k$ for degree reasons.
+  If $b=0$, then $a=\sqrt[p]{t}$, so $k(\m)=k(\sqrt[p]{t})$ has $k(\m)/k$ a non-separable extension.
+  It follows from (II, 8.6A) that $\dim_{k(\m)}\Omega_{k(x)/k}>0$.
+\end{proof}
+
+\begin{enumerate}
+  \item[10.2] {
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[10.3] {
+      A morphism $f:X\to Y$ of schemes of finite type over $k$ is \emph{\'etale} if it is smooth of relative dimension 0.
+      It is \emph{unramified} if for every $x\in X$, letting $y=f(x)$, we have $\m_y\cdot \O_x=\m_x$, and $k(x)$ is a separable algebraic extension of $k(y)$.
+      Show that the following conditions are equivalent:
+      \begin{enumerate}[label=(\roman*)]
+        \item $f$ is \emph{\'etale};
+        \item $f$ flat, and $\Omega_{X/Y}= 0$;
+        \item $f$ is flat and unramified.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (i)$\implies$(ii):
+  Let $i:X_y\inc X$ be the inclusion.
+  (II,8.10) gives us $\Omega_{X_y/k(y)}\cong i^*(\Omega_{X/Y})$.
+  $i^*$ is a left adjoint and thus commutes with stalks, so
+  \begin{align*}
+    (\Omega_{X_y/k(y)})_x 
+      &\cong (\Omega_{X/Y})_x\otimes_{\O_x} (\O_X\otimes_{\O_y} k(y)) \\
+      &\cong (\Omega_{X/Y})_x\otimes_{\O_y}k(y).
+  \end{align*}
+  dunno
+  \begin{align*}
+    (\Omega_{X/Y})_x
+      &\cong (\Omega_{X_y/k(y)})_x \\
+      &\cong \Omega_{k(x)/k(y)}
+  \end{align*}
+
+  (ii)$\implies$(iii):
+  It follows from (II, 8.10) and (II, 8.4A) that
+  \begin{align*}
+    0 &= \Omega_{X/Y}\otimes k(x) \\
+      &\cong \Omega_{X_y/k(y)}\otimes k(x) \\
+      &\cong \Omega_{\O_x/k(y)}\otimes k(x)
+  \end{align*}
+  maps surjectively onto $\Omega_{k(x)/k(y)}$.
+  Then $\Omega_{k(x)/k(y)}=0$, so it follows from (II, 8.6A) that $k(x)$ is a separable algebraic extension of $k(y)$.
+  Now, we have a map $f^\sharp_x:\O_y\to \O_x$, and we wish to show that $\m_y^e = \m_x$.
+  Clearly 
+
+  (iii)$\implies$(i):
+  f
+\end{proof}
+
+% \begin{enumerate}
+%   \item[10.4] {
+%       Show that a morphism $f:X\to Y$ of schemes of finite type over $k$ is \emph{\'etale} if and only if the following condition is satisfied:
+%       for each $x\in X$, let $y=f(x)$.
+%       Let $\hat\O_x$
+%     }
+% \end{enumerate}
+
+\begin{enumerate}
+  \item[10.8] {
+    }
+\end{enumerate}
+
+\begin{enumerate}
+  \item[10.9] {
+    }
+\end{enumerate}
+
+\end{document}

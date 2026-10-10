@@ -636,39 +636,44 @@
 \end{enumerate}
 
 \begin{proof}
-  We induct on $\dim X$.
-  Noetherianity allows us to write $X=\bigcup_{i=1}^s X_i$ for $X_i$ irreducible.
-  If $\dim X=0$
-  We claim that, if $\P$ holds for each $X_i$, then $\P$ holds for $X$.
-  Namely, if $Y=\bigcup_{i=1}^s Y_i$ with $Y_i=Y\cap Y_i$, then
+  Noetherianity allows us to write $X=\bigcup_{i=1}^s X_i$ for $X_i$ irreducible, with some integer $n=\sum_{i=1}^s \dim X_i$.
+  We induct on $(n,s)$ with the lexicographic ordering.
+  If $n=s=0$, then $X=\0$, so $\P$ holds for $X$.
+  If $n=0$ and $s>0$, then $X = \{x_1,\ldots, x_s\}$ is the union of finitely many closed points.
+  Then every proper subset of $X'\subset S$ is a union of $s'<s$ closed points, so that $\P$ holds for $X'$ by induction, whence $\P$ holds for $X$.
 
-  We begin by showing the result for $X$ irreducible.
-  $X$ irreducible implies $\dim X=n$ is finite, so we may induct on $n$.
-  If $n=0$, then the only proper closed subset of $X$ is $\0$, for which $\P$ holds.
-  Hence, $\P$ holds for $X$.
+  Now, write $X = \bigcup_{i=1}^s X_i$, reordering so that $\dim X_i>0$ for $1\leqs i\leqs r$ and $X_j = \{x_j\}$ are closed points for $r<j\leqs s$.
+  Take a proper closed subset $X'\subsetneq X$.
+  We have an irreducible decomposition
+  \[
+    X' = \bigcup_{i=1}^{s} X'\cap X_i
+  \] 
+  for $X'$, with some $X'\cap X_i$ empty.
+  Let $s'$ be the number of nonempty $X'\cap X_i$, and $n'=\sum_{i=1}^s \dim X'\cap X_i$.
 
-  Suppose now that the result holds for $n-1$.
-  Then, for any closed subset $Y\subsetneq X$, noetherianity allows us to write $Y=\bigcup_{i=1}^s Y_i$ for finitely many irreducible schemes $Y_i$ with $\dim Y_i\leqs \dim Y<\dim X$.
-  By induction, $\P$ holds each of the $Y_i$,
+  Take some $i$ such that $X_i\cap X'\subsetneq X_i$ is a proper closed subset.
+  If $i>r$, then $X_i\cap X'=\0$ gives us $s'<s$, so $\P$ holds for $X'$ by induction.
+  Otherwise we have $\dim X_i\cap X'<\dim X_i$, so that $n'<n$, whence $\P$ holds for $X'$ by induction once more.
+  We conclude that, in fact, $\P$ holds for $X$
 \end{proof}
 
-\begin{enumerate}
-  \item[3.20.] {
-      \emph{Dimension}. Let $X$ be an integral scheme of finite type over a field $k$ (not necessarily algebraically closed).
-      Use results about varieties to prove the following.
-      \begin{enumerate}
-        \item For any closed point $p\in X$, $\dim X=\dim \O_p$, where for rings we always mean the Krull dimension.
-        \item Let $K(X)$ be the function field of $X$.
-          Then $\dim X=\trd K(X)/k$.
-        \item If $Y$ is a closed subset of $X$, then $\codim(Y,X)=\inf{\dim \O_{X,p}|p\in Y}$.
-        \item If $Y$ is a closed subset of $X$, then $\dim Y+\codim (Y,X)=\dim X$.
-        \item If $U$ is a nonempty open subset of $X$, then $\dim U=\dim X$.
-      \end{enumerate}
-    }
-\end{enumerate}
-
-\begin{proof}
-\end{proof}
+% \begin{enumerate}
+%   \item[3.20.] {
+%       \emph{Dimension}. Let $X$ be an integral scheme of finite type over a field $k$ (not necessarily algebraically closed).
+%       Use results about varieties to prove the following.
+%       \begin{enumerate}
+%         \item For any closed point $p\in X$, $\dim X=\dim \O_p$, where for rings we always mean the Krull dimension.
+%         \item Let $K(X)$ be the function field of $X$.
+%           Then $\dim X=\trd K(X)/k$.
+%         \item If $Y$ is a closed subset of $X$, then $\codim(Y,X)=\inf{\dim \O_{X,p}|p\in Y}$.
+%         \item If $Y$ is a closed subset of $X$, then $\dim Y+\codim (Y,X)=\dim X$.
+%         \item If $U$ is a nonempty open subset of $X$, then $\dim U=\dim X$.
+%       \end{enumerate}
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+% \end{proof}
 
 % \begin{enumerate}
 %   \item[3.16.] {

@@ -5,9 +5,6 @@
 \input{./latex-preamble/use-scr.tex}
 \input{./latex-preamble/fr-mod.tex}
 
-\newcommand{\fF}{\fr{F}}
-\newcommand{\fL}{\fr{L}}
-\renewcommand{\O}{\cO}
 
 %\graphicspath{ {./diagrams/} }
 
@@ -56,6 +53,18 @@
           Note that since $I^2=0$, $I$ has a natural structure of a $B$-module and hence also of an $A$-module.
           Conversely, for any $\theta\in \Hom_A(\Omega_{A/k},I)$, $g'=g+\theta$ is another homomorphism lifting $f$.
           (For this step, you do not need the hypothesis about $\Spec A$ being nonsingular.)
+        \item Now let $P=k[x_1,\ldots, x_n]$ be a polynomial ring over $k$ of which $A$ is a quotient, and let $J$ be the kernel.
+          Show that there exists a homomorphism $h:P\to B'$ making the following diagram commute,
+          \[
+            \begin{tikzcd}[row sep = 0.4cm]
+              0\ar[d]& 0\ar[d] \\
+              J\ar[d]& I\ar[d] \\
+              P\ar[d]\ar[r,"h"]& B'\ar[d] \\
+              A\ar[d]\ar[r,"f"]& B\ar[d] \\
+              0& 0
+            \end{tikzcd}
+          \] 
+          and show that $h$ induces an $A$-linear map $\ol h:J/J^2\to I$.
       \end{enumerate}
     }
 \end{enumerate}
@@ -85,8 +94,6 @@
       &=g'(aa')
   \end{align*}
   gives us that $g':A\to B'$ is in fact a $k$-algebra morphism, as desired.
-
-  (b)
 \end{proof}
 
 \begin{enumerate}
@@ -98,25 +105,38 @@
 \end{enumerate}
 
 \begin{proof}
-  We begin by showing that each local ring at a closed point of $X$ is regular, whence it will follow that all of its local rings are regular by (II, 8.14A).
-  We must first find all the closed points of $X$.
+  We begin by showing $X$ is not smooth, and proceed to prove that each local ring at a closed point of $X$ is regular, whence it will follow that all of its local rings are regular by (II, 8.14A).
 
   Write $A=k[x,y]/(y^2-x^p+1)$, so that $X=\Spec A$.
   Any maximal ideal of $\m\lideal A$ corresponds to a maximal ideal $\wt\m\lideal k[x,y]$.
   Taking an algebraic closure $\ol k/k$, we have that the induced map $k[x,y]\inc \ol k[x,y]$ is integral, so (AM, 5.10) gives us a maximal ideal $\n\lideal \ol k[x,y]$ such that $\n\cap k[x,y] = \wt\m$.
 
   Hilbert's Nullstellensatz says that $\n=(x-a,y-b)$ for $a,b\in \ol k$.
-  Then $\m = (x-a,y-b)\cap A$ for $b^2-a^p+t=0$, and $A/\m\cong k(a,b)\subset\ol k$.
-  If $b\neq 0$, then $b=\sqrt{a^p-t}$.
-  If $a=\sum_i a_it^i\in k$, then $b=\sqrt{\sum_i a_i^pt^{ip} - t}\notin k$ for degree reasons.
+  Then $q=\m = (x-a,y-b)\cap A$ for $b^2-a^p+t=0$, and $A/\m\cong k(a,b)\subset\ol k$.
   If $b=0$, then $a=\sqrt[p]{t}$, so $k(\m)=k(\sqrt[p]{t})$ has $k(\m)/k$ a non-separable extension.
-  It follows from (II, 8.6A) that $\dim_{k(\m)}\Omega_{k(x)/k}>0$.
+  It follows from (II, 8.6A) that $\dim_{k(\m)}\Omega_{k(\m)/k}>0$,
+  For a closed point $q\in X$, stability under base exchange and (II, 8.4A) give us a surjection
+  \begin{align*}
+    \Omega_{X/k}\otimes k(q)\cong \Omega_{\O_q/k}\otimes k(q)\epi \Omega_{k(q)/k}
+  \end{align*}
+  with kernel $\m_q/\m_q^2$,
+  In particular, we have $\Omega_{X/k}\otimes k(q)\neq 0$.
+
+  If $b\neq 0$, then $b=\sqrt{a^p-t}$, and $k(q)/k$ is separable, so $\m_q/\m_q^2\to \Omega_{X/k}\otimes k(q)$ is surjective.
+  If $a=\sum_i a_it^i\in k$, then $b=\sqrt{\sum_i a_i^pt^{ip} - t}\notin k$ for degree reasons.
 \end{proof}
 
 \begin{enumerate}
   \item[10.2] {
+      Let $f:X\to Y$ be a proper, flat morphism of varieties over $k$.
+      Suppose for some point $y\in Y$ that the fibre $X_y$ is smooth over $k(y)$.
+      Then show that there is an open neighborhood $U$ of $y$ in $Y$ such that $f:f^{-1}(U)\to U$ is smooth.
     }
 \end{enumerate}
+
+\begin{proof}
+  None of this is even characteristic 0!!!
+\end{proof}
 
 \begin{enumerate}
   \item[10.3] {
@@ -134,7 +154,7 @@
 \begin{proof}
   (i)$\implies$(ii):
   Let $i:X_y\inc X$ be the inclusion.
-  (II,8.10) gives us $\Omega_{X_y/k(y)}\cong i^*(\Omega_{X/Y})$.
+  (II, 8.10) gives us $\Omega_{X_y/k(y)}\cong i^*(\Omega_{X/Y})$.
   $i^*$ is a left adjoint and thus commutes with stalks, so
   \begin{align*}
     (\Omega_{X_y/k(y)})_x 
@@ -157,7 +177,7 @@
   \end{align*}
   maps surjectively onto $\Omega_{k(x)/k(y)}$.
   Then $\Omega_{k(x)/k(y)}=0$, so it follows from (II, 8.6A) that $k(x)$ is a separable algebraic extension of $k(y)$.
-  Now, we have a map $f^\sharp_x:\O_y\to \O_x$, and we wish to show that $\m_y^e = \m_x$.
+  Now, we have a map $f^\sharp:\O_y\to \O_x$, and we wish to show that $\m_y^e = \m_x$.
   Clearly 
 
   (iii)$\implies$(i):
@@ -179,7 +199,15 @@
 
 \begin{enumerate}
   \item[10.9] {
+      Let $f:X\to Y$ be a morphism of varieties over $k$.
+      Assume that $Y$ is regular, $X$ is Cohen-Macauley, and that every fibre of $f$ has dimension equal to $\dim X-\dim Y$. 
+      Then $f$ is flat.
     }
 \end{enumerate}
+
+\begin{proof}
+  It suffices, by localization of flatness, to show that $\O_x$ is flat over $\O_y$ for every closed point $x\in X$, where $y=f(x)$.
+  Let $t_1,\ldots, t_r$ be a regular system of parameters for $\O_y$
+\end{proof}
 
 \end{document}

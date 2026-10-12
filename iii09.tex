@@ -5,8 +5,6 @@
 \input{./latex-preamble/use-scr.tex}
 \input{./latex-preamble/fr-mod.tex}
 
-\newcommand{\fF}{\fr{F}}
-\newcommand{\fL}{\fr{L}}
 
 %\graphicspath{ {./diagrams/} }
 
@@ -30,6 +28,38 @@
 
 \bigskip\bigskip
 
+
+\begin{enumerate}
+  \item[II.3.16.] {
+      \emph{Noetherian Induction.}
+      Let $X$ be a noetherian topological space, and let $\P$ be a property of closed subsets of $X$.
+      Assume that for any closed subset $Y$ of $X$, if $\P$ holds for every proper closed subset of $Y$, then $\P$ holds for $Y$. 
+      (In particular, $\P$ must hold for the empty set.)
+      Then $\P$ holds for $X$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  Noetherianity allows us to write $X=\bigcup_{i=1}^s X_i$ for $X_i$ irreducible, with some integer $n=\sum_{i=1}^s \dim X_i$.
+  We induct on $(n,s)$ with the lexicographic ordering.
+  If $n=s=0$, then $X=\0$, so $\P$ holds for $X$.
+  If $n=0$ and $s>0$, then $X = \{x_1,\ldots, x_s\}$ is the union of finitely many closed points.
+  Then every proper subset of $X'\subset S$ is a union of $s'<s$ closed points, so that $\P$ holds for $X'$ by induction, whence $\P$ holds for $X$.
+
+  Now, write $X = \bigcup_{i=1}^s X_i$, reordering so that $\dim X_i>0$ for $1\leqs i\leqs r$ and $X_j = \{x_j\}$ are closed points for $r<j\leqs s$.
+  Take a proper closed subset $X'\subsetneq X$.
+  We have an irreducible decomposition
+  \[
+    X' = \bigcup_{i=1}^{s} X'\cap X_i
+  \] 
+  for $X'$, with some $X'\cap X_i$ empty.
+  Let $s'$ be the number of nonempty $X'\cap X_i$, and $n'=\sum_{i=1}^s \dim X'\cap X_i$.
+
+  Take some $i$ such that $X_i\cap X'\subsetneq X_i$ is a proper closed subset.
+  If $i>r$, then $X_i\cap X'=\0$ gives us $s'<s$, so $\P$ holds for $X'$ by induction.
+  Otherwise we have $\dim X_i\cap X'<\dim X_i$, so that $n'<n$, whence $\P$ holds for $X'$ by induction once more.
+  We conclude that, in fact, $\P$ holds for $X$
+\end{proof}
 
 \begin{enumerate}
   \item[II.3.17] {
@@ -162,9 +192,9 @@
   Disjointness implies $y\in U_i^c$ and $x\in C_j^c$.
   Then 
   \[
-    \{y\}^-\subset \{x\}^- \cap C_j\subset\{x\}^-\setminus \{x\}.
+    \{y\}^-\subset \{x\}^- \cap C_j\subset \{x\}^-\setminus \{x\}
   \]
-  FINISH THIS
+  FINISH THIS!!
   
   (d) If $S=\bigsqcup_{i=1}^n(U_i\cap C_i)$ is constructible in $Y$, then
   \begin{align*}
@@ -184,7 +214,7 @@
         \item In that case, show that $f(X)$ contains a nonempty open subset of $Y$ by using the following result from commutative algebra:
           let $A\subset B$ be an inclusion of noetherian integral domains, with $B$ a finitely generated $A$-algebra.
           Then, given a nonzero element $b\in B$, there is a nonzero element $a\in A$ with the following property: if $\phi:A\to K$ is any homomorphism of $A$ to any algebraically closed field $K$, such that $\phi(a)\neq 0$, then $\phi$ extends to a homomorphism $\phi'$ of $B$ into $K$, such that $\phi'(b)\neq 0$.
-          [\emph{hint}: Prove the algebraic result by induction on the number of generators of $B$ over $A$, with a direct proof for $B$ cyclic over $A$. In the application, take $b=1$.]
+          [\emph{Hint}: Prove the algebraic result by induction on the number of generators of $B$ over $A$, with a direct proof for $B$ cyclic over $A$. In the application, take $b=1$.]
         \item Now use noetherian induction on $Y$ to complete the proof.
         \item Give some examples of morphisms $f:X\to Y$ of varieties over an algebraically closed field $k$, to show that $f(X)$ need not be either open or closed.
       \end{enumerate}
@@ -204,6 +234,16 @@
 
 \begin{proof}
   $f(U)$ is constructible by (II, Ex. 3.19), so it suffices to show it is stable under generalization by (II, Ex. 3.18c).
+  Suppose $y'\specto y=f(x)$ for some $x\in X$, so $y'$ is the image of some prime $\q'\in\Spec \O_y$ under the inclusion $\Spec \O_y\inc Y$.
+  The map $f^\sharp:\O_y\to \O_x$ is flat, so (AM 3.18) gives us that it is in fact surjective.
+  \[
+    \begin{tikzcd}
+      X\ar[r,"f"]&Y \\
+      \Spec\O_x\ar[u,hookrightarrow]\ar[r,"f",twoheadrightarrow] &\Spec\O_y\ar[u,hookrightarrow]
+    \end{tikzcd}
+  \] 
+  In particular, it supplies us with a prime $\p'\in \Spec\O_x$ such that $f^\sharp(\p')=\q'$.
+  The image $x'\in X$ of $\p'$ gives us $y'=f(x')\in f(X)$, as desired.
 \end{proof}
 
 \begin{enumerate}
@@ -241,7 +281,7 @@
   \item[9.7.] {
       Let $Y\subset X$ be a closed subscheme, where $X$ is a scheme of finite type over a field $k$.
       Let $D=k[t]/t^2$ be the ring of dual numbers, and define an \emph{infinitesimal deformation of $Y$ as a closed subscheme of $X$}, to be a closed subscheme $Y'\subset X\times_k D$, which is flat over $D$ and whose closed fibre is $Y$.
-      Show that there are classified by $H^0(Y,\N_{Y/X})$, where
+      Show that they are classified by $H^0(Y,\N_{Y/X})$, where
       \[
         \N_{Y/X} = \sHom_{\O_X}(\I_Y/\I_Y^2,\O_Y).
       \] 
@@ -249,6 +289,31 @@
 \end{enumerate}
 
 \begin{proof}
+  We consider first the affine case, so that $X=\Spec A$ and $Y=\Spec A/I$.
+  Then $X\times_k D=\Spec B$ with $A[t]/t^2$, and $Y'=\Spec B/I'$ for 
+  \[
+    I'=(a_1 + b_1t,\ldots, a_r +b_rt,b_{r+1}t,\ldots, b_st)
+  \]
+  with $b_1,\ldots, b_s\in A$ and $(a_1,\ldots, a_r)=I$.
+  Hence, the coordinate ring of the closed fibre is given by
+  \begin{align*}
+    \frac{B}{I'}\otimes_{k[t]/t^2}\frac{k[t]/t^2}{(t)}
+     &\cong \frac{B/(t)}{I'/(t)}
+     \cong \frac{A}{I}.
+  \end{align*}
+  Note that any $I'$ can be written in this way without duplicate $a_i$, as $a_i + b_i't = a_i +b_it + (b_i'-b_i)t$.
+  It suffices to find a condition for $Y'\to D$ to be flat.
+
+  Recall that a morphism of affine schemes is flat if and only if the associate map of rings is flat.
+  (9.1Aa) gives us that $k[t]/t^2\to B/I'$ is flat if and only if the multiplication map $\a\otimes B/I'\to B/I'$ is injective for every finitely generated ideal $\a\lideal k[t]/t^2$.
+  There are only two ideals of $k[t]/t^2$, and $(1)\otimes B/I'\to B/I'$ is an isomorphism.
+  Thus, we need only consider $(t)\otimes B/I'\to B/I'$.
+
+  First, we note that $t\otimes bt = 0$.
+  Then if $b\in B/I'\setminus (t)/I'$
+
+  Now, consider  $\N_{Y/X}=\Hom_A(I/I^2,A/I)$
+
   The universal property of $X\times_k D$ gives us that maps $Y'\to X\times_k D$ are in correspondence with commuting diagrams of the following form.
   \[
     \begin{tikzcd}[column sep = 0.3cm]
@@ -260,12 +325,28 @@
 \end{proof}
 
 \begin{enumerate}
-  \item[9.10] {
+  \item[9.10.] {
       A scheme $X_0$ over a field $k$ is \emph{rigid} if it has no infinitesimal deformations.
       \begin{enumerate}
         \item Show that $\PP_k^1$ is rigid, using (9.13.2).
       \end{enumerate}
     }
 \end{enumerate}
+
+\begin{proof}
+  It suffices via (9.13.2) to show that $H^1(X,\T_X)=0$, with $X=\PP_k^1$.
+  \begin{align*}
+    \T_X &=\Omega_X^\vee \\
+         &=\omega_X^\vee \\
+         &\cong \O(2).
+  \end{align*}
+  Then (7.1) and (II, 5.1) give us
+  \begin{align*}
+    H^1(X,\T_X)^\vee &\cong \Hom(\T_X,\omega_X) \\
+                     &\cong \Gamma(X,\O(-4)) \\
+                     &= 0,
+  \end{align*}
+  since $-4<0$.
+\end{proof}
 
 \end{document}

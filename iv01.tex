@@ -1,0 +1,194 @@
+\documentclass[12pt]{amsart} 
+\usepackage{mathtools}
+
+\input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
+\input{./latex-preamble/fr-mod.tex}
+
+
+%\graphicspath{ {./diagrams/} }
+
+\begin{document}
+
+{Hartshorne} \hfill {10-16-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter IV.1}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+	\item[1.] {
+      Let $X$ be a curve and $P\in X$.
+      Show that there exists a rational function $f\in K(X)$ that is regular everywhere except $P$.
+    }
+\end{enumerate} 
+
+\begin{proof}
+  Consider the sheaves $\O_X(dP)$, for $d\geqs 0$.
+  We have 
+  \begin{align*}
+    \dim\Gamma(X,\O_X(dP))
+    &=h^0(X,\O_X(dP)) \\
+    &\geqs \chi(X,\O_X(dP)) \\
+    &= \deg (dP) +1-g \\
+    &= d + 1-g
+  \end{align*}
+  by Riemann-Roch.
+  Then, for all $d\geqs g$, there exists $f\in \Gamma(X,\O_X(dP))\subset K(X)$ which is regular everywhere except $P$.
+\end{proof}
+
+\begin{enumerate}
+	\item[2.] {
+      Again let $X$ be a curve, and let $P_1,\ldots, P_r\in X$ be a finite collection of points with $r\geqs 1$.
+      Then there is a rational function $f\in K(X)$ having poles (of some order) at each of the $P_i$ and regular elsewhere.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We proceed via induction on $r$.
+  If $r=1$, we are done by (Ex. 1.1).
+  Otherwise, take $f$ with poles at precisely the points $P_1,\ldots,P_{r-1}$, and consider the effective divisor $\sum_{i=1}^s m_i Q_i$ of zeroes of $f$.
+  If $P_r\neq Q_i \ (1\leqs i\leqs s)$, then we can take $g\in K(X)$ with a pole only at
+
+  Take $f_1,\ldots,f_r\in K(X)$ which are regular everywhere except $P$.
+  There are finitely many zeroes $Q_1,\ldots, Q_m\in X$ of the $f_1,\ldots, f_r$, so that $h:=f_1^{-1}\cdots f_r^{-1}\in \O_X(\sum_{i=1}^m d_iQ_i)=:\L$ for some $d_i\geqs 0$.
+  Note that the $f_i$ are not constant, so we must have $\sum_i d_i\geqs 1$.
+
+  The sheaf $\L^m\ni h^m$ is very ample for $m\sum_id_i\geqs 2g+1$, and thus for $m\gg 0$ since $\sum_id_i\geqs 1$.
+  Take some basis $h_1,\ldots, h_N$ of $\Gamma(X,\L^n)$, so that the elements $h^n,h_1,\ldots, h_N$ define a closed immersion $i:X\to \PP^N$ with $i^\sharp(x_0)=h$.
+  Then
+  \[
+    i^{-1}(V(x_0)) = V(h^n) = \{P_1,\ldots, P_r\}
+  \]
+  by construction of $h^n$, so that
+  \begin{align*}
+    X\setminus \{P_1,\ldots, P_r\}
+    &= X\setminus i^{-1}(V(x_0)) \\
+    &= i^{-1}(D(x_0))
+  \end{align*}
+  is a closed subscheme of $D(x_0)\cong \AA^N$.
+  In particular, it is affine.
+\end{proof}
+
+\begin{enumerate}
+	\item[3.] {
+      Let $X$ be an integral, separated, regular, one-dimensional scheme of finite type over $k$, which is \emph{not} proper over $k$.
+      Then $X$ is affine.
+      [\emph{Hint}: Embed $X$ in a (proper) curve $\ol X$ over $k$< and use (Ex. 1.2) to construct a morphism $f:\ol X\to \PP^1$ such that $f^{-1}(\AA^1)=X$.]
+    }
+\end{enumerate}
+
+\begin{proof}
+  We assume $k=\ol k$ is algebraically closed, so $X$ is a nonsingular one-dimensional variety over $k$.
+  Then we have an open embedding $X\inc \ol X:= C_{K(X)}$, with $C_{K(X)}$ the abstract nonsingular curve defined by the function field $K(X)$.
+  Then $\ol X$ is complete, and $X\cong \ol X\setminus \{P_1,\ldots, P_r\}$ for some $P_1,\ldots, P_r$.
+
+  (1.2) gives us $f\in K(\ol X)$ with poles at precisely $\{P_1,\ldots, P_r\}$.
+  Write $D=\sum_{i=1}^r a_i P_i$, where $a_i>0$ is the multiplicity of the pole of $f$ at $P_i$.
+  Then $\O_{\ol X}(D)\subset \K(\ol X)$ has
+  \[
+    \O_{\ol X}(D)_{P_i}\cong \pi^{-a_i}\O_{\ol X,P_i}\cong f\O_{\ol X,P_i},
+  \] 
+  since $\O_{\ol X,P_i}$ is a DVR.
+  $\O_{\ol X}(D)_Q\cong \O_{\ol X}$ for all other points $Q$, so $1,f\in \Gamma(\ol X, \O_{\ol X}(D))$ are global sections generating $\O_{\ol X}(D)$.
+  It follows from (II, 7.1) that there is a unique map
+  \begin{align*}
+    \vphi: \ol X\to \PP^1_k
+  \end{align*}
+  such that $\O_{\ol X}(D)\cong \vphi^*\O_{\PP_k^1}(1)$, $1=\vphi^*(x_0)$, and $f = \vphi^*(x_1)$.
+
+  TODO: 
+  \begin{enumerate}
+    \item Show that $\vphi^{-1}(\AA^1)= \ol X\setminus \{P_1,\ldots, P_r\}$.
+    \item Show that $\vphi$ is affine.
+  \end{enumerate}
+\end{proof}
+
+\begin{enumerate}
+	\item[5.] {
+      For an effective divisor $D$ on a curve $X$ of genus $g$, show that $\dim |D|\leqs \deg D$.
+      Furthermore, equality holds if and only if $D=0$ or $g=0$.
+    }
+\end{enumerate}
+
+\begin{proof}
+  We have
+  \begin{align*}
+    |D| = l(D) - 1 &= \deg D + l(K-D) -g \\
+                   &= \deg D - (l(K) - l(K-D)).
+  \end{align*}
+  We have an inclusion $\O_X(K-D)\subset \O_X(K)$ whenever $D$ is effective, so the inequality clearly holds.
+  Further, equality occurs iff $l(K)=l(K-D)$.
+
+  Suppose now that $l(K)=l(K-D)$, and $D\neq 0$ is an effective divisor.
+  Then we have
+  \begin{align*}
+    l(D) &= \deg D +  l(K-D) +1 -g \\
+         &= \deg D+1 \\
+         &\geqs 2,
+  \end{align*}
+  so there is a non-constant function $f\in \Gamma(X,\O_X(D))\subset K(X)$.
+
+  TODO: Show that this gives us a finite, degree one map $\vphi:X\to \PP^1$, so that $K(X)\cong K(\PP^1)$ implies $X\cong \PP^1$ is the unique curve of genus $g=0$.
+\end{proof}
+
+\begin{enumerate}
+	\item[6.] {
+      Let $X$ be a curve of genus $g$.
+      Show that there is always a finite morphism $f:X\to \PP^1$ with degree $\leqs g+1$.
+      %In particular, $\gon(X)\leqs g+1$.
+    }
+\end{enumerate} 
+
+\begin{proof}
+  TODO: prove the gonality lemma, or at least the direction that gives us this.
+
+  For a morphism $f:X\to \PP^n$ with $f^*\O_{\PP^n}(1)\cong \O_{\PP^n}(D)$, we have
+  \[
+    \deg D= \deg f^*\O_{\PP^n}(1)= \deg f.
+  \]
+  Thus, it suffices by our lemma that $\gon(X)$ is the smallest degree of a finite map $f:X\to \PP^1$ to find a divisor $D$ of $\deg D\leqs g+1$ such that $h^0(X,\O_X(D))\geqs2$.
+  The sheaf $\O_X((g+1)P)$ for $P\in X$ has
+  \begin{align*}
+    h^0(\O_X((g+1)P))\geqs \chi(X,\O_X((g+1)P)) = (g+1)+1-g= 2
+  \end{align*}
+  by Riemann-Roch, so that we're done by the above.
+\end{proof}
+
+\begin{enumerate}
+	\item[7.] {
+      A curve $X$ is called \emph{hyperelliptic} if $g\geqs 2$ and there exists a finite morphism $f:X\to \PP^1$ of degree 2.
+      \begin{enumerate}
+        \item If $X$ is a curve of genus $g=2$, show that the canonical divisor defines a complete linear system $|K|$ of degree 2 and dimension 1, without base points.
+          Use (II, 7.8.1) to donclude that $X$ is hyperelliptic.
+        \item Show that the curves constructed in (1.1.1) all admit a morphism of degree 2 to $\PP^1$.
+          Thus, there exist hyperelliptic curves of any genus $g\geqs 2$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) We have $\deg K = 2g-2 = 2$ and
+  \[
+    |K| = l(K) - 1 = g-1=1.
+  \] 
+  Then (II, 7.8.1) supplies us with a morphism $f:X\to \PP^1$.
+
+  STS: basepoint free, and that there exists $P\in \PP^1$ such that $f^*P= D$.
+
+  (b) I have literally no clue how to work with these.
+\end{proof}
+
+\end{document}

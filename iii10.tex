@@ -105,9 +105,15 @@
 \end{enumerate}
 
 \begin{proof}
+  We begin by showing that each local ring is regular.
+  For any prime ideal $\p\in X$, we have
+  \begin{align*}
+    \frac{k[x,y]}{(y^2-x^p)}
+  \end{align*}
+  Localizations of a regular local ring at prime ideals are regular (8.14A), so it suffices to show $k[x,y]/(y^2 - x^p +t)$
   We begin by showing $X$ is not smooth, and proceed to prove that each local ring at a closed point of $X$ is regular, whence it will follow that all of its local rings are regular by (II, 8.14A).
 
-  Write $A=k[x,y]/(y^2-x^p+1)$, so that $X=\Spec A$.
+  Write $A=k[x,y]/(y^2-x^p+t)$, so that $X=\Spec A$.
   Any maximal ideal of $\m\lideal A$ corresponds to a maximal ideal $\wt\m\lideal k[x,y]$.
   Taking an algebraic closure $\ol k/k$, we have that the induced map $k[x,y]\inc \ol k[x,y]$ is integral, so (AM, 5.10) gives us a maximal ideal $\n\lideal \ol k[x,y]$ such that $\n\cap k[x,y] = \wt\m$.
 
@@ -135,7 +141,82 @@
 \end{enumerate}
 
 \begin{proof}
-  None of this is even characteristic 0!!!
+  $X_y$ smooth over $k(y)$ of relative dimension $m$ has, in particular, that $X_y$ is equidimensional with $\dim X_y=m$.
+  If $y$ is not closed, then $f$ proper implies no $x\in X_y$ is closed.
+  Write $n=\dim X-\dim Y$.
+  Then $f$ flat implies that, for $x\in X_y\subset X$,
+  \begin{align*}
+    m &= \dim_x(X_y) \\
+      &= \dim_x X-\dim_y Y \\
+      &= n + \dim \{y\}^- -\dim \{x\}^-
+  \end{align*}
+  by (II, Ex. 3.20).
+  We claim that $\dim\O_{X,x}=\dim \O_{Y,y}$ for any $x\in X_y$, so that $m=n$.
+
+  First, we note that $\Spec \O_{Y,y}=\{y':y'\in \{y\}^-\}$.
+  We claim that $f^{-1}(\Spec\O_{Y,y})= \Spec \O_{X,x}$.
+  It suffices to show that $f^{-1}(\Spec\O_{Y,y})\subset \Spec\O_{X,x}$.
+  Take $x'\in X$ such that $f(x'):=y'\in\{y\}^-$.
+  Then $x'\in f^{-1}(\{y'\})\subset f^{-1}(\{y\}^-)$.
+  If $f^{-1}(\{y\})=\{x\}$, then we still don't get anything.
+  We may assume $Y$ is affine, so by (II, 2.4) $\Spec \O_{Y,y}=\{y':y'\subset y\}$, and 
+  
+  First, assume $X$ and $Y$ are affine.
+  Then
+
+  so for any $x'\subset x$, we can consider the following diagram.
+  \[
+    \begin{tikzcd}
+      y'\ar[r,hook]\ar[d,"f^\sharp"'] & y\ar[d,"f^\sharp"] \\
+      x'\ar[r,hook] & x
+    \end{tikzcd}
+  \] 
+  If
+
+  Now, we have $(\Omega_{X/Y}\otimes k(x))_x \cong (\Omega_{X/Y})_x\otimes_{\O_x}k(x)$, so (II, 5.8) supplies us with the open set
+  \[
+    V:=\{x\in X: \dim_{k(x)}(\Omega_{X/Y}\otimes k(x))\leqs n\}\subset X
+  \] 
+  containing $X_y$.
+  Properness of $f$ gives us that
+  \[
+    U:=Y\setminus f(X\setminus V)\subset Y
+  \] 
+  is open.
+  Further,
+  \[
+    f^{-1}(U) = X\setminus f^{-1}(f(X\setminus V))\subset V.
+  \] 
+
+  We claim that $f:f^{-1}(U)\to U$ is smooth of relative dimension $n=\dim X-\dim Y$.
+  It is flat by preservation of flatness under base change.
+  We also have $\dim$ 
+
+  First, suppose $y$ is closed, so that $n=\dim X-\dim Y$.
+
+
+  If $x'\in f^{-1}(f(V))$, then there is some $x\in X_{y'}$, where $y'=f(x')$, such that $\dim_{k(x)}(\Omega_{X/Y}\otimes k(x))\leqs n$.
+  We claim that in fact $x'\in V$.
+  We offer no proof :3
+
+  We consider the restricted map $f:V\to f(V)$
+
+  Take an algebraic closure $\ol k/k$ and consider the base extension of $f:X\to Y$.
+  \[
+    \begin{tikzcd}
+      X\ar[r,"f"] & Y \\
+      X_\ol k\ar[u]\ar[r] & \Spec \ol k\ar[u]
+    \end{tikzcd}
+  \] 
+  Now, we have that $X_{\ol k}$
+  \[
+    \begin{tikzcd}
+      X\ar[r,"f"] & Y \\
+      f^{-1}(V)\ar[u]\ar[r,"f"] & V\ar[u] \\
+      f^{-1}(V)_\ol k\ar[u]\ar[r] & \Spec \ol k\ar[u]
+    \end{tikzcd}
+  \] 
+  Stability of properness under base extension gives us that $X$ is proper.
 \end{proof}
 
 \begin{enumerate}
@@ -153,6 +234,14 @@
 
 \begin{proof}
   (i)$\implies$(ii):
+  Let $X'\inc X$ be an irreducible subset of $X$ with the reduced induced subscheme, and consider $f':X'\to Y$.
+  The presence of nilpotent elements changes neither dimensions of irreducible components nor the tensor with a field, so (2) and (3) still hold for $f'$.
+  Then $X'$ is integral, so (10.0.2) implies $\Omega_{X'/Y}=0$ is locally free of rank 0.
+  Writing $\I$ for the ideal sheaf of $X'$, we have an exact sequence
+  \[
+    \I/\I^2\to \Omega_{X/Y}\otimes \O_{X'}\to 0,
+  \] 
+
   Let $i:X_y\inc X$ be the inclusion.
   (II, 8.10) gives us $\Omega_{X_y/k(y)}\cong i^*(\Omega_{X/Y})$.
   $i^*$ is a left adjoint and thus commutes with stalks, so

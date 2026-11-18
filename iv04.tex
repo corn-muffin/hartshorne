@@ -1,0 +1,397 @@
+\documentclass[12pt]{amsart} 
+\usepackage{mathtools}
+
+\input{./latex-preamble/cm-preamble.tex}
+\input{./latex-preamble/use-scr.tex}
+\input{./latex-preamble/fr-mod.tex}
+
+\DeclareMathOperator{\Jac}{Jac}
+\renewcommand{\epsilon}{\varepsilon}
+%\graphicspath{ {./diagrams/} }
+
+\begin{document}
+
+{Hartshorne} \hfill {11-17-2026}
+
+\bigskip\bigskip
+
+\begin{center}
+
+{\sc Chapter IV.4}
+
+\end{center}
+
+\begin{center}
+
+  {Noah Parker} 
+    
+\end{center}
+
+\bigskip\bigskip
+
+\begin{enumerate}
+	\item[1.] {
+      Let $X$ be an elliptic curve over $k$, with $\char k\neq 2$, let $P\in X$ be a point, and let $R$ be the graded ring $R=\bigoplus_{n\geqs 0}H^0(X,\O_X(nP))$.
+      Show that for a suitable choice of $t,x,y$,
+      \[
+        R\cong k[t,x,y]/(y^2-x(x-t^2)(x-\lambda t^2))
+      \] 
+      as a graded ring, where $k[t,x,y]$ is graded by setting $\deg t=1$, $\deg x=2$, $\deg y=3$.
+    }
+\end{enumerate} 
+
+\begin{proof}
+  Denote $R_n:= H^0(\O(nP))\subset K$, where $K$ is the function field of $X$.
+  As in (4.6), Riemann-Roch gives us
+  \[
+    \dim R_n = \deg nP + 1 - g + l(K-nP) = n
+  \] 
+  since $\deg (K-nP)=-n<0$, whenever $n>0$.
+  For $n=0$, $R_0=H^0(X,\O_X)\cong k$ has dimension 1, since $X$ is complete.
+  Unlike in (4.6), however, we do not view the modules as filtered, but instead as disjoint degree components, with $R_n$ the degree $n$ component.
+  $R$ is given the structure of a graded ring by the natural map
+  \[
+    H^0(mP)\otimes H^0(nP)\cong H^0(\wt{\O_X(m)\otimes\O_X(m)})\to H^0(\O_X(m)\otimes\O_X(n))\cong H^0((m+n)P)
+  \] 
+  given by the inclusion of the presheaf tensor product into its sheafification.
+  Let $1_n\in R_n$ denote the constant function with value $1\in k$. 
+  Clearly $1_n^m = 1_{mn}\in R_{mn}$, and $1_{m-n}\cdot$ induces an inclusion $R_n\inc R_m$ whenever $m\geqs n$.
+  Then, for $f\in R_n$ and $g\in R_m$, we can alternatively define their product by $f\cdot g= (f\cdot 1_m)(g\cdot 1_n)\in R_{m+n}\subset K$, viewed as a product of rational functions on $X$.
+  In particular, we see that $R$ is an integral domain.
+
+  Let $t:=1_1\in R_1$ be the constant function with value 1, and let $x\in R_2$, $y\in R_3$ be nonzero elements such that
+  \begin{align*}
+    R_2 &\cong k\langle t^2,x\rangle, \\
+    R_3 &\cong k\langle t^3, tx, y\rangle.
+  \end{align*}
+  This is clearly possible for $R_2$, and hence for $R_3$ since $t\cdot$ is injective.
+  We claim that
+  \[
+    R_4 \cong k\langle t^4, t^2x, ty, x^2\rangle
+  \] 
+  as well.
+  The first three elements are once again linearly independent since $t\cdot$ is injective.
+  $x^2$ has $v_P(x^2)=4>v_P(ty),v_P(t^2x),v_P(t^4)$, so any linear combination $f=at^4+bt^2x+cty+x^2$ must also have $v_P(f)=4$. 
+  In particular, $f\neq 0$.
+  An identical argument shows that
+
+  By abuse of notation, these elements define a map $\phi:k[t,x,y]\to R$.
+  $\dim R_6=6$, so there is a relation between the seven elements
+  \[
+    t^6,t^4x,t^3y,t^2x^2,txy,x^3,y^2.
+  \] 
+  As rational functions, $v_P(x^3)=v_P(y^2)=6$, so either both functions have coefficient zero or neither does.
+  The former is impossible since the first five elements span $R_5$.
+  Then, replacing $x$ and $y$ by scalar multiples,\footnote{They are algebraically closed, so we can take the square and cube roots of their coefficients.} we may write the equation as
+  \[
+    y^2 + a_1txy + a_2t^3y = x^3 + a_3t^2x^2 + a_4t^4x + a_5t^6.
+  \] 
+  $\char k\neq 2$, so we may replace $y$ by $y'= y + \frac12(a_1t^4x + a_2t^6)$.
+  Then
+  \begin{align*}
+    {y'}^2 = y^2 + a_1t^4xy +a_2y + \frac 14a_1^2 t^2x^2 + a_1a_2t^4x + \frac14 a_2^2t^6,
+  \end{align*}
+  so in our new coordinates we may write
+  \[
+    y^2 = x^3 + a_1' t^2x^2 + a_2't^4 + a_3't^6
+  \] 
+  for some $a_1',a_2',a_3'\in k$.
+  Thus, we can write
+  \[
+    y^2 = (x-at^2)(x-bt^2)(y-ct^2)
+  \] 
+  for some $a,b,c\in k$.
+  A linear change of coordinates on $x$ allows us to take $a=0$ and $b=1$, so that
+  \[
+    y^2 = x(x-t^2)(x-\lambda t^2).
+  \] 
+  Hence, we may replace $\phi$ by the induced map
+  \[
+    \phi:\frac{k[t,x,y]}{(y^2 - x(x-t^2)(x-\lambda t^2))}\to R.
+  \] 
+  Denote the domain $R'$ going forward.
+
+  The maps $\phi_n:R'_n\to R_n$ are trivially isomorphisms for $0\leqs n\leqs 2$, so we may assume $n\geqs 3$.
+  We first note that the monomials
+  \begin{align*}
+    \left\{t^{n-2i}x^i : 0\leqs i\leqs \left\lfloor\frac n2\right\rfloor\right\} 
+    \cup \left\{t^{n-3-2i}x^iy: 0\leqs i\leqs \left\lfloor\frac{n-3}2\right\rfloor\right\}
+  \end{align*}
+  span $R_n'$.
+  Further, their images under $\phi_n$ all have distinct valuations, and thus are linearly independent in $R_n$.
+  In particular, $\phi_n$ is injective, and the above form a basis of $R_n'$, so
+  \begin{align*}
+    \dim R_n' &= \dim \im\phi_n \\
+              &= \left\lfloor\frac n2\right\rfloor+1 +\left\lfloor\frac{n-3}2\right\rfloor + 1 \\
+              %&= \left\lfloor\frac n2\right\rfloor+\left\lfloor\frac{n-1}2\right\rfloor + 1 \\
+              &= \frac n2 +\frac{n-1}2 - \frac12 + 1 \\
+              &= n.
+  \end{align*}
+  It follows that $\phi_n:R'_n\iso R_n$ is an isomorphism for all $n\geqs 3$, so that $\phi:R'\iso R$ is an isomorphism.
+\end{proof}
+
+\begin{enumerate}
+	\item[2.] {
+      If $D$ is any divisor of degree $\geqs 3$ on the elliptic curve $X$, and if we embed $X$ in $\PP^n$ by the complete linear system $|D|$, show that the image of $X$ in $\PP^n$ is projectively normal.
+
+      \emph{Note:} It is true more generally that if $D$ is a divisor of degree $\geqs 2g+1$ on a curve of genus $g$, then the embedding of $X$ by $|D|$ is projectively normal (Mumford [4, p. 55]).
+    }
+\end{enumerate}
+
+\begin{proof}
+  Recall from (II, Ex. 5.14d) that a closed subscheme $X\subset \PP^n$ is projectively normal if and only if it is normal, and for every $m\geqs 0$ the natural map $\Gamma(\PP^n,\O_{\PP^n}(m))\to\Gamma(X,\O_X(m))$ is surjective.
+  Our curve is nonsingular, so in particular normal. 
+  Hence, we need only consider the latter condition.
+  By (III, 5.1), we have a natural isomorphism
+  \[
+    k[x_0,\ldots,x_n]\iso \bigoplus_{m\geqs 0}H^0(\PP^n,\O_{\PP^n}(m)),
+  \] 
+  so that
+  \[
+    \bigoplus_{m\geqs 0}H^0(\PP^n,\O_{\PP^n}(m))\cong \mb{Sym}(H^0(\PP^n,\O_{\PP^n}(1))).
+  \] 
+  %The embedding $\vphi:X\inc\PP^n$ identifies $\O_{\PP^n}(1)\cong \vphi^*\O_{X}(D)$.
+  %Then (II, Ex. 5.1d) gives us an isomorphism $\vphi_*\O_X(D)\cong \vphi_*(\vphi^*\O_{\PP^n}(1))\cong\vphi_*\O_X\otimes \O_{\PP^n}(1)$, whence
+  For some reason, the map
+  \begin{align*}
+    H^0(\PP^n,\O_{\PP^n}(1))\surj H^0(X,\O_X(D))
+  \end{align*}
+  given by restriction is surjective.
+  Thus, it suffices to show that the natural map
+  \[
+    \mb{Sym}^m(H^0(X,\O_X(D))\to H^0(X,\O_X(mD))
+  \] 
+  is surjective.
+
+  Consider the case of $d=\deg D=3$, so that $X\subset \PP^2$.
+  Consider $X$ as a Weil divisor of $\PP^2$, so that $\I_X=\O_{\PP^n}(-X)\cong \O_{\PP^n}(-1)$, and we receive an exact sequence
+  \[
+    0\to \O_{\PP^n}(-1)\to \O_{\PP^n}\to \O_X\to 0,
+  \] 
+  which we can tensor by $\O_X(mD)$ to get
+  \[
+    0\to \O_{\PP^n}(m-1)\to \O_{\PP^n}(m)\to \O_X(mD)\to 0.
+  \] 
+  $\O_{\PP^n}(m-1)$ is locally free, so its first cohomology vanishes by (III, 5.1), whence exactness of
+  \[
+    H^0(\PP^n,\O_{\PP^n}(m))\to H^0(X,\O_X(mD))\to H^1(\PP^n, \O_{\PP^n}(m-1))=0
+  \] 
+  gives us projective normality.
+
+  % Now, take $d=\deg D\geqs 4$.
+  % The result holds for some $D'=D-P$ whenever $P\in X$ is a point.
+  % Take some closed point $P\in X$ and consider the unreduced schemes
+  % \[
+  %   k(mP):=\frac{k(P)[\epsilon]}{(\epsilon^m)},
+  % \] 
+  % with spectrum $\Spec k(mP)=\{(\epsilon^{m-1})\}$.
+  % The map
+
+  % \[
+  %   0\to \O_X(-mP)\to \O_X\to \O_{mP}\to 0.
+  % \] 
+  % Tensoring with $\O_X(mD)$, we have
+  % \[
+  %   0\to \O_X(mD')\to \O_X(mD)\to \O_{mP}(mD)\to 0.
+  % \] 
+  % $\O_P(D)\cong k(P)\otimes \O_X(D)$ is skyscraper, thus flasque, so for all $m\geqs 2$ we have an isomorphism $H^m(X,D')\to H^m(X,D)$ given by the exact sequence
+  % \[
+  %   0=H^{m-1}(X,\O_P(D))\to H^m(X,\O_X(D'))\to H^m(X,\O_X(D))\to H^m(X,\O_P(D))=0.
+  % \] 
+  % \[
+  %   \begin{tikzcd}
+  %     0\ar[r] & \mb{Sym}^mH^0(\O_X(D-P)) \ar[r]\ar[d] & \mb{Sym}^m H^0(\O_X(D)) \ar[r]\ar[d] & H^0(\O_P) \ar[r]\ar[d] & 0\\
+  %     0\ar[r] & H^0(\O_X(mD - mP)) \ar[r]\ar[d] & H^0(\O_X(mD)) \ar[r] & H^0(\O_{mP}) \ar[r]\ar[d] & 0 \\
+  %             & 0 & & 0
+  %   \end{tikzcd}
+  % \] 
+
+  Now, take $d=\deg D\geqs 4$.
+  The result holds for some $D'=D-P$ whenever $P\in X$ is a point.
+  Take a closed point $P$ not involved in $D$.
+  Then we have the following diagram,
+  \[
+    \begin{tikzcd}
+      %0 & 0 \\
+      %\frac{\mb{Sym}^m H^0(\O_X(D))}{\mb{Sym}^m H^0(\O_X(D')}\ar[r]\ar[u] & \frac{H^0(\O_X(mD))}{H^0(\O_X(mD'))}\ar[u] \\
+      \mb{Sym}^m H^0(\O_X(D))\ar[r,"\phi"] & H^0(\O_X(mD)) \\
+      \mb{Sym}^m H^0(\O_X(D'))\ar[u, hook] \ar[r,twoheadrightarrow] & H^0(\O_X(mD'))\ar[u,hook]
+    \end{tikzcd}
+  \] 
+  so it suffices by the 5-lemma to show that the map of quotients is surjective.
+  By Riemann-Roch, $\dim H^0(\O_X(mD))/H^0(\O_X(mD - mP))=m$.
+  Now, take 
+  \begin{align*}
+    &f\in H^0(\O_X(D))\setminus H^0(\O_X(D-P)), \\ 
+    &g\in H^0(\O_X(D-P))\setminus H^0(\O_X(D-2P))\subset H^0(\O_X(D))
+  \end{align*}
+  supplied by Riemann-Roch once more.
+  Then $v_P(f)= 0$ and $v_P(g)=1$, so $v_P(f^{m-i}g^i)=i$ for $0\leqs i\leqs m$.
+  In particular, the elements
+  \[
+    \{f^{m-i}g^i\}_{i=0}^{m-1}\subset \im\phi\cap H^0(\O_X(mD))\setminus H^0(\O_X(mD'))
+  \]
+  are linearly independent from eachother, and all elements of $h\in H^0(\O_X(mD'))$, which have $v_P(h)\geqs m$.
+  It follows that the quotient map is surjective, so that $\phi$ is as well, giving us our result.
+\end{proof}
+
+\begin{enumerate}
+	\item[3.] {
+      Let the elliptic curve $X$ be embedded in $\PP^2$ so as to have the equation $y^2=x(x-1)(x-\lambda)$.
+      Show that any automorphism of $X$ leaving $P_0=(0,1,0)$ fixed is induced by an automorphism of $\PP^2$ coming from the automorphism of the affine $(x,y)$-plane given by 
+      \[
+        \begin{cases}
+          x' = ax +b \\
+          y' = cy.
+        \end{cases}
+      \] 
+    }
+\end{enumerate}
+
+\begin{proof}
+  Let $\vphi:X\inc \PP^2$ be our fixed embedding, and choose such an automorphism $\sigma:X\to X$ with $\sigma(P_0)=P_0$.
+  %Then $\vphi\circ \sigma:X\inc \PP^2$ is another
+  We have induced maps $\sigma^*:H^0(X,\O(nP_0))\to H^0(X,\O(nP_0))$ for each $n\geqs 0$, since the divisors, and thus the line bundles, are fixed.
+  As in 4.6, we have generators $1,x$ for $H^0(X,\O(2P_0))$ and $1,x,y$ for $H^0(X,\O(3P_0))$.
+  Hence, $\sigma^*x=ax+b$ and $\sigma^*y=cy+dx+e$.
+  $\sigma^*$ invertible implies $a,c\neq 0$.
+  Then the map $\tau:\PP^2\to\PP^2$ given by $\tau(y)=y -\frac dax -\frac ea$ fixes $P_0$, and has $\tau\sigma(y)=cy$, $\tau\sigma(x)=ax+b$, as in our problem.%\footnote{This is like the vagueist of proof sketches, but I want to move onto the dual morphism problem. 
+  %I'll come back to this and make it not nonsense (like fix the differing uses of $x$ and $y$) later.}
+\end{proof}
+
+% \begin{enumerate}
+% 	\item[6c.] {
+%       If $X$ is an elliptic curve, for any $d\geqs 3$, embed $X$ as a curve of degree $d$ in $\PP^{d-1}$, and conclude that $X$ has exactly $d^2$ points of order $d$ in its group law.
+%     }
+% \end{enumerate}
+% 
+% \begin{proof}
+%   Fix some point $P_0\in X$. 
+%   $\deg dP_0=d\geqs 3=2g+1$, so $dP_0$ is very ample by (3.2) and induces a closed embedding $X\inc \PP^{d-1}$.
+%   By (Ex. 4.6b), there are $(d-1)d(g-1)+(d-1+1)d=d^2$ hyperosculation points of $X$.
+%   We wish to show that $P$ is a hyperosculation point if and only if $d(P-P_0)$.
+% \end{proof}
+
+\begin{enumerate}
+	\item[7.] {
+      \textit{The Dual of a Morphism.}
+      Let $X$ and $X'$ be elliptic curves over $k$. with base points $P_0,P_0'$.
+      \begin{enumerate}
+        \item If $f:X\to X'$ is any morphism, use (4.11) to show that $f^*:\Pic X'\to \Pic X$ induces a homomorphism $\widehat f:(X',P_0')\to (X,P_0)$.
+          We call this the \emph{dual} of $f$.
+        \item If $f:X\to X'$ and $g:X'\to X''$ are two morphisms, then $\widehat{g\circ f} = \hat f\circ \hat g$.
+        \item Assume $f(P_0)=P_0'$, and let $n=\deg f$.
+          Show that if $Q\in X$ is any point and $f(Q)=Q'$, then $\hat f(Q')=n_X(Q)$.
+          Conclude that $f\circ \hat f = n_{X'}$ and $\hat f\circ f = n_X$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+\begin{proof}
+  (a) We show a slightly more general result for arbitrary Jacobians and conclude our result via (4.11).
+  Namely, we claim that a morphism $f:X\to X'$ of curves of any genus induces a dual map $\hat f:J'\to J$ of Jacobians.
+
+  Let $T$ be an arbitrary scheme of finite type over $k$, and consider the induced morphism $f:X\times T\to X'\times T$, and in particular the induced group map $f^*:\Pic(X'\times T)\to \Pic(X\times T)$.
+  We claim that $f^*$ restricts to a map 
+  \[
+    f^*:\Pic^0(X'\times T)\to \Pic^0(X\times T).
+  \]
+  Take $t\in T$ and consider the map $f^*_t:\Pic X'_t\to \Pic X_t$ of degree $n_t\in \ZZ$.
+  If $\O_{X'_t}(D)$ is an invertible sheaf of degree 0, then
+  \[
+    f^*\O_{X'_t}(D) = \O_{X_t}(f^*D)
+  \]
+  is an invertible sheaf of degree $n_t\cdot 0=0$, as desired.
+  
+  Now, let $p:X\times T\to T$ and $p':X'\times T\to T$ be the projection maps.
+  We can write $f=(f,\id_T):X\times T\to X'\times T$, so $p=p'\circ f$.
+  % The following diagram gives us $p = p'\circ f$.
+  % \[
+  %   \begin{tikzcd}
+  %     X\times T\ar[d]\ar[r,"f"] & X'\times T\ar[d] \\
+  %     X\ar[r,"f"] & X'
+  %   \end{tikzcd}
+  % \] 
+  Then any $\L\in \Pic T$ has 
+  \[
+    f^*(p'^*\L) = (p'\circ f)^*\L = p^*\L,
+  \]
+  so $f$ induces a group morphism $f^*:\Pic^0(X'/T)\to \Pic^0(X/T)$.
+  By definition of Jacobian, this gives us a map
+  \[
+    f^*:\Hom(T,J)\to\Hom(T,J').
+  \] 
+  We claim that this process is natural in $T$.
+
+  Let $g:T\to T'$ be a morphism of schemes of finite type over $k$.
+  We have
+  \[
+    (\id_{X'}, g)\circ (f,\id_T) = (f,g)=(f,\id_{T'})\circ (\id_X, g),
+  \]
+  so the following diagram commutes by injectivity and surjectivity of the vertical arrows.
+  \[
+    \begin{tikzcd}[column sep = 0.3cm]
+      \Pic(X'\times T')\ar[dr, "g^*"] \ar[rr, near start, "f^*"] && \Pic(X\times T')\ar[dr, "g^*"]\ar[from=dd, hook] \\
+      &\Pic(X'\times T)\ar[rr, crossing over, near start, "f^*"] && \Pic(X\times T) \\
+      \Pic^0(X'\times T')\ar[dd,twoheadrightarrow]\ar[uu,hook]\ar[dr, "g^*"] \ar[rr, near start, "f^*"] && \Pic^0(X\times T')\ar[dr, "g^*"]\ar[dd,twoheadrightarrow] \\
+      &\Pic^0(X'\times T)\ar[uu,crossing over, hook]\ar[rr, crossing over, near start, "f^*"] && \Pic^0(X\times T)\ar[uu,hook] \\
+      \Pic^0(X'/ T')\ar[dr, "g^*"] \ar[rr, near start, "f^*"] && \Pic^0(X/ T')\ar[dr, "g^*"] \\
+      &\Pic^0(X'/T)\ar[from=uu, crossing over, twoheadrightarrow] \ar[rr, near start, "f^*"] && \Pic^0(X/T)\ar[from=uu, twoheadrightarrow] \\
+    \end{tikzcd}
+  \] 
+  Then $f^*:\Hom(-,J')\to \Hom(-,J)$ is a natural transformation, so the contravariant Yoneda embedding gives us our scheme morphism $\hat f:J'\to J$.
+  Further, $\hat f$ coincides with the group morphism $f^*:\Pic^0X'\to \Pic^0X$ on closed points, and therefore must be a morphism of group schemes $\hat f:(J',0')\to (J,0)$.
+  % We claim that $\hat f:J'\to J$ is in fact a morphism of group schemes.
+  % Let $e,\rho,\mu$ and $e',\rho',\mu'$ be as in (4.10.6).
+  % %That is, $e:\Spec k\to J$ is the unique map with $e^*\L\cong 0\in \Pic^0(X/k)$.
+  % We note that, on closed points, $\hat f$ coincides with $f^*:\Pic^0(X'/k)\to \Pic^0(X/k)$, which is a morphism of groups.
+  % Then $\hat f
+  Finally, take $X,X'$ to be elliptic curves.
+  Then $J=X$ and $J'=X'$ by (4.11), so we have our desired morphism $\hat f:(X',P_0')\to (X,P_0)$ of group schemes.
+
+  (b) Taking pullbacks $f\mapsto f^*$ and Yoneda's lemma are functorial, so $f\mapsto \hat f$ is functorial as well.
+
+  (c) Under the identification $X\cong \Pic^0X$,
+  \[
+    \hat f(Q')= f^*\O_{X'}(Q'-P_0') = f^*\O_{X'}(Q') - f^*\O_{X'}(P_0'),
+  \] 
+  where we recall that $f^*\O_{X'}(P')=\O_X(\sum_{P_i\mapsto P'} e_{P_i}\cdot P_i)$.
+  If $f$ is purely inseparable, then it is an isomorphism of schemes, so $f^*\O_{X'}(P')=\O_X(e_P\cdot P)$ for a unique $P\in X$ with $f(P)=P'$.
+  Then $\deg (f^*\O_{X'}(P'))= n\cdot 1$ implies $e_P=n$, so plugging back into our original formula gives us
+  \[
+    \hat f(Q')= \O_X(n\cdot (Q- P_0)) = n_X(Q),
+  \] 
+  as desired.
+
+  Suppose now that $f$ is separable.
+  Then Hurwitz formula gives us
+  \[
+    \sum_{P\in X}(e_P-1)\leqs \deg R = 2g(X)-2 - n(2g(X')-2) = 0,
+  \] 
+  so that $f^*\O_{X'}(P') = \O_X(\sum_{P_i\mapsto P'} P_i)$.
+  Recall that $f(P_0)=P_0'$, so $f$ is a group homomorphism by (4.9).
+  Then, fixing some preimage $P\mapsto P'$, $P_i\mapsto P'$ implies $P_i-P_0\sim P+R_i - 2P_0$ for some unique $R_i\mapsto P_0'$.
+  Hence, $P_i\sim P+R_i - P_0$, so
+  \[
+    \sum_{P_i\mapsto P'} P_i = \sum_{R_i\mapsto P_0'} P+ R - P_0 = nP -nP_0 + \sum_{R_i\mapsto P_0'} R_i
+  \] 
+  for any fixed element $P\mapsto P'$.
+  In particular,
+  \[
+    \Bigg(\sum_{Q_i\mapsto Q'} Q_1 \Bigg) - \Bigg(\sum_{R_i\mapsto P_0'}R_i\Bigg) = nQ - nP_0
+  \] 
+  implies
+  \[
+    \hat f(Q') = \O_X(n\cdot(Q-P_0)) = n_X(Q)
+  \] 
+  once again.
+  Degree and $n_X$ are multiplicative under composition, so $\hat f(Q')= n_X(Q)$ for arbitrary $f$.
+  Clearly this gives us $\hat f\circ f(Q)= n_X(Q)$, and $f$ a group homomorphism gives us 
+  \[
+    f\circ \hat f(Q')= f(n_X(Q)) = n_{X'}(f(Q))= n_{X'}(Q'),
+  \]
+  where $Q\mapsto Q'$ is arbitrary.
+  This concludes our proof.
+\end{proof}
+
+\end{document}

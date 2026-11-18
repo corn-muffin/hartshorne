@@ -151,27 +151,52 @@
       &= n + \dim \{y\}^- -\dim \{x\}^-
   \end{align*}
   by (II, Ex. 3.20).
-  We claim that $\dim\O_{X,x}=\dim \O_{Y,y}$ for any $x\in X_y$, so that $m=n$.
+  In particular, $\dim\{x\}^-$ is constant for all $x\in X_y$.
+  We claim that in fact $\dim\{x\}^-=\dim \{y\}^-$, so that $m=n$.
 
-  First, we note that $\Spec \O_{Y,y}=\{y':y'\in \{y\}^-\}$.
-  We claim that $f^{-1}(\Spec\O_{Y,y})= \Spec \O_{X,x}$.
-  It suffices to show that $f^{-1}(\Spec\O_{Y,y})\subset \Spec\O_{X,x}$.
-  Take $x'\in X$ such that $f(x'):=y'\in\{y\}^-$.
-  Then $x'\in f^{-1}(\{y'\})\subset f^{-1}(\{y\}^-)$.
-  If $f^{-1}(\{y\})=\{x\}$, then we still don't get anything.
-  We may assume $Y$ is affine, so by (II, 2.4) $\Spec \O_{Y,y}=\{y':y'\subset y\}$, and 
-  
-  First, assume $X$ and $Y$ are affine.
-  Then
+  \begin{lemma}
+    Let $f:X\to Y$ be a flat, proper morphism of finite type of schemes of finite type over a field $k$, and let $y\in Y$ be such that $f:X_y\to k(y)$ is smooth.
+    Then $\dim\{x\}^-=\dim\{y\}^-$ for all $x\in X_y$.
+  \end{lemma}
 
-  so for any $x'\subset x$, we can consider the following diagram.
-  \[
-    \begin{tikzcd}
-      y'\ar[r,hook]\ar[d,"f^\sharp"'] & y\ar[d,"f^\sharp"] \\
-      x'\ar[r,hook] & x
-    \end{tikzcd}
-  \] 
-  If
+  \begin{proof}
+    First, we may assume by (II, Ex. 3.20) that $\{x\}^-=\Spec B$ and $\{y\}^-=\Spec A$ are affine.
+    Restrict $f:\{x\}^-\to \{y\}^-$, which is still proper by (II, 4.8abc) and the following diagram.
+    \[
+      \begin{tikzcd}
+        X\ar[r,"f"] & Y \\
+        f^{-1}(\{y\}^-)\ar[u,hook,sloped,"\mb{cl}"]\ar[r,"f"] & \{y\}^-\ar[u,hook,sloped,"\mb{cl}"] \\
+        \{x\}^-\ar[u,hook, sloped, "\mb{cl}"]\ar[ur,"f"']
+      \end{tikzcd}
+    \] 
+    We have $y\in f(\{x\}^-)\subset \{y\}^-$ closed, so $f(\{x\}^-)=\{y\}^-$, whence $f$ surjective gives $\dim \{x\}^-\geqs \dim\{y\}^-$.
+
+    Now, we induct on $m=\dim\{y\}^-$ to show that $\dim\{x\}^-=\dim\{y\}^-$.
+    If $y$ is closed, then $X_y$ is closed, and thus contains a closed point $x'\in X_y$.
+    Hence, $f:X_y\to k(y)$ smooth and (9.5) gives us $\dim\{x\}^-=\dim\{x'\}^-=0$.
+    Suppose now that $\dim\{y\}^-=m>0$, and let $\dim\{x\}^-=l\geqs m$.
+    Take a maximal chain
+    \[
+      \0\subsetneq X_0\subsetneq\cdots\subsetneq X_l=\{x\}^-
+    \] 
+    with $X_{l-1}\neq X_l$.
+    Now, we have a chain
+    \[
+      \0\subsetneq f(X_0)\subset\cdots \subset f(X_l) = \{y\}^-,
+    \] 
+    where each $f(X_i)=f(\{x_i\}^-)=\{f(x_i)\}^-$ is irreducible.
+    Removing repetitions if necessary, this gives us a chain
+    \begin{align*}
+      \0\subsetneq Y_0\subsetneq\cdots\subsetneq Y_{m}=\{y\}^-
+    \end{align*}
+    for $m'\leqs m$.
+    Then $\0\subsetneq X_{l-1}\subsetneq X_l$, so $\0\subsetneq f(X_{l-1})=Y_{m'}\subsetneq \{y\}^-$ has dimension $\dim Y_{m'}\leqs m-1$.
+    We claim that the generic point $y'\in Y_{m'}$ has $f:X_{y'}\to k(y')$ smooth.
+
+    Not sure if this works/ is true.
+    Perhaps if we use (10.2) somehow?
+    Maybe we can even skip this proof? Dunno.
+  \end{proof}
 
   Now, we have $(\Omega_{X/Y}\otimes k(x))_x \cong (\Omega_{X/Y})_x\otimes_{\O_x}k(x)$, so (II, 5.8) supplies us with the open set
   \[
@@ -247,7 +272,7 @@
   $i^*$ is a left adjoint and thus commutes with stalks, so
   \begin{align*}
     (\Omega_{X_y/k(y)})_x 
-      &\cong (\Omega_{X/Y})_x\otimes_{\O_x} (\O_X\otimes_{\O_y} k(y)) \\
+      &\cong (\Omega_{X/Y})_x\otimes_{\O_x} (\O_x\otimes_{\O_y} k(y)) \\
       &\cong (\Omega_{X/Y})_x\otimes_{\O_y}k(y).
   \end{align*}
   dunno
@@ -267,7 +292,33 @@
   maps surjectively onto $\Omega_{k(x)/k(y)}$.
   Then $\Omega_{k(x)/k(y)}=0$, so it follows from (II, 8.6A) that $k(x)$ is a separable algebraic extension of $k(y)$.
   Now, we have a map $f^\sharp:\O_y\to \O_x$, and we wish to show that $\m_y^e = \m_x$.
-  Clearly 
+  That is, to show $\O_x/\m_y^e$ is a field.
+  
+  Fix $x\in X$, $y=f(x)\in Y$, and define $C:= \O_x/\m_y^e$, so that we have morphisms
+  \begin{align*}
+    \O_y\epi k(y)\inc C\to k(x).
+  \end{align*}
+  The morphism $k(y)\to k(x)$ is finite.
+  Consider morphisms $k(x)\to X\to Y$.
+  Then (II, 8.11) gives us an exact sequence
+  \[
+    \begin{tikzcd}
+      0=f^*\Omega_{X/Y}\to \Omega_{k(x)/Y}\to \Omega_{k(x)/X}\to 0
+    \end{tikzcd}
+  \] 
+  Taking stalks, we have an isomorphism $\phi:\Omega_{k(x)/\O_y}\iso \Omega_{k(x)/\O_x}$.
+  (II, 8.12) implies $\Omega_{k(x)/\O_x}=0$, so for any $k(x)$-module $M$ and $\O_y$-derivation $d:k(x)\to M$, we must have $d=0$.
+
+  Now, let $r\in \m_x$.
+  Then 
+  and consider the following diagram.
+  \[
+    \begin{tikzcd}
+      \O_x\ar[r]\ar[dr] &k(x)\ar[r,"d_x"] &\Omega_{k(x)/\O_x}=0 \\
+      \O_y\ar[r]\ar[u,"f^\sharp"] &k(x)\ar[r,"d_y"]\ar[u,sloped,"\cong"] &\Omega_{k(x)/\O_y}=0\ar[u,"\phi"]
+    \end{tikzcd}
+  \] 
+  Then $d_x(r)=0$ implies 
 
   (iii)$\implies$(i):
   f
